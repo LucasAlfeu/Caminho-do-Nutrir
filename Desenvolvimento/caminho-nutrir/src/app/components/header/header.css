@@ -1,0 +1,30 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header_title{
+    color: #fff;
+}
+
+.header_nav_list{
+    display: flex;
+    list-style: none;
+
+    .header_nav_list--item:last-child .header_nav_list--link {
+        background-color: #fff;
+        color: #000 !important;
+        border-radius: 5px;
+    }
+
+    .header_nav_list--link{
+        text-decoration: none;
+        color: #fff;
+        margin-left: 2rem;
+        padding: .5rem 1rem;
+        font-weight: 700;
+    }
+}

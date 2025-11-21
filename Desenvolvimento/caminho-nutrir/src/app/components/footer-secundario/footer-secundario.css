@@ -1,0 +1,17 @@
+.footer__secundario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    background-color: #CF9F3E;
+}
+
+.logo_rural{
+    width: 90px;
+    height: 90px;
+}
+
+.logo_uerj{
+    width: 70px;
+    height: 70px;
+}
