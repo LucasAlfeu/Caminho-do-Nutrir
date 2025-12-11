@@ -1,32 +1,64 @@
 <section class="liberar-usuario">
-    <div class="title">Olá, nome do Usuário</div>
+        <div class="title">Olá, nome do Usuário</div>
 
-    <div class="painel__form">
-        <div class="container--form">
-            <h1 class="painel__title">Bancos de Leite Humano</h1>
-            <div class="painel__form--container">
-                <input type="text" name="" id="" class="input-form">
-                <button class="btn__padrao btn__form">Buscar</button>
+        <div class="painel__form">
+            <div class="container--form">
+                <h1 class="painel__title">Bancos de Leite Humano</h1>
+                <div class="painel__form--container">
+                    <input type="text" class="input-form" placeholder="Buscar usuário...">
+                    <button class="btn__padrao btn__form">Buscar</button>
+                </div>
             </div>
+            
+            <table class="tabela">
+                <thead>
+                    <tr class="thead__tabela">
+                        <th class="col1">Usuário</th>
+                        <th class="col2">Permissão</th>
+                        <th class="col3"></th>
+                    </tr>
+                </thead>
+                <tbody class="corpo-tabela">
+                    <tr>
+                        <td class="col1">Usuário 01</td>
+                        <td class="col2"><span class="status-aguardando">Aguardando aprovação</span></td>
+                        <td class="col3">
+                            <div class="action-buttons">
+                                <button class="btn__reprovar btn_acao" title="Reprovar"></button>
+                                <button class="btn__aprovar btn_acao" title="Aprovar"></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1">Usuário 02</td>
+                        <td class="col2"><span class="status-aguardando">Aguardando aprovação</span></td>
+                        <td class="col3">
+                            <div class="action-buttons">
+                                <button class="btn__reprovar btn_acao" title="Reprovar"></button>
+                                <button class="btn__aprovar btn_acao" title="Aprovar"></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1">Usuário 03</td>
+                        <td class="col2"><span class="status-aprovado">Aprovado</span></td>
+                        <td class="col3">
+                            <div class="action-buttons">
+                                <button class="btn__reprovar btn_acao" title="Bloquear"></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col1">Usuário 04</td>
+                        <td class="col2"><span class="status-aguardando">Aguardando aprovação</span></td>
+                        <td class="col3">
+                            <div class="action-buttons">
+                                <button class="btn__reprovar btn_acao" title="Reprovar"></button>
+                                <button class="btn__aprovar btn_acao" title="Aprovar"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <thead class="tabela">
-            <tr class="thead__tabela">
-                <th scope="col" class="col1">Usuário</th>
-                <th scope="col" class="col2">Permissão</th>
-                <th scope="col" class="col3"></th>
-            </tr>
-        </thead>
-        <tbody class="corpo-tabela">
-            <tr>
-                <th scope="row" class="col1 row">Usuário 01</th>
-                <th class="col2 row">Aguardando aprovação</th>
-                <th class="col3 row">
-                    <!-- <img src="/images/editar.png" alt="" >
-                    <img src="/images/excluir.png" alt=""> -->
-                    <button class="btn__reprovar btn_acao"></button>
-                    <button class="btn__aprovar btn_acao"></button>
-                </th>
-            </tr>
-        </tbody>
-    </div>
-</section>
+    </section>
