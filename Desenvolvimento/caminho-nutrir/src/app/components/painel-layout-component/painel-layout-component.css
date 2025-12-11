@@ -1,0 +1,7 @@
+.container {
+    display: flex; 
+    min-height: calc(100vh - [Altura do seu Header]); 
+    margin: 0; 
+    padding: 0;
+    width: 100%;
+}

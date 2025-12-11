@@ -1,0 +1,95 @@
+.liberar-usuario{
+    padding: 1rem 1.5rem;
+}
+
+.painel{
+    padding: 1rem;
+}
+
+.container--form{
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.painel__title{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.painel__form--container{
+    display: flex;
+    align-items: center;
+}
+
+.input-form{
+    padding: .25rem .5rem;
+    width: 20vw;
+    border-radius: 4px;
+    border: none;
+}
+
+.btn__form{
+    padding: .2rem .5rem;
+    width: 6rem;
+    margin-left: 1.5rem;
+}
+
+.tabela{
+    width: 100%;
+}
+
+.corpo-tabela{
+    background-color: #fff;
+}
+
+.thead__tabela{
+    background-color: #AA9CAC;
+    color: #fff;
+}
+.col1{
+    width: 30vw;
+    text-align: left;
+    padding: .25rem 0 .25rem 1.5rem;
+}
+
+.col2{
+    width: 20vw;
+    text-align: left;
+}
+
+.col3{
+    min-width: 5vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    font-weight: 400;
+}
+
+.btn__aprovar{
+    background-image: url(/images/permissao.png);
+}
+
+.btn__reprovar{
+    background-image: url(/images/bloquear-usuario.png);
+}
+
+.btn_acao{
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    border: none;
+    background-color: transparent;
+    margin: .5rem;
+}
+
+.btn_acao:hover{
+    cursor: pointer;
+}

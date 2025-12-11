@@ -35,12 +35,18 @@
 }
 
 .tabela{
-    width: 100%;
+    width: 100%; 
+    border-collapse: collapse;
 }
 
 .thead__tabela{
     background-color: #AA9CAC;
     color: #fff;
+    display: table-row;
+}
+
+.col1, .col2, .col3 {
+    border-bottom: 1px solid #ccc;
 }
 .col1{
     width: 30vw;
@@ -56,10 +62,8 @@
 .col3{
     min-width: 5vw;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
+
 
 .row{
     font-weight: 400;
@@ -77,9 +81,12 @@
     width: 20px;
     height: 20px;
     background-size: contain;
+    background-repeat: no-repeat; /* Adicionar para garantir que o ícone não se repita */
     border: none;
     background-color: transparent;
     margin: .5rem;
+    /* Ajuste de alinhamento */
+    vertical-align: middle;
 }
 
 .btn_acao:hover{
