@@ -1,0 +1,65 @@
+<section class="form_cadastrar_banco">
+    <h1 class="title_cadastrar">Cadastrar Banco de Leite</h1>
+
+    <form action="" class="form_cadastrar" [formGroup]="cadastroBancoForm">
+        <div class="one_row">
+                <div class="label_input">
+                    <label for="nome" class="label_form">Nome do Banco de Leite</label>
+                    <input type="text" id="nome" formControlName="nome" class="input_form">
+                </div>
+        </div>
+
+            <div class="one_row">
+                <div class="form_container">
+                    <div class="label_input">
+                        <label for="cep" class="label_form">CEP</label>
+                        <input type="text" id="cep" formControlName="cep" class="input_form">
+                    </div>
+                    <button class="btn__padrao btn_cadastrar" (click)="carregaEnderecoViaCep()">Buscar</button>
+                </div>
+            </div>
+
+            <div class="one_row">
+                <div class="label_input">
+                    <label for="logradouro" class="label_form">Logradouro</label>
+                    <input type="text" id="logradouro" formControlName="logradouro" class="input_form">
+                </div>
+                <div class="label_input">
+                    <label for="numero" class="label_form">Número</label>
+                    <input type="text" id="numero" formControlName="numero" class="input_form input__menor">
+                </div>
+                <div class="label_input">
+                    <label for="complemento" class="label_form">Complemento</label>
+                    <input type="text" id="complemento" formControlName="complemento" class="input_form">
+                </div>
+        </div>
+
+        <div class="one_row">
+                <div class="label_input">
+                    <label for="bairro" class="label_form">Bairro</label>
+                    <input type="text" id="bairro" formControlName="bairro" class="input_form">
+                </div>
+                <div class="label_input">
+                    <label for="uf" class="label_form">UF</label>
+                    <select name="" formControlName="uf" id="uf" class="input_form input__menor" (blur)="exibeMunicipios()">
+                        <option value="null">Selecione</option>
+                        <option [value]="item.id" *ngFor="let item of listaDeEstados">
+                            {{ item.sigla }}
+                        </option>
+                    </select>
+                </div>
+                <div class="label_input">
+                    <label for="municipio" class="label_form">Município</label>
+                    <select name="" id="uf" formControlName="localidade" class="input_form">
+                        <option value="null">Selecione</option>
+                        <option [value]="item.id" *ngFor="let item of listaDeMunicipios">
+                            {{ item.nome }}
+                        </option>
+                    </select>
+                </div>
+        </div> 
+        <div class="conatiner">
+            <button class="btn__padrao btn_cadastrar" (click)="salvar()">Cadastrar</button>
+        </div>
+    </form>
+</section>

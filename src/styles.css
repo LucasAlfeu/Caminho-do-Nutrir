@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*{
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.main{
+    background-color: #F5E8DC;
+    height: calc(100vh - 72.1px);
+}
+
+.mainSecundario{
+    background-color: #F5E8DC;
+    height: calc(100vh - 72.1px - 90px);
+}
+
+.logo__caminhoNutrir{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 1.75rem 0;
+}
+
+.btn__padrao{
+    font-size: 18px;
+    border: none;
+    background-color: #452A15;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.btn__padrao:hover{
+    background-color: #CF9F3E;
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+}
