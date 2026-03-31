@@ -1,0 +1,25 @@
+.footer_main{
+    background-color: #91572C;
+    padding: 2rem;
+    
+    .container{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    .ufrrj{
+        width: 170px;
+        height: 150px;
+    }
+
+    .uerj{
+        width: 130px;
+        height: 150px;
+    }
+
+    .instagram, .facebook, .web{
+        width: 30px;
+        height: 30px;
+        margin: 0 .75rem;
+    }
+}

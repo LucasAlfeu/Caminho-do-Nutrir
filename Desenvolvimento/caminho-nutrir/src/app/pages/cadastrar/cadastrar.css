@@ -1,0 +1,36 @@
+.cadastrar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cadastrar__form{
+    /* height: 70vh; */
+    width: 30vw;
+    background-color: #91572C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.input-form{
+    margin: 0.5rem;
+    padding: .5rem .75rem;
+    width: 80%;
+    border-radius: 8px;
+    border: none;
+}
+
+.form-container{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+
+    button{
+        margin-bottom: 1rem;
+        padding: .25rem 2rem;
+    }
+}

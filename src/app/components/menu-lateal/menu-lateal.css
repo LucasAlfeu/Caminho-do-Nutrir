@@ -1,0 +1,31 @@
+.menu{
+    display: block;
+    width: 20vw;
+    background-color: #91572C;
+    height: calc(100vh - 72px); 
+    padding: 0;
+    margin: 0;
+}
+
+.menu__lista{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu__lista--link{
+    text-decoration: none;
+    color: #fff;
+    display: block; 
+    width: 100%;
+    height: 100%;
+}
+
+.menu__lista--item:hover {
+    background-color: #FFE2CC;
+}
+
+.menu__lista--item{
+    padding: 1rem .75rem;
+    border-bottom: 1px solid #fff;
+}
