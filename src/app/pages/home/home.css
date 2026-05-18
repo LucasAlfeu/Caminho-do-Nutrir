@@ -26,10 +26,10 @@
     flex-direction: column;
     align-items: center;
     font-size: 3rem;
-    position: absolute; /* Altera de relative para absolute */
-    top: 50%; /* Coloca o topo na metade vertical */
+    position: absolute; 
+    top: 50%; 
     left: 50%;
-    transform: translate(-50%, -50%); /* Centraliza perfeitamente */
+    transform: translate(-50%, -50%); 
 }
 
 .header_text--text:last-child{
@@ -40,9 +40,19 @@
 .main_home{
     background-color: #F5E8DC;
     margin-top: 0; 
-    padding: 0 12rem;
+    padding: 2rem 12rem 4rem 12rem;
 }
 
+.sobre_container,
+.doar_container,
+.mapa {
+    background-color: #A8744F;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 1rem ;
+    color: #fff;
+   
+}
 .sobre_home{
     padding: 3.5rem  0;
     
@@ -71,7 +81,8 @@
 }
 
 .mapa{
-    display: flex;
+     display: flex;
+    justify-content: space-between;
     align-items: center;
 
     .mapa_title{
@@ -80,14 +91,21 @@
     }
 
     .mapa_container{
-        padding-left: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        
+        
     }
 
-    .mapa_img{
-        width: 370px;
-        height: 210px;
-        background-image: url(../../../../public/images/mapa.png);
-        margin-bottom: 1rem;
+   .mapa_img{
+    width: 370px;
+    height: 210px;
+    background-image: url('/images/mapa.png');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 1rem;
+    border-radius: 8px;
     }
 
     .mapa_link{
@@ -120,14 +138,14 @@
         background-size: contain;
         width: 500px;
         height: 260px;
-        margin-left: 3rem;
+        margin-left: 2rem;
     }
     .doar_division{
         width: 50vw;
         text-align: left;
     }
     .doar_text{
-        font-size: 1rem;
+        font-size: 2rem;
         margin-bottom: 1.5rem;
     }
     .doar_link{
