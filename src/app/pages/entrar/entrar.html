@@ -1,12 +1,53 @@
-<app-header-secundario></app-header-secundario>
-<main class="main entrar">
-    <form action="" class="entrar-form">
-        <img src="/images/logo.png" alt="" class="logo__caminhoNutrir">
-        <input type="text" placeholder="Usuário" class="input-form">
-        <input type="password" name="" id="" placeholder="Senha" class="input-form">
-        <div class="form-container">
-            <button class="btn__padrao">Entrar</button>
-            <a href="/cadastrar" class="link-cadastrar">Cadastrar</a>
-        </div>
+<!-- <app-header-secundario></app-header-secundario> -->
+<!-- <main class="w-100" style="background-image: url('/images/background-entrar.jpg');
+              height: 100vh;
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              filter: brightness(55%);">
+    <div>
+      <h1>ENTRAR</h1>
+      <form action="">
+        <input type="text" placeholder="Email">
+        <input type="text" placeholder="Senha">
+
+        <button>Entrar</button>
+      </form>
+
+      <div>
+        <a href="#">Cadastrar</a>
+        <a href="">Perdeu a senha?</a>
+      </div>
+    </div>
+</main> -->
+
+<main class="w-100 d-flex align-items-center justify-content-center"
+      style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/background-entrar.jpg');
+             min-height: 100vh;
+             background-size: cover;
+             background-position: center;
+             background-repeat: no-repeat;">
+
+  <div class="glass-card p-5" style="width: 100%; max-width: 450px;">
+
+    <h1 class="text-center fw-bold mb-5" style="color: #1a1a1a; letter-spacing: 1px;">ENTRAR</h1>
+
+    <form action="">
+      <div class="mb-4">
+        <input type="email" class="form-control input-underlined" placeholder="Email">
+      </div>
+
+      <div class="mb-5">
+        <input type="password" class="form-control input-underlined" placeholder="Senha">
+      </div>
+
+      <button type="submit" class="btn btn-dark-custom w-100 fw-bold py-2 mb-4 fs-6">ENTRAR</button>
     </form>
+
+    <div class="d-flex justify-content-between mt-2">
+      <a href="/cadastrar" class="text-decoration-none fw-bold" style="color: #1a1a1a; font-size: 0.95rem;">Cadastrar</a>
+      <a href="#" class="text-decoration-none fw-bold" style="color: #1a1a1a; font-size: 0.95rem;">Perdeu a senha?</a>
+    </div>
+
+  </div>
 </main>
