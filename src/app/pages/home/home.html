@@ -1,79 +1,140 @@
-<section class="header_home">
-    <div class="header_box"><app-header></app-header></div>
-    <div class="banner"></div>
-    <div class="header_text">
-        <p class="header_text--text">Leite doado contém</p>
-        <p class="header_text--text">amor dobrado</p>
-    </div>
+<section class="position-relative d-flex flex-column w-100">
+
+  <div class="position-absolute w-100" style="z-index: 1000;">
+    <app-header></app-header>
+  </div>
+
+  <div class="w-100" style="background-image: url('/images/banner 2.jpg');
+              height: 80vh;
+              background-size: cover;
+              background-position: center; /* Centraliza perfeitamente no PC e no Mobile */
+              background-repeat: no-repeat; /* Bloqueia a repetição */
+              filter: brightness(30%);">
+  </div>
+
+  <div
+    class="position-absolute top-50 start-50 translate-middle text-white d-flex flex-column align-items-center text-center w-100"
+    style="z-index: 100;">
+    <p class="mb-0 fs-2">Leite doado contém</p>
+    <p class="mb-0 text-uppercase fw-bold display-4">amor dobrado</p>
+  </div>
+
 </section>
-<main class="main_home">
+<main class="main_home pb-5 pt-5">
 
-  <!-- SOBRE -->
-  <section class="sobre_home" id="sobre">
-    <div class="sobre_container card">
+  <section id="sobre" class="py-4 row">
+    <div class="container d-flex justify-content-center">
+      <div class="card border-0 p-4 text-white w-100" style="background-color: #a67c52; border-radius: 12px;">
+        <div class="row align-items-stretch g-4 m-0">
 
-      <div class="sobre_img"></div>
+          <div class="col-12 col-md-5 d-flex flex-column p-0">
+            <img src="/images/sobre_img.jpg" alt="Extração de leite materno" class="img-fluid rounded-3 h-100 w-100"
+              style="object-fit: cover; min-height: 250px;">
+          </div>
 
-      <div class="sobre_content">
-        <h2 class="sobre_title">Conheça o Caminho do Nutrir</h2>
+          <div class="col-12 col-md-7 pe-0 ps-md-4">
+            <h2 class="fw-bold mb-3">Conheça o Caminho do Nutrir</h2>
+            <p class="lh-base">
+              O Caminho do Nutrir é uma iniciativa conjunta entre a Universidade Federal Rural do Rio de Janeiro (UFRRJ)
+              e a Universidade do Estado do Rio de Janeiro (UERJ). O projeto utiliza a tecnologia como
+              ponte para facilitar e incentivar a doação de leite materno, mapeando de forma
+              estratégica os Bancos de Leite Humano (BLH) e os postos de coleta parceiros.
+              Por meio de uma plataforma acessível, a ação conecta mães doadoras a uma rede de apoio
+              segura, otimizando a logística da coleta e contribuindo diretamente para a redução da
+              mortalidade neonatal e para a saúde dos recém-nascidos internados.
+            </p>
+            <p class="mb-2 fw-semibold">O projeto:</p>
+            <ul class="mb-4 ps-3">
+              <li class="mb-1">Ajuda mães a encontrarem onde doar</li>
+              <li class="mb-1">Simplifica e agiliza a doação</li>
+              <li class="mb-1">Aumenta os estoques nos hospitais</li>
+              <li class="mb-1">Contribui para a saúde de bebês, especialmente prematuros</li>
+            </ul>
+            <p class="fs-5 fw-bold mt-3 mb-0">
+              Une tecnologia e solidariedade para salvar vidas.
+            </p>
+          </div>
 
-        <p>
-          O Caminho do Nutrir facilita a doação de leite materno mapeando Bancos de Leite Humano e postos de coleta.
-        </p>
-
-        <ul class="sobre_list">
-          <li>Ajuda mães a encontrarem onde doar</li>
-          <li>Simplifica e agiliza a doação</li>
-          <li>Aumenta os estoques nos hospitais</li>
-          <li>Contribui para a saúde de bebês</li>
-        </ul>
-
-        <p class="sobre_strong">
-          <strong>Une tecnologia e solidariedade para salvar vidas.</strong>
-        </p>
+        </div>
       </div>
-
     </div>
   </section>
 
-  <!-- DOAÇÃO -->
-  <section class="como_doar" id="doacao">
-    <div class="doar_container card">
+  <section id="doacao" class="py-4 row">
+    <div class="container d-flex justify-content-center">
+      <div class="card border-0 p-4 text-white w-100" style="background-color: #a67c52; border-radius: 12px;">
+        <div class="row align-items-stretch g-4 m-0">
 
-      <div class="doar_image"></div>
+          <div class="col-12 col-md-5 d-flex flex-column p-0">
+            <img src="/images/imagem-como-doar.jpeg" alt="Processo de doação de leite materno"
+              class="img-fluid rounded-3 h-100 w-100" style="object-fit: cover; min-height: 250px;">
+          </div>
 
-      <div class="doar_division">
-        <h2 class="doar_title">DOAÇÕES:</h2>
+          <div class="col-12 col-md-7 d-flex flex-column justify-content-between pe-0 ps-md-4">
+            <div>
+              <h2 class="fw-bold mb-3 text-uppercase">Doações:</h2>
+              <p class="lh-base mb-3">
+                Doar leite materno é um processo simples, seguro e cercado de cuidados.
+                Sabendo das dúvidas que podem surgir, nossa rede oferece orientação profissional
+                completa desde o primeiro momento. Cada etapa é pensada para garantir a segurança
+                da mãe e do bebê que receberá o alimento. É um ato de solidariedade que descomplica
+                a rotina da doadora e transforma o excesso de
+                leite em uma chance de sobrevivência e saúde para recém-nascidos internados.
+                Um pequeno gesto que salva vidas com total suporte técnico.
+              </p>
+              <p>A doação:</p>
+              <ul class="mb-4 ps-3">
+                <li class="mb-1">Fácil e acompanhada por professionals</li>
+                <li class="mb-1">Pode ser feita em casa, com segurança</li>
+                <li class="mb-1">Coleta domiciliar disponível</li>
+                <li class="mb-1">Ajuda a aliviar o excesso de leite</li>
+                <li class="mb-1">Contribui para salvar vidas</li>
+              </ul>
+              <p class="mb-4">
+                <strong>É um gesto de cuidado, empatia e solidariedade.</strong>
+              </p>
+            </div>
+            <div>
+              <a href="#" class="btn fw-bold px-4 py-2"
+                style="background-color: #fff; color: #a67c52; border-radius: 8px;">
+                Saiba Mais
+              </a>
+            </div>
+          </div>
 
-        <p class="doar_text">
-          O processo de doação é simples e seguro, com orientação profissional.
-        </p>
-
-        <ul class="doar_list">
-          <li>Fácil e acompanhada por profissionais</li>
-          <li>Pode ser feita em casa, com segurança</li>
-          <li>Coleta domiciliar disponível</li>
-          <li>Ajuda a aliviar o excesso de leite</li>
-          <li>Contribui para salvar vidas</li>
-        </ul>
-
-        <p class="doar_text">
-          <strong>É um gesto de cuidado, empatia e solidariedade.</strong>
-        </p>
-
-        <a href="#" class="doar_link">Saiba Mais</a>
+        </div>
       </div>
-
     </div>
   </section>
 
-  <!-- MAPA -->
-  <section class="mapa">
-    <h2 class="mapa_title">Conheça o Banco de Leite Humano mais Próximo</h2>
+  <section id="mapa" class="py-4 row">
+    <div class="container d-flex justify-content-center">
+      <div class="card border-0 p-4 text-white w-100" style="background-color: #a67c52; border-radius: 12px;">
+        <div class="row align-items-stretch g-4 m-0">
 
-    <div class="mapa_container">
-      <div class="mapa_img"></div>
-      <a href="mapa" class="mapa_link">ACESSAR O MAPA</a>
+          <div class="col-12 col-md-7 d-flex align-items-center ps-0 pe-md-4">
+            <h2 class="fw-bold display-5 mb-0 lh-sm" style="font-size: 80px;">
+              Conheça o Banco de Leite Humano mais Próximo
+            </h2>
+          </div>
+
+          <div class="col-12 col-md-5 p-0">
+            <img src="/images/mapa.png" alt="Mapa demonstrando a localização dos bancos de leite"
+              class="img-fluid rounded-3 h-100 w-100" style="object-fit: cover; min-height: 200px;">
+          </div>
+
+        </div>
+
+        <div class="row m-0 mt-3">
+          <div class="col-12 col-md-5 offset-md-7 p-0 text-md-start text-start">
+            <a href="/mapa" class="text-white fw-bold text-uppercase text-decoration-underline"
+              style="letter-spacing: 1px;">
+              Acessar o Mapa
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
