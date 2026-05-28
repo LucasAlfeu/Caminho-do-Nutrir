@@ -1,55 +1,21 @@
-.menu {
-    background-color: #91572C; /* Cor marrom da imagem [1] */
-    width: 20vw;
-    min-width: 250px;
-    min-height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
+.sidebar-custom {
+    width: 320px;
+    background-color: #9A6233;
+  }
 
-.menu__secao {
-    
-    padding-top: 100px;    /* Mantém a altura para não sumir atrás do título [1] */
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* A linha fica aqui, fixa */
-    width: 100%;     
-}
-
-.menu__secao--texto {
-    position: absolute;
-    margin: 0;
-    margin-top: -45px;
-    padding-left: 24px; /* Ajuste este número até chegar na posição desejada */
-    padding-bottom: 10px;
-    color: white;
-    font-size: 1.0rem;
-    
-}
-
-.menu__lista {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-top: 1px solid white; 
-}
-
-/* 2. Ajuste nos itens da lista */
-.menu__lista--item {
-    /* Removido o border-top com valor 1.9 (inválido) para evitar linhas duplas */
-    border-bottom: 1px solid white; /* Linha inferior conforme a imagem [1] */
-}
-
-.menu__lista--link {
+  .sidebar-link {
+    color: #ffffff;
     text-decoration: none;
-    color: white;
-    font-weight: 500;
+    font-size: 1.05rem;
     display: block;
-    padding: 15px 20px;
-    transition: background 0.3s;
-}
+    transition: all 0.2s ease-in-out;
+  }
 
-.menu__lista--link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
+  .sidebar-link:hover {
+    color: #9A6233;
+    background-color: #EBE1D8;
+  }
+
+  .divider-custom {
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }

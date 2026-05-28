@@ -1,22 +1,40 @@
-<nav class="menu">
-    <!-- Novo rótulo para organizar o menu -->
-    <div class="menu__secao">
-        <p class="menu__secao--texto">Sistema de Gestão</p>
-    </div>
-    
-    <ul class="menu__lista">
-        <!-- O item Painel agora virá abaixo do rótulo e do título externo -->
-        <li class="menu__lista--item">
-            <a href="painel" class="menu__lista--link">Início</a>
-        </li>
-        <li class="menu__lista--item">
-            <a href="painel/cadastrar-banco" class="menu__lista--link"> Painel de Cadastro</a>
-        </li>
-        <li class="menu__lista--item">
-            <a href="painel/liberar-usuario" class="menu__lista--link">Liberar Usuário</a>
-        </li>
-        <li class="menu__lista--item">
-            <a href="mapa" class="menu__lista--link">Mapa</a>
-        </li>
-    </ul>
-</nav>
+<aside class="sidebar-custom text-white d-flex flex-column min-vh-100">
+
+  <div class="p-4 border-bottom divider-custom">
+    <h2 class="fw-bold mb-1 fs-3">Caminho do Nutrir</h2>
+    <span style="font-size: 0.95rem;">Sistema de Gestão</span>
+  </div>
+
+  <nav class="pb-4 pt-3 flex-grow-1 d-flex flex-column">
+
+    <a href="#" class="sidebar-link px-4 py-2 mb-1 d-flex align-items-center gap-3">
+      <i class="bi bi-house-door fs-5"></i>
+      Início
+    </a>
+
+    <a href="#" class="sidebar-link px-4 py-2 mb-1 d-flex align-items-center gap-3">
+      <i class="bi bi-ui-checks fs-5"></i>
+      Painel de Cadastro
+    </a>
+
+    <a href="#" class="sidebar-link px-4 py-2 mb-1 d-flex align-items-center gap-3">
+      <i class="bi bi-person-check fs-5"></i>
+      Liberar Usuário
+    </a>
+
+    <a href="#" class="sidebar-link px-4 py-2 mb-1 d-flex align-items-center gap-3">
+      <i class="bi bi-map fs-5"></i>
+      Mapa
+    </a>
+  </nav>
+
+  <div class="p-4 border-top divider-custom">
+    <h5 class="fw-bold mb-1 fs-5">Nome do Usuário</h5>
+
+    <a href="#" class="sidebar-link px-2 py-1 mt-2 d-inline-flex align-items-center gap-2 rounded" style="margin-left: -0.5rem;">
+      <i class="bi bi-box-arrow-right fs-5"></i>
+      <small>Sair</small>
+    </a>
+  </div>
+
+</aside>
