@@ -1,65 +1,280 @@
-<section class="form_cadastrar_banco">
-    <h1 class="title_cadastrar">Cadastrar Banco de Leite</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
 
-    <form action="" class="form_cadastrar" [formGroup]="cadastroBancoForm">
-        <div class="one_row">
-                <div class="label_input">
-                    <label for="nome" class="label_form">Nome do Banco de Leite</label>
-                    <input type="text" id="nome" formControlName="nome" class="input_form">
-                </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div class="one_row">
-                <div class="form_container">
-                    <div class="label_input">
-                        <label for="cep" class="label_form">CEP</label>
-                        <input type="text" id="cep" formControlName="cep" class="input_form">
+    <title>Caminho do Nutrir - Cadastro de Bancos</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="cadastrar-banco.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div class="header-custom">
+
+        <h1 class="header-title">
+            Bancos de Leite Humano
+        </h1>
+
+        <p class="header-subtitle">
+            Gerenciamento de bancos cadastrados no sistema
+        </p>
+
+    </div>
+
+    <!-- Container Bootstrap -->
+    <div class="container-fluid p-0">
+
+        <!-- Conteúdo -->
+        <div class="form-container shadow-sm">
+
+            <h2 class="section-title">
+                Cadastrar Banco de Leite Humano
+            </h2>
+
+            <form>
+
+                <div class="row g-3">
+
+                    <!-- Nome e CEP -->
+                    <div class="col-md-7">
+
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">
+                                Nome
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="nome"
+                                placeholder="Digite o nome do banco"
+                            >
+                        </div>
+
+                        <div class="row align-items-end">
+
+                            <div class="col-md-8">
+
+                                <label for="cep" class="form-label">
+                                    CEP
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="cep"
+                                    placeholder="Informe o CEP"
+                                >
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-custom w-100"
+                                >
+                                    Buscar
+                                </button>
+
+                            </div>
+
+                        </div>
+
                     </div>
-                    <button class="btn__padrao btn_cadastrar" (click)="carregaEnderecoViaCep()">Buscar</button>
-                </div>
-            </div>
 
-            <div class="one_row">
-                <div class="label_input">
-                    <label for="logradouro" class="label_form">Logradouro</label>
-                    <input type="text" id="logradouro" formControlName="logradouro" class="input_form">
+                    <!-- Descrição -->
+                    <div class="col-md-5">
+
+                        <div class="mb-3">
+
+                            <label for="descricao" class="form-label">
+                                Descrição
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="descricao"
+                                rows="5"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="label_input">
-                    <label for="numero" class="label_form">Número</label>
-                    <input type="text" id="numero" formControlName="numero" class="input_form input__menor">
+
+                <!-- Logradouro -->
+                <div class="row g-3 mt-1">
+
+                    <div class="col-md-6">
+
+                        <label for="logradouro" class="form-label">
+                            Logradouro
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="logradouro"
+                            placeholder="Digite o logradouro"
+                        >
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <label for="numero" class="form-label">
+                            Número
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="numero"
+                            placeholder="Digite o número"
+                        >
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label for="complemento" class="form-label">
+                            Complemento
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="complemento"
+                            placeholder="Digite o complemento"
+                        >
+
+                    </div>
+
                 </div>
-                <div class="label_input">
-                    <label for="complemento" class="label_form">Complemento</label>
-                    <input type="text" id="complemento" formControlName="complemento" class="input_form">
+
+                <!-- Bairro, Cidade e UF -->
+                <div class="row g-3 mt-1">
+
+                    <div class="col-md-4">
+
+                        <label for="bairro" class="form-label">
+                            Bairro
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="bairro"
+                            placeholder="Digite o bairro"
+                        >
+
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <label for="cidade" class="form-label">
+                            Cidade
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="cidade"
+                            placeholder="Digite a cidade"
+                        >
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label for="uf" class="form-label">
+                            UF
+                        </label>
+
+                        <select class="form-select" id="uf">
+
+                            <option selected>
+                                Selecione um UF
+                            </option>
+
+                            <option value="SP">SP</option>
+                            <option value="RJ">RJ</option>
+
+                        </select>
+
+                    </div>
+
                 </div>
+
+                <!-- Latitude e Longitude -->
+                <div class="row g-3 mt-1">
+
+                    <div class="col-md-6">
+
+                        <label for="latitude" class="form-label">
+                            Latitude
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="latitude"
+                            placeholder="Digite a latitude"
+                        >
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label for="longitude" class="form-label">
+                            Longitude
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="longitude"
+                            placeholder="Digite a longitude"
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- Botão -->
+                <div class="d-flex justify-content-end mt-4">
+
+                    <button
+                        type="submit"
+                        class="btn btn-custom px-5"
+                    >
+                        Cadastrar
+                    </button>
+
+                </div>
+
+            </form>
+
         </div>
 
-        <div class="one_row">
-                <div class="label_input">
-                    <label for="bairro" class="label_form">Bairro</label>
-                    <input type="text" id="bairro" formControlName="bairro" class="input_form">
-                </div>
-                <div class="label_input">
-                    <label for="uf" class="label_form">UF</label>
-                    <select name="" formControlName="uf" id="uf" class="input_form input__menor" (blur)="exibeMunicipios()">
-                        <option value="null">Selecione</option>
-                        <option [value]="item.id" *ngFor="let item of listaDeEstados">
-                            {{ item.sigla }}
-                        </option>
-                    </select>
-                </div>
-                <div class="label_input">
-                    <label for="municipio" class="label_form">Município</label>
-                    <select name="" id="uf" formControlName="localidade" class="input_form">
-                        <option value="null">Selecione</option>
-                        <option [value]="item.id" *ngFor="let item of listaDeMunicipios">
-                            {{ item.nome }}
-                        </option>
-                    </select>
-                </div>
-        </div> 
-        <div class="conatiner">
-            <button class="btn__padrao btn_cadastrar" (click)="salvar()">Cadastrar</button>
-        </div>
-    </form>
-</section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

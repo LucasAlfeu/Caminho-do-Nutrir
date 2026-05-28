@@ -1,17 +1,12 @@
-.footer__secundario{
-    display: flex;
+.footer__secundario {
+    display: none !important; /* Isso esconde o elemento completamente */
     justify-content: center;
     align-items: center;
-    width: 79vw;
+    width: 100%;
     background-color: #CF9F3E;
 }
 
-.logo_rural{
-    width: 90px;
-    height: 90px;
-}
-
-.logo_uerj{
-    width: 70px;
-    height: 70px;
+/* Você pode manter as logos aqui, elas também não aparecerão */
+.logo_rural, .logo_uerj {
+    display: none;
 }
