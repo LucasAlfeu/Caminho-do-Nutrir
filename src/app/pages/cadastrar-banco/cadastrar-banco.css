@@ -1,54 +1,64 @@
-.form_cadastrar_banco{
-    padding: 1.5rem;
+* {
+    box-sizing: border-box;
 }
 
-.title_cadastrar{
-    font-size: 1.75rem;
-    margin-bottom: 2rem;
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
 }
 
-.form_cadastrar{
-    margin-left: 1rem;
+/* Header */
+.header-custom {
+    background-color: #D1A17B;
+    padding: 20px 30px;
 }
 
-.label_input{
-    display: flex;
-    flex-direction: column;
-    margin: .75rem 1rem 0 0;
+.header-title {
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    color: #000;
 }
 
-.input__menor{
-    width: 100px !important;
+.header-subtitle {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 5px;
 }
 
-.input_form{
+/* Container */
+.form-container {
+    background-color: white;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 4px;
+}
+
+/* Título */
+.section-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+/* Labels */
+.form-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Botões */
+.btn-custom {
+    background-color: #4A2C1D;
+    color: white;
     border: none;
-    padding: .25rem .35rem;
-    border-radius: 3px;
-    width: 290px;
 }
 
-.btn_cadastrar{
-    font-size: 1rem;
-    margin-left: 1rem;
-    padding: .25rem .35rem;
-    height: fit-content;
-}
-
-.one_row{
-    display: flex;
-    width: 60vw;
-}
-
-.form_container{
-    display: flex;
-    justify-items: baseline;
-    align-items: flex-end;
-}
-
-.conatiner{
-    margin-top: 2rem;
-    width: 80%;
-    display: flex;
-    justify-content: right;
+.btn-custom:hover {
+    background-color: #362015;
+    color: white;
 }

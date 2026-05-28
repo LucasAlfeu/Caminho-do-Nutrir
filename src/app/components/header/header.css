@@ -13,6 +13,8 @@
 .header_nav_list{
     display: flex;
     list-style: none;
+    position: relative;
+    top: 10px;
 
     .header_nav_list--item:last-child .header_nav_list--link {
         background-color: #fff;

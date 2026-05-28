@@ -1,139 +1,184 @@
 .painel {
-            padding: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    padding: 1.5rem 2rem;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
 
-        .painel p {
-            font-size: 18px;
-            margin-bottom: 2rem;
-        }
+/* topo */
+.container--form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
 
-        .container--form {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-        }
+/* título */
+.painel__title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000;
+}
 
-        .painel__title {
-            font-size: 20px;
-            font-weight: 400;
-        }
+/* área do formulário */
+.painel__form--container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
-        .painel__form--container {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
+/* input */
+.input-form {
+    width: 320px;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid #BDBDBD;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
 
-        .input-form {
-            padding: 0.5rem;
-            width: 380px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
+/* botão */
+.btn__padrao {
+    background-color: #4A3933;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-        .btn__padrao {
-            background-color: #4A3933;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.btn__padrao:hover {
+    background-color: #352721;
+}
 
-        .btn__padrao:hover {
-            background-color: #3A2923;
-        }
+.btn__form {
+    height: 38px;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
-        .btn__form {
-            padding: 0.5rem 1.5rem;
-            font-size: 14px;
-        }
+/* tabela */
+.tabela {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #D9D9D9;
+}
 
-        .tabela {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+/* cabeçalho */
+.thead__tabela {
+    background-color: #4A2C1D;
+    color: white;
+}
 
-        .thead__tabela {
-            background-color: #AA9CAC;
-            color: white;
-        }
+.thead__tabela th {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
 
-        .thead__tabela th {
-            padding: 1rem 1.5rem;
-            text-align: left;
-            font-weight: 500;
-        }
+/* linhas */
+.tbody__tabela td {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #EAEAEA;
+}
 
-        .tbody__tabela tr {
-            border-bottom: 1px solid #E0E0E0;
-        }
+.tbody__tabela tr:hover {
+    background-color: #F5F5F5;
+}
 
-        .tbody__tabela tr:last-child {
-            border-bottom: none;
-        }
+/* colunas */
+.col1 {
+    width: 15%;
+}
 
-        .tbody__tabela tr:hover {
-            background-color: #F5F5F5;
-        }
+.col2 {
+    width: 45%;
+}
 
-        .tbody__tabela td {
-            padding: 1rem 1.5rem;
-        }
+.col3 {
+    width: 25%;
+}
 
-        .col1 {
-            width: 50%;
-            text-align: left;
-        }
+.col4 {
+    width: 15%;
+    text-align: center;
+}
 
-        .col2 {
-            width: 30%;
-            text-align: left;
-        }
+/* botões de ação */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
 
-        .col3 {
-            width: 20%;
-            text-align: center;
-        }
+/* ícones */
+.btn_acao {
+    width: 22px;
+    height: 22px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: 0.2s;
+}
 
-        .btn_acao {
-            width: 24px;
-            height: 24px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border: none;
-            background-color: transparent;
-            margin: 0 0.25rem;
-            cursor: pointer;
-            vertical-align: middle;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
+.btn_acao:hover {
+    opacity: 1;
+}
 
-        .btn_acao:hover {
-            opacity: 1;
-        }
+/* evita faixa branca */
+html,
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
 
-        .btn__editar {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>');
-        }
+/* CARDS SUPERIORES */
+.cards-resumo {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
 
-        .btn__excluir {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d32f2f" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>');
-        }
+.card-resumo {
+    background-color: #4A2C1D;
+    color: white;
+    width: 180px;
+    min-height: 110px;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-        .action-buttons {
-            display: inline-flex;
-            gap: 0.5rem;
-            justify-content: center;
-        }
+.card-resumo h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.card-resumo .numero {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.card-resumo p {
+    font-size: 12px;
+    margin: 0;
+    opacity: 0.8;
+}
