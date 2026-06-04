@@ -1,184 +1,89 @@
-.painel {
-    padding: 1.5rem 2rem;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f8f9fa;
 }
 
-/* topo */
-.container--form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
+.wrapper-conteudo {
+  display: flex;
+  flex-direction: column;
+
+  flex-grow: 1;
+  width: calc(100vw - 320px);
+  min-width: 0;
+
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* título */
-.painel__title {
-    font-size: 28px;
-    font-weight: bold;
-    color: #000;
+.bg-header-custom {
+  background-color: #D3A280;
+  color: #211915;
+  height: 85px;
+  flex-shrink: 0;
 }
 
-/* área do formulário */
-.painel__form--container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.bg-card-custom {
+  background-color: #4A2E1B;
+  color: #FFFFFF;
 }
 
-/* input */
-.input-form {
-    width: 320px;
-    height: 38px;
-    padding: 0 12px;
-    border: 1px solid #BDBDBD;
-    border-radius: 4px;
-    font-size: 14px;
-    outline: none;
+.btn-custom-dark {
+  background-color: #4A2E1B;
+  color: #FFFFFF;
+  border: none;
 }
 
-/* botão */
-.btn__padrao {
-    background-color: #4A3933;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
+.btn-custom-dark:hover {
+  background-color: #362113;
+  color: #FFFFFF;
 }
 
-.btn__padrao:hover {
-    background-color: #352721;
+.btn-custom-blue {
+  background-color: #246095;
+  color: #FFFFFF;
 }
 
-.btn__form {
-    height: 38px;
-    padding: 0 24px;
-    font-size: 14px;
-    font-weight: bold;
+.btn-custom-blue:hover {
+  background-color: #1A476F;
+  color: #FFFFFF;
 }
 
-/* tabela */
-.tabela {
-    width: 100%;
-    background-color: white;
-    border-collapse: collapse;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #D9D9D9;
+.table-custom-header {
+  background-color: #4A2E1B;
+  color: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
-/* cabeçalho */
-.thead__tabela {
-    background-color: #4A2C1D;
-    color: white;
+.border-custom-container {
+  border: 1px solid #A0A0A0;
+  border-radius: 15px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
-.thead__tabela th {
-    padding: 12px 16px;
-    font-size: 14px;
-    font-weight: 600;
+.main-container {
+  height: calc(100vh - 85px);
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
 }
 
-/* linhas */
-.tbody__tabela td {
-    padding: 12px 16px;
-    font-size: 14px;
-    border-bottom: 1px solid #EAEAEA;
-}
-
-.tbody__tabela tr:hover {
-    background-color: #F5F5F5;
-}
-
-/* colunas */
-.col1 {
-    width: 15%;
-}
-
-.col2 {
-    width: 45%;
-}
-
-.col3 {
-    width: 25%;
-}
-
-.col4 {
-    width: 15%;
-    text-align: center;
-}
-
-/* botões de ação */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-/* ícones */
-.btn_acao {
-    width: 22px;
-    height: 22px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.7;
-    transition: 0.2s;
-}
-
-.btn_acao:hover {
-    opacity: 1;
-}
-
-/* evita faixa branca */
-html,
-body {
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-/* CARDS SUPERIORES */
-.cards-resumo {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.card-resumo {
-    background-color: #4A2C1D;
-    color: white;
-    width: 180px;
-    min-height: 110px;
-    border-radius: 8px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.card-resumo h3 {
-    font-size: 16px;
-    font-weight: 400;
-    margin: 0;
-}
-
-.card-resumo .numero {
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 1;
-}
-
-.card-resumo p {
-    font-size: 12px;
-    margin: 0;
-    opacity: 0.8;
+.bg-white-panel {
+  background-color: #ffffff;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
