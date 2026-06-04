@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import {FormularioCadastrarUsuario} from '../../components/formulario-cadastrar-usuario'
+import { FormularioCadastrarUsuario } from '../../components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
 
 @Component({
   selector: 'app-cadastrar',
@@ -11,5 +11,5 @@ import {FormularioCadastrarUsuario} from '../../components/formulario-cadastrar-
   styleUrl: './cadastrar.css',
 })
 export class Cadastrar {
-  
+
 }
