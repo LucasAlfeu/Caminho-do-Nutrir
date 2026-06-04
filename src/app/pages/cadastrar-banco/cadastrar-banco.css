@@ -1,64 +1,36 @@
-* {
-    box-sizing: border-box;
-}
-
-html,
 body {
-    width: 100%;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #f8f9fa;
 }
 
-/* Header */
+.wrapper-conteudo {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 320px);
+  height: 100vh;
+  min-width: 0;
+}
+
 .header-custom {
-    background-color: #D1A17B;
-    padding: 20px 30px;
+  flex-shrink: 0;
 }
 
-.header-title {
-    font-weight: bold;
-    margin-bottom: 0;
-    font-size: 1.5rem;
-    color: #000;
+.form-scroll-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #f8f9fa;
 }
 
-.header-subtitle {
-    font-size: 0.9rem;
-    color: #333;
-    margin-top: 5px;
-}
-
-/* Container */
 .form-container {
-    background-color: white;
-    padding: 30px;
-    margin: 20px;
-    border-radius: 4px;
+  width: 100%;
 }
 
-/* Título */
-.section-title {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-}
-
-/* Labels */
-.form-label {
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-/* Botões */
-.btn-custom {
-    background-color: #4A2C1D;
-    color: white;
-    border: none;
-}
-
-.btn-custom:hover {
-    background-color: #362015;
-    color: white;
+.bg-header-custom {
+  background-color: #D3A280;
+  color: #211915;
+  height: 85px;
+  flex-shrink: 0;
 }
