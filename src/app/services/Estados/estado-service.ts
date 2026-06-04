@@ -13,7 +13,7 @@ export class EstadosService {
   constructor(private http: HttpClient) { }
 
   buscarEstados(): Observable<Estado[]>{
-    return this.http.get<Estado[]>('http://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+    return this.http.get<Estado[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
   }
 
   buscarMunicipios(uf: string): Observable<Municipio[]>{
