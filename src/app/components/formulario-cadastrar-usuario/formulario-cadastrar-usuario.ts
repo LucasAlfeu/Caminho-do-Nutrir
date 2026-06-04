@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -10,20 +10,22 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './formulario-cadastrar-usuario.css',
 })
 export class FormularioCadastrarUsuario {
-form!: FormGroup;
+  @Output() cadastrar = new EventEmitter();
+
+  form!: FormGroup;
   showPassword = false;
   showConfirmPassword = false;
 
   constructor(
     protected fb: FormBuilder,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm()
   }
 
-  createForm(){
+  createForm() {
     this.form = this.fb.group({
       email: ['', Validators.compose([Validators.required])],
       senha: ['', Validators.compose([Validators.required])],
@@ -35,10 +37,10 @@ form!: FormGroup;
     })
   }
 
-  cadastrar(){
-    if(!this.form) return;
+  _cadastrar() {
+    if (!this.form) return;
 
-    if(this.form.invalid) {
+    if (this.form.invalid) {
       this.toastr.error('Revise os campos obrigatórios', 'Erro');
       return
     }
@@ -52,6 +54,6 @@ form!: FormGroup;
       confirmaSenha: this.form.get('confirmaSenha')?.value,
     };
 
-    console.log(dadosCadastrais);
+    this.cadastrar.emit(dadosCadastrais);
   }
 }

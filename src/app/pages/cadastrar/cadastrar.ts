@@ -12,4 +12,7 @@ import { FormularioCadastrarUsuario } from '../../components/formulario-cadastra
 })
 export class Cadastrar {
 
+  cadastrar(dados: any){
+    console.log(dados)
+  }
 }

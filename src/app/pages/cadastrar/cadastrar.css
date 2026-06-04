@@ -1,39 +1,39 @@
 .bg-brown-custom {
-      background-color: #8c5730;
-    }
+  background-color: #8c5730;
+}
 
-    .btn-brown-custom {
-      background-color: #8c5730;
-      color: #ffffff;
-      border: none;
-    }
+.btn-brown-custom {
+  background-color: #8c5730;
+  color: #ffffff;
+  border: none;
+}
 
-    .btn-brown-custom:hover {
-      background-color: #704526;
-      color: #ffffff;
-    }
+.btn-brown-custom:hover {
+  background-color: #704526;
+  color: #ffffff;
+}
 
-    .form-control::placeholder {
-      color: #d6b4b4;
-      font-size: 0.95rem;
-    }
+.form-control::placeholder {
+  color: #d6b4b4;
+  font-size: 0.95rem;
+}
 
-    .text-gray-custom {
-      color: #979797;
-    }
+.text-gray-custom {
+  color: #979797;
+}
 
-    @media (min-width: 992px) {
-      .layout-wrapper {
-        height: 100vh;
-        overflow: hidden;
-      }
+@media (min-width: 992px) {
+  .layout-wrapper {
+    height: 100vh;
+    overflow: hidden;
+  }
 
-      .sidebar-fixed {
-        height: 100vh;
-      }
+  .sidebar-fixed {
+    height: 100vh;
+  }
 
-      .form-scrollable {
-        height: 100vh;
-        overflow-y: auto;
-      }
-    }
+  .form-scrollable {
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
