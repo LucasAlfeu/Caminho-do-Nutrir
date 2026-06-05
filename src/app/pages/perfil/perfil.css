@@ -1,5 +1,5 @@
 .bg-main-custom {
-  background-color: #f5ece4;
+  background-color: #f8f9fa;
 }
 
 .wrapper-conteudo {
@@ -10,12 +10,6 @@
   min-width: 0;
 }
 
-.form-align-left {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.form-align-left>* {
+.form-container {
   width: 100%;
-  max-width: 800px;
 }
