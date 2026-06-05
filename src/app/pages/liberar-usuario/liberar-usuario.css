@@ -1,184 +1,54 @@
-.liberar-usuario {
-    padding: 1.5rem 2rem;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Evita scrolls globais */
 }
 
-/* título */
-.title {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 2rem;
-    color: #000;
+/* O pulo do gato para preencher a tela até o final (descontando o menu) */
+.wrapper-conteudo {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 320px);
+  height: 100vh;
+  min-width: 0;
 }
 
-/* topo */
-.container--form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
+.bg-main-custom {
+  background-color: #f5ece4; /* Cor de fundo bege */
 }
 
-.painel__title {
-    font-size: 20px;
-    font-weight: 600;
+/* Botão de busca marrom personalizado */
+.btn-brown-custom {
+  background-color: #4A3933;
+  transition: 0.3s;
 }
 
-/* formulário */
-.painel__form--container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.btn-brown-custom:hover {
+  background-color: #352721;
+  color: white;
 }
 
-/* input */
-.input-form {
-    width: 320px;
-    height: 38px;
-    padding: 0 12px;
-    border: 1px solid #BDBDBD;
-    border-radius: 4px;
-    font-size: 14px;
-    outline: none;
-}
-
-/* botão */
-.btn__padrao {
-    background-color: #4A3933;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn__padrao:hover {
-    background-color: #352721;
-}
-
-.btn__form {
-    height: 38px;
-    padding: 0 24px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-/* tabela */
-.tabela {
-    width: 100%;
-    background-color: white;
-    border-collapse: collapse;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #D9D9D9;
-}
-
-/* cabeçalho */
-.thead__tabela {
-    background-color: #4A2C1D;
-    color: white;
-}
-
-.thead__tabela th {
-    padding: 12px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-}
-
-/* corpo */
-.corpo-tabela tr {
-    border-bottom: 1px solid #EAEAEA;
-}
-
-.corpo-tabela tr:last-child {
-    border-bottom: none;
-}
-
-.corpo-tabela tr:hover {
-    background-color: #F5F5F5;
-}
-
-.corpo-tabela td {
-    padding: 12px 16px;
-    font-size: 14px;
-}
-
-/* colunas */
-.col1 {
-    width: 15%;
-}
-
-.col2 {
-    width: 45%;
-}
-
-.col3 {
-    width: 25%;
-}
-
-.col4 {
-    width: 15%;
-    text-align: center;
-}
-
-/* ações */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
+/* Ícones de Ação SVG */
 .btn_acao {
-    width: 22px;
-    height: 22px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.7;
-    transition: 0.2s;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  transition: 0.2s;
 }
 
 .btn_acao:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
-/* ícones */
 .btn__aprovar {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%234CAF50" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%234CAF50" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>');
 }
 
 .btn__reprovar {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d32f2f" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>');
-}
-
-/* status */
-.status-aguardando {
-    color: #F57C00;
-    font-weight: 600;
-}
-
-.status-aprovado {
-    color: #4CAF50;
-    font-weight: 600;
-}
-
-.status-reprovado {
-    color: #d32f2f;
-    font-weight: 600;
-}
-
-/* evita faixa branca */
-html,
-body {
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23d32f2f" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>');
 }
