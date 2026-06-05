@@ -43,12 +43,14 @@ export class CadastrarBanco {
       numero: [''],
       complemento: [''],
       bairro: [''],
-      uf: [''],
-      localidade: [''],
+      localidade: [null],
+      uf: [null],
       latitude: [''],
       longitude: [''],
       descricao: ['']
     })
+
+    this.cadastroBancoForm.get('localidade')?.disable();
   }
 
   carregaEnderecoViaCep() {
@@ -68,43 +70,34 @@ export class CadastrarBanco {
   }
 
   preencheFormulario() {
-    console.log("chamou o método de preencher os dados")
     const siglaUf = this.dadosCep.uf;
-    const nomeLocalidade = this.dadosCep.localidade;
-    console.log(this)
     const estadoEncontrado = this.listaDeEstados.find(estado => estado.sigla === siglaUf);
+    this.carregarMunicipios(String(estadoEncontrado?.sigla))
+    setTimeout(() => {
+      console.log("municipiuos", this.listaDeMunicipios)
 
-    if (!estadoEncontrado) {
-      console.error("Estado não encontrado na lista.");
-      return;
-    }
-
-    this.cadastroBancoForm.get('uf')?.setValue(estadoEncontrado.id);
-    this.cadastroBancoForm.get('uf')?.disable();
-
-    this.estadosService.buscarMunicipios(String(estadoEncontrado.id)).subscribe({
-      next: (municipios) => {
-        this.listaDeMunicipios = municipios;
-
-        const localidadeEncontrada = this.listaDeMunicipios.find(m => m.nome === nomeLocalidade);
-        console.log(localidadeEncontrada?.id)
-        if (localidadeEncontrada) {
-          this.cadastroBancoForm.get('localidade')?.setValue(localidadeEncontrada.nome);
-          this.cadastroBancoForm.get('localidade')?.disable();
-        } else {
-          console.warn(`Município "${nomeLocalidade}" não encontrado na lista IBGE.`);
-        }
-
-        this.cadastroBancoForm.get('logradouro')?.setValue(this.dadosCep.logradouro);
-        this.cadastroBancoForm.get('bairro')?.setValue(this.dadosCep.bairro);
-        this.cadastroBancoForm.get('logradouro')?.disable();
-        this.cadastroBancoForm.get('bairro')?.disable();
-
-      },
-      error: (err) => {
-        console.error("Erro ao carregar municípios:", err);
+      if (!estadoEncontrado) {
+        console.error("Estado não encontrado na lista.");
+        return;
       }
-    });
+
+      this.cadastroBancoForm.get('uf')?.setValue(estadoEncontrado.id);
+
+      const cidadeEncontrada = this.listaDeMunicipios.find(
+        cidade => cidade.nome.toLowerCase() === this.dadosCep.localidade.toLowerCase()
+      );
+
+      if (cidadeEncontrada) {
+        this.cadastroBancoForm.get('localidade')?.setValue(cidadeEncontrada.id);
+      } else {
+        console.warn("Cidade não encontrada na lista de municípios carregada.");
+      }
+
+      this.cadastroBancoForm.get('logradouro')?.setValue(this.dadosCep.logradouro);
+      this.cadastroBancoForm.get('bairro')?.setValue(this.dadosCep.bairro);
+
+      this.desabilitaCamposEndereco();
+    }, 300)
   }
 
   carregaEstados() {
@@ -138,20 +131,23 @@ export class CadastrarBanco {
     })
   }
 
-  exibeMunicipios() {
-    const ufControl = this.cadastroBancoForm.get('uf')?.value;
+  carregaDadosMunicipio() {
+    const UfSelecionada = this.cadastroBancoForm.get('uf')?.value
 
-    if (ufControl) {
-      this.carregarMunicipios(ufControl)
+    if (UfSelecionada !== null) {
+      const estadoEncontrado = this.listaDeEstados.find(estado => estado.id == UfSelecionada);
+      this.carregarMunicipios(String(estadoEncontrado?.sigla))
+      this.cadastroBancoForm.get('localidade')?.enable();
     } else {
       return
     }
   }
 
-  carregaDados(){
-    const UfSelecionada = this.cadastroBancoForm.get('uf')?.value
-
-    console.log("Selecionada", UfSelecionada)
+  desabilitaCamposEndereco() {
+    this.cadastroBancoForm.get('uf')?.disable();
+    this.cadastroBancoForm.get('localidade')?.disable();
+    this.cadastroBancoForm.get('logradouro')?.disable();
+    this.cadastroBancoForm.get('bairro')?.disable();
   }
 
   salvar() {
