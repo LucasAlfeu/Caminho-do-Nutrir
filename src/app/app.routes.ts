@@ -9,6 +9,7 @@ import { PainelLayoutComponent } from './components/painel-layout-component/pain
 import { CadastrarBanco } from './pages/cadastrar-banco/cadastrar-banco';
 import { LiberarUsuario } from './pages/liberar-usuario/liberar-usuario';
 import { Mapa } from './pages/mapa/mapa';
+import { Perfil } from './pages/perfil/perfil';
 // Importe aqui o seu componente de Layout que contém a estrutura (header/menu/footer)
 // import { PainelLayoutComponent } from './layout/painel-layout/painel-layout.component';
 
@@ -51,6 +52,10 @@ export const routes: Routes = [
             {
                 path: 'liberar-usuario',
                 component: LiberarUsuario,
+            },
+             {
+                path: 'perfil',
+                component: Perfil,
             },
         ]
     }
