@@ -1,4 +1,21 @@
 .bg-main-custom {
-    background-color: #f5ece4; /* Tom de bege claro da imagem */
+  background-color: #f5ece4;
 }
 
+.wrapper-conteudo {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 320px);
+  height: 100vh;
+  min-width: 0;
+}
+
+.form-align-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-align-left>* {
+  width: 100%;
+  max-width: 800px;
+}

@@ -1,15 +1,12 @@
-<!-- Adicione "w-100" para ocupar a largura total e "vh-100" para a altura da tela -->
-<main class="w-100 flex-grow-1 overflow-auto" style="background-color: #f5ece4;">
-    
-    <!-- Cabeçalho com padding e borda inferior -->
-    <header class="px-4 py-3 border-bottom border-secondary border-opacity-10">
-        <h1 class="h3 fw-bold mb-0 text-dark">Bancos de Leite Humano</h1>
-        <p class="mb-0 text-muted small">Gerenciamento de bancos cadastrados no sistema</p>
-    </header>
+<main class="wrapper-conteudo flex-grow-1 overflow-auto" style="background-color: #f5ece4;">
 
-    <!-- Envolva seu componente em um container-fluid para que ele use todo o espaço horizontal, respeitando o padding -->
-    <div class="container-fluid p-4">
-        <app-formulario-cadastrar-usuario></app-formulario-cadastrar-usuario>
-    </div>
+  <header class="px-4 py-3 border-bottom border-secondary border-opacity-10">
+    <h1 class="h3 fw-bold mb-0 text-dark">Bancos de Leite Humano</h1>
+    <p class="mb-0 text-muted small">Gerenciamento de bancos cadastrados no sistema</p>
+  </header>
+
+  <div class="container-fluid p-4 form-align-left">
+    <app-formulario-cadastrar-usuario></app-formulario-cadastrar-usuario>
+  </div>
 
 </main>
