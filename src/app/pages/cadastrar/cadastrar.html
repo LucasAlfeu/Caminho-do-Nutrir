@@ -1,11 +1,8 @@
 <body style="background-color: #f8f9fa;">
-
   <div class="container-fluid p-0">
     <div class="row g-0 layout-wrapper">
 
-      <div
-        class="col-12 col-lg-4 bg-brown-custom text-white d-flex flex-column justify-content-between text-center p-5 sidebar-fixed">
-
+      <div class="col-12 col-lg-4 bg-brown-custom text-white d-flex flex-column justify-content-between text-center p-5 sidebar-fixed">
         <div class="mt-4">
           <h1 class="fw-bold display-4 lh-sm">Caminho<br>do Nutrir</h1>
         </div>
@@ -22,18 +19,17 @@
             Preencha os campos ao lado para fazer<br>parte dessa rede de apoio e nutrição.
           </p>
         </div>
-
       </div>
 
-      <h2 class="fw-bold mb-2">Cadastro</h2>
-      <p class="mb-5">Já possui conta? <a href="/entrar" class="text-decoration-none" style="color: #6a73fa;">Acesse
-          aqui</a></p>
-
       <div class="col-12 col-lg-8 bg-white p-5 form-scrollable d-flex flex-column">
+
+        <h2 class="fw-bold mb-2">Cadastro</h2>
+        <p class="mb-5">Já possui conta? <a href="/entrar" class="text-decoration-none" style="color: #6a73fa;">Acesse aqui</a></p>
+
         <app-formulario-cadastrar-usuario (cadastrar)="cadastrar($event)"></app-formulario-cadastrar-usuario>
+
       </div>
 
     </div>
   </div>
-
 </body>
