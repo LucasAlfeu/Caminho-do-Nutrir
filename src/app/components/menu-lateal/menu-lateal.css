@@ -1,21 +1,26 @@
 .sidebar-custom {
-    width: 320px;
-    background-color: #9A6233;
-  }
+  width: 320px;
+  background-color: #9A6233;
+}
 
-  .sidebar-link {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 1.05rem;
-    display: block;
-    transition: all 0.2s ease-in-out;
-  }
+.sidebar-header-custom {
+  height: 85px;
+  flex-shrink: 0;
+}
 
-  .sidebar-link:hover {
-    color: #9A6233;
-    background-color: #EBE1D8;
-  }
+.sidebar-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.05rem;
+  display: block;
+  transition: all 0.2s ease-in-out;
+}
 
-  .divider-custom {
-    border-color: rgba(255, 255, 255, 0.9) !important;
-  }
+.sidebar-link:hover {
+  color: #9A6233;
+  background-color: #EBE1D8;
+}
+
+.divider-custom {
+  border-color: rgba(255, 255, 255, 0.9) !important;
+}
