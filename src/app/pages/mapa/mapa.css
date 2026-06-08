@@ -1,4 +1,16 @@
-.map{
-    width: 100vw;
-    height: 100vh;;
+.wrapper-mapa app-mapa-leaflet {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+}
+
+.header-secundario {
+  background-color: #CF9F3E;
+  position: relative;
+  z-index: 1050;
+  flex-shrink: 0; /* ← impede que o header encolha */
+  width: 100%;
 }

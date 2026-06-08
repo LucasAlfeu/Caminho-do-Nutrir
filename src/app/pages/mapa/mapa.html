@@ -1,7 +1,40 @@
-<section class="mapa">
-    <app-header-secundario></app-header-secundario>
+<section class="d-flex flex-column m-0 p-0" style="height: 100vh; overflow: hidden;">
+  <!-- <app-header-secundario></app-header-secundario> -->
+  <header
+    class="d-flex justify-content-between align-items-center px-4 py-3 w-100"
+    style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background-color: #9A6233;
+    "
+  >
+    <h1 class="text-white fw-bold m-0 fs-4">Caminho do Nutrir</h1>
 
-    <div class="mapa-container">
-        <app-mapa-leaflet></app-mapa-leaflet>
-    </div>
+    <nav>
+      <ul class="d-flex align-items-center list-unstyled m-0 gap-4">
+        <li>
+          <a href="/" class="text-white text-decoration-none fw-semibold">Início</a>
+        </li>
+        <li>
+          <a href="/#sobre" class="text-white text-decoration-none fw-semibold">Sobre</a>
+        </li>
+        <li>
+          <a href="/#doacao" class="text-white text-decoration-none fw-semibold">Doação</a>
+        </li>
+        <li>
+          <a href="painel" class="text-white text-decoration-none fw-semibold">Painel</a>
+        </li>
+        <li>
+          <a href="mapa" class="btn btn-light fw-bold px-3 py-1">Mapa</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="flex-grow-1 w-100 position-relative" style="min-height: 0;">
+    <app-mapa-leaflet></app-mapa-leaflet>
+  </div>
+
 </section>

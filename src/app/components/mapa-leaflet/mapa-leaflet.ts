@@ -1,43 +1,44 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 
 @Component({
   selector: 'app-mapa-leaflet',
   standalone: true,
   imports: [],
-  template: `
-    <div id="mapaContainer" style="height: 600px; width: 100%; background-color: #e0e0e0;"></div>
-  `,
-  styles: [`
-    #mapaContainer {
-      height: 600px;
-      width: 100%;
-    }
-  `]
+  templateUrl: './mapa-leaflet.html',
+  styleUrl: './mapa-leaflet.css'
 })
-export class MapaLeaflet implements AfterViewInit { 
-  private map!: L.Map;
+export class MapaLeaflet implements AfterViewInit, OnDestroy {
+  private map: L.Map | undefined;
 
   customIcon = L.icon({
-  iconUrl: 'images/pino-de-localizacao.png',
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
-});
+    iconUrl: 'assets/images/pino-de-localizacao.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+  });
 
   ngAfterViewInit(): void {
     console.log('Iniciando mapa...');
     this.initMap();
-    this.addMarker(-22.5003437, -44.1227801, "Esse é um teste")
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.remove();
+      this.map = undefined;
+    }
   }
 
   private initMap(): void {
-    const container = document.getElementById('mapaContainer');
+    if (this.map) {
+      return;
+    }
 
     this.map = L.map('mapaContainer', {
       center: [-22.5003437, -44.1227801],
       zoom: 15,
-      zoomControl: false, 
+      zoomControl: false,
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -45,37 +46,22 @@ export class MapaLeaflet implements AfterViewInit {
       attribution: '© OpenStreetMap'
     }).addTo(this.map);
 
+    this.addMarker(-22.5003437, -44.1227801, "Banco de Leite - Exemplo");
+
     setTimeout(() => {
-      this.map.invalidateSize();
+      if (this.map) {
+        this.map.invalidateSize();
+      }
     }, 100);
   }
 
-   private fixLeafletIcon(): void {
-    const iconRetinaUrl = 'images/pino-de-localizacao.png';
-    const iconUrl = 'images/pino-de-localizacao.png';
-    const shadowUrl = 'images/pino-de-localizacao.png';
-    
-    const iconDefault = L.icon({
-      iconRetinaUrl,
-      iconUrl,
-      shadowUrl,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      tooltipAnchor: [16, -28],
-      shadowSize: [41, 41]
-    });
-    
-    L.Marker.prototype.options.icon = iconDefault;
-  }
-
   private addMarker(lat: number, lng: number, mensagem?: string): L.Marker {
-    const marker = L.marker([lat, lng], {icon: this.customIcon}).addTo(this.map);
-    
+    const marker = L.marker([lat, lng], {icon: this.customIcon}).addTo(this.map!);
+
     if (mensagem) {
       marker.bindPopup(mensagem);
     }
-    
+
     return marker;
   }
 }

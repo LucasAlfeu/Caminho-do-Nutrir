@@ -2,6 +2,10 @@
   background-color: #f8f9fa;
 }
 
+.custom-header {
+  background-color: #D3A280;
+}
+
 .wrapper-conteudo {
   display: flex;
   flex-direction: column;
