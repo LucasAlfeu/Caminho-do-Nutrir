@@ -1,0 +1,56 @@
+<div #meuModal class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div *ngIf="endereco" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ endereco?.nome }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          style="background: transparent; border: none;" (click)="fecharModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="mb-3">
+          <p class="mb-1"><strong>Descrição:</strong></p>
+          <p class="text-muted">{{ endereco?.descricao }}</p>
+        </div>
+
+        <hr>
+        <div class="mb-3">
+          <p class="mb-1"><strong>Endereço:</strong></p>
+          <p class="text-muted">{{ endereco?.longradouro }}, nº {{ endereco?.numero }}</p>
+        </div>
+
+        @if (endereco?.complemento) {
+        <div class="mb-3">
+          <p class="mb-1"><strong>Complemento:</strong></p>
+          <p class="text-muted">{{ endereco?.complemento }}</p>
+        </div>
+        }
+
+        <div class="mb-3">
+          <p class="mb-1"><strong>Bairro:</strong></p>
+          <p class="text-muted">{{ endereco?.bairro }}</p>
+        </div>
+
+        <div class="mb-3">
+          <p class="mb-1"><strong>Cidade / Estado:</strong></p>
+          <p class="text-muted">{{ endereco?.cidade }} - {{ endereco?.uf }}</p>
+        </div>
+
+        <div class="mb-3">
+          <p class="mb-1"><strong>CEP:</strong></p>
+          <p class="text-muted">{{ endereco?.cep }}</p>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fecharModal()">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="copiarEnderecoCompleto()">
+          <i class="bi bi-clipboard"></i> Copiar Endereço
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,25 +1,35 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import * as L from 'leaflet';
+import { ModalMark } from '../modal-mark/modal-mark';
+
+declare var bootstrap: any;
+
+const defaultIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+L.Marker.prototype.options.icon = defaultIcon;
 
 @Component({
   selector: 'app-mapa-leaflet',
   standalone: true,
-  imports: [],
+  imports: [ModalMark],
   templateUrl: './mapa-leaflet.html',
   styleUrl: './mapa-leaflet.css'
 })
 export class MapaLeaflet implements AfterViewInit, OnDestroy {
   private map: L.Map | undefined;
 
-  customIcon = L.icon({
-    iconUrl: 'assets/images/pino-de-localizacao.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-  });
+  @ViewChild('modalMark') modalElement!: ModalMark;
+  // private modalInstance: any;
 
   ngAfterViewInit(): void {
-    console.log('Iniciando mapa...');
     this.initMap();
   }
 
@@ -56,12 +66,25 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy {
   }
 
   private addMarker(lat: number, lng: number, mensagem?: string): L.Marker {
-    const marker = L.marker([lat, lng], {icon: this.customIcon}).addTo(this.map!);
+    const marker = L.marker([lat, lng]).addTo(this.map!);
 
-    if (mensagem) {
-      marker.bindPopup(mensagem);
-    }
+    const endereco = {
+    nome: 'Isso é um teste',
+    descricao: 'teste teste teste',
+    cep: '20205570',
+    longradouro: 'Avenida Jaraguá',
+    numero: '370',
+    complemento: 'casa 47',
+    bairro: 'Retiro',
+    cidade: 'Volta Redonda',
+    uf: 'RJ'
+  }
+
+    marker.on('click', () => {
+      this.modalElement.abrirModal(endereco);
+    });
 
     return marker;
   }
+
 }
