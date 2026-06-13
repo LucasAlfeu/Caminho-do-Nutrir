@@ -1,20 +1,26 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entrar',
-  imports: [ ReactiveFormsModule ],
+  imports: [ ReactiveFormsModule, CommonModule ],
   templateUrl: './entrar.html',
   styleUrl: './entrar.css',
 })
 export class Entrar {
 
   form!: FormGroup;
+  esconderSenha = true;
 
   constructor(
     protected fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private autenticacaoService: AutenticacaoService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -23,7 +29,7 @@ export class Entrar {
 
   createForm(){
     this.form = this.fb.group({
-      email: ['', Validators.compose([Validators.required])],
+      usuario: ['', Validators.compose([Validators.required])],
       senha: ['', Validators.compose([Validators.required])]
     })
   }
@@ -32,14 +38,26 @@ export class Entrar {
     if(!this.form) return;
 
     if(this.form.invalid) {
-      this.toastr.error('Email e senha são obrigatórios', 'Erro');
+      this.toastr.error('Usuario e senha são obrigatórios', 'Erro');
       return
     }
     const credenciais = {
-      email: this.form.get('email')?.value,
+      usuario: this.form.get('usuario')?.value,
       senha: this.form.get('senha')?.value
     };
 
-    console.log(credenciais);
+    this.autenticacaoService.entrar(credenciais).subscribe({
+      next:(user) => {
+        console.log(user)
+        localStorage.setItem("usuario", JSON.stringify(user));
+        this.toastr.success("Login feito com sucesso")
+        setTimeout(() => {
+          this.router.navigate(['/painel']);
+        }, 200)
+      },
+      error: (err) => {
+        this.toastr.error(err.error.errors.default)
+      }
+    })
   }
 }

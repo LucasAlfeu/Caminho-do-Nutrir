@@ -1,5 +1,8 @@
-<main class="w-100 d-flex align-items-center justify-content-center"
-      style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/background-entrar.jpg');
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<main class="w-100 d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/background-entrar.jpg');
              min-height: 100vh;
              background-size: cover;
              background-position: center;
@@ -11,21 +14,29 @@
 
     <form [formGroup]="form">
       <div class="mb-4">
-        <input type="email" formControlName="email" class="form-control input-underlined" placeholder="Email">
+        <input type="text" formControlName="usuario" class="form-control input-underlined" placeholder="Usuario">
       </div>
 
-      <div class="mb-5">
-        <input type="password" formControlName="senha" class="form-control input-underlined" placeholder="Senha">
+      <div class="mb-5 position-relative">
+        <div class="input-group">
+          <input [type]="esconderSenha ? 'password' : 'text'" formControlName="senha"
+            class="form-control input-underlined" placeholder="Senha">
+
+          <button
+            class="btn btn-outline-secondary border-0 bg-transparent position-absolute end-0 top-50 translate-middle-y z-3"
+            type="button" (click)="esconderSenha = !esconderSenha" style="box-shadow: none;">
+            <i class="bi" [ngClass]="esconderSenha ? 'bi-eye-slash-fill' : 'bi-eye-fill'" style="color: #1a1a1a;"></i>
+          </button>
+        </div>
       </div>
 
-      <button
-      type="button"
-      class="btn btn-dark-custom w-100 fw-bold py-2 mb-4 fs-6"
-      (click)="enviarCredenciais()">ENTRAR</button>
+      <button type="button" class="btn btn-dark-custom w-100 fw-bold py-2 mb-4 fs-6"
+        (click)="enviarCredenciais()">ENTRAR</button>
     </form>
 
     <div class="d-flex justify-content-between mt-2">
-      <a href="/cadastrar" class="text-decoration-none fw-bold" style="color: #1a1a1a; font-size: 0.95rem;">Cadastrar</a>
+      <a href="/cadastrar" class="text-decoration-none fw-bold"
+        style="color: #1a1a1a; font-size: 0.95rem;">Cadastrar</a>
       <a href="#" class="text-decoration-none fw-bold" style="color: #1a1a1a; font-size: 0.95rem;">Perdeu a senha?</a>
     </div>
 
