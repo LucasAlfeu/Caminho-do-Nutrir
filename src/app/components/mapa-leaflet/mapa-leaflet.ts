@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { ModalMark } from '../modal-mark/modal-mark';
+import { BancoLeite } from '../../class/BancoLeite';
 
 declare var bootstrap: any;
 
@@ -23,14 +24,26 @@ L.Marker.prototype.options.icon = defaultIcon;
   templateUrl: './mapa-leaflet.html',
   styleUrl: './mapa-leaflet.css'
 })
-export class MapaLeaflet implements AfterViewInit, OnDestroy {
+export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   private map: L.Map | undefined;
+  private markersGroup: L.LayerGroup | undefined;
 
   @ViewChild('modalMark') modalElement!: ModalMark;
-  // private modalInstance: any;
+
+  @Input() listBancos?: BancoLeite[];
 
   ngAfterViewInit(): void {
     this.initMap();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['listBancos']) {
+      this.listBancos = changes['listBancos'].currentValue;
+
+      if (this.map) {
+        this.renderizarMarcadores();
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -45,6 +58,7 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy {
       return;
     }
 
+    // Mantemos as coordenadas antigas como "fallback" padrão caso o usuário recuse a localização
     this.map = L.map('mapaContainer', {
       center: [-22.5003437, -44.1227801],
       zoom: 15,
@@ -56,7 +70,12 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy {
       attribution: '© OpenStreetMap'
     }).addTo(this.map);
 
-    this.addMarker(-22.5003437, -44.1227801, "Banco de Leite - Exemplo");
+    this.markersGroup = L.layerGroup().addTo(this.map);
+
+    this.renderizarMarcadores();
+
+    // Tenta centralizar na localização de quem está acessando
+    this.obterLocalizacaoUsuario();
 
     setTimeout(() => {
       if (this.map) {
@@ -65,26 +84,49 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy {
     }, 100);
   }
 
-  private addMarker(lat: number, lng: number, mensagem?: string): L.Marker {
-    const marker = L.marker([lat, lng]).addTo(this.map!);
+  private obterLocalizacaoUsuario(): void {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
 
-    const endereco = {
-    nome: 'Isso é um teste',
-    descricao: 'teste teste teste',
-    cep: '20205570',
-    longradouro: 'Avenida Jaraguá',
-    numero: '370',
-    complemento: 'casa 47',
-    bairro: 'Retiro',
-    cidade: 'Volta Redonda',
-    uf: 'RJ'
+          if (this.map) {
+            this.map.setView([lat, lng], 14);
+          }
+        },
+        (error) => {
+          console.warn('Não foi possível obter a localização do usuário:', error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        }
+      );
+    } else {
+      console.log('Geolocalização não é suportada por este navegador.');
+    }
   }
 
-    marker.on('click', () => {
-      this.modalElement.abrirModal(endereco);
+  private renderizarMarcadores(): void {
+    if (!this.map || !this.markersGroup) return;
+
+    this.markersGroup.clearLayers();
+
+    (this.listBancos ?? []).forEach((banco) => {
+      const lat = Number(banco.latitude);
+      const lng = Number(banco.longitude);
+
+      if (!isNaN(lat) && !isNaN(lng)) {
+        const marker = L.marker([lat, lng]);
+
+        marker.on('click', () => {
+          this.modalElement.abrirModal(banco);
+        });
+
+        this.markersGroup?.addLayer(marker);
+      }
     });
-
-    return marker;
   }
-
 }

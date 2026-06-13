@@ -42,9 +42,9 @@ export class ModalMark {
     if (!this.endereco) return;
 
     const textoParaCopiar = `
-      ${this.endereco.longradouro}, nº ${this.endereco.numero} ${this.endereco.complemento ? '- ' + this.endereco.complemento : ''},
+      ${this.endereco.logradouro}, nº ${this.endereco.numero} ${this.endereco.complemento ? '- ' + this.endereco.complemento : ''},
       ${this.endereco.bairro},
-      ${this.endereco.cidade} - ${this.endereco.uf},
+      ${this.endereco.municipio} - ${this.endereco.uf},
       ${this.endereco.cep}`.trim();
 
     navigator.clipboard.writeText(textoParaCopiar)

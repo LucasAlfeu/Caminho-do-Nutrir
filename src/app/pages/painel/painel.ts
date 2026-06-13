@@ -39,7 +39,6 @@ export class Painel {
     this.bancoLeiteService.listBancoLeite().subscribe({
       next: (res) => {
         this.listBancos = res;
-        console.log(res);
       },
       error: (err) => {
         this.toastr.error("Não foi possível carregar os Bancos de Leite")
@@ -50,8 +49,4 @@ export class Painel {
   goTo() {
     this.router.navigate(['painel/cadastrar-banco']);
   }
-
-  // formatarData(data: string): string {
-  //   return moment(data).format('DD/MM/YYYY');
-  // }
 }

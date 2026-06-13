@@ -11,15 +11,15 @@
       </div>
       <div class="modal-body">
 
-        <div class="mb-3">
+        <div *ngIf="endereco?.descricao" class="mb-3">
           <p class="mb-1"><strong>Descrição:</strong></p>
           <p class="text-muted">{{ endereco?.descricao }}</p>
+          <hr>
         </div>
 
-        <hr>
         <div class="mb-3">
           <p class="mb-1"><strong>Endereço:</strong></p>
-          <p class="text-muted">{{ endereco?.longradouro }}, nº {{ endereco?.numero }}</p>
+          <p class="text-muted">{{ endereco?.logradouro }}, nº {{ endereco?.numero }}</p>
         </div>
 
         @if (endereco?.complemento) {
@@ -36,7 +36,7 @@
 
         <div class="mb-3">
           <p class="mb-1"><strong>Cidade / Estado:</strong></p>
-          <p class="text-muted">{{ endereco?.cidade }} - {{ endereco?.uf }}</p>
+          <p class="text-muted">{{ endereco?.municipio }} - {{ endereco?.uf }}</p>
         </div>
 
         <div class="mb-3">
