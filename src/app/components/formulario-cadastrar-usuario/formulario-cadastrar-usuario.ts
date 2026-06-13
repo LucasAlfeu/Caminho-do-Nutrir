@@ -31,7 +31,6 @@ export class FormularioCadastrarUsuario {
       senha: ['', Validators.compose([Validators.required])],
       nome: ['', Validators.compose([Validators.required])],
       matricula: ['', Validators.compose([Validators.required])],
-      cpf: ['', Validators.compose([Validators.required])],
       usuario: ['', Validators.compose([Validators.required])],
       confirmaSenha: ['', Validators.compose([Validators.required])],
     })
@@ -44,14 +43,22 @@ export class FormularioCadastrarUsuario {
       this.toastr.error('Revise os campos obrigatórios', 'Erro');
       return
     }
+
+    const senha = this.form.get('senha')?.value
+    const confirmaSenha = this.form.get('confirmaSenha')?.value
+
+    if (senha && confirmaSenha && senha !== confirmaSenha) {
+      this.toastr.error("As senhas precisam ser iguais", 'Erro');
+      // return
+    }
+
+
     const dadosCadastrais = {
       email: this.form.get('email')?.value,
       senha: this.form.get('senha')?.value,
       nome: this.form.get('nome')?.value,
       matricula: this.form.get('matricula')?.value,
-      cpf: this.form.get('cpf')?.value,
       usuario: this.form.get('usuario')?.value,
-      confirmaSenha: this.form.get('confirmaSenha')?.value,
     };
 
     this.cadastrar.emit(dadosCadastrais);

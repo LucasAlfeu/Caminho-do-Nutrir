@@ -22,6 +22,10 @@ export class AutenticacaoService {
     return this.http.post<Usuario>(`${environment.apiUrl}/entrar`, dados);
   }
 
+  cadastrarUsuario(dados: any){
+    return this.http.post<Usuario>(`${environment.apiUrl}/cadastrar`, dados);
+  }
+
   verificaLogin(): any {
     const usuarioLogado = localStorage.getItem("usuario");
 
