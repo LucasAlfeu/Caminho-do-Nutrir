@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateal',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class MenuLateal {
 
+  constructor(private router: Router) { }
+
+  sair(){
+    localStorage.clear();
+    this.router.navigate(['/entrar']);
+  }
 }

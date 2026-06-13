@@ -14,11 +14,13 @@
   font-size: 1.05rem;
   display: block;
   transition: all 0.2s ease-in-out;
+  background: transparent;
+  border: none;
 }
 
 .sidebar-link:hover {
   color: #9A6233;
-  background-color: #EBE1D8;
+  background: #EBE1D8;
 }
 
 .divider-custom {
