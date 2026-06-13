@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class Entrar {
 
   form!: FormGroup;
-  esconderSenha = true;
+  showPassword = false;
 
   constructor(
     protected fb: FormBuilder,
@@ -56,6 +56,7 @@ export class Entrar {
         }, 200)
       },
       error: (err) => {
+        this.form.get('senha')?.setValue("");
         this.toastr.error(err.error.errors.default)
       }
     })
