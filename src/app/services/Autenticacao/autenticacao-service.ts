@@ -2,16 +2,40 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../class/Usuario';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class AutenticacaoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private router: Router,
+  ) { }
 
   entrar(dados: any) {
     return this.http.post<Usuario>(`${environment.apiUrl}/entrar`, dados);
+  }
+
+  verificaLogin(): any {
+    const usuarioLogado = localStorage.getItem("usuario");
+
+    if (usuarioLogado !== null) {
+      const user = JSON.parse(usuarioLogado);
+
+      return user
+    } else {
+      this.toastr.error("Erro de autenticação");
+      setTimeout(() => {
+        this.router.navigate(['entrar']);
+      }, 3000);
+      return null;
+    }
   }
 }
 
