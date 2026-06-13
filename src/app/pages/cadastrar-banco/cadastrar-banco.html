@@ -19,20 +19,31 @@
             <div class="mb-3">
               <label for="nome" class="form-label">Nome</label>
               <input type="text" formControlName="nome" class="form-control border-2" id="nome"
-                placeholder="Digite o nome do banco">
+                placeholder="Digite o nome do banco"
+                [ngClass]="{'is-invalid': cadastroBancoForm.get('nome')?.invalid && cadastroBancoForm.get('nome')?.touched}">
+              <div class="text-danger small mt-1"
+                *ngIf="cadastroBancoForm.get('nome')?.invalid && cadastroBancoForm.get('nome')?.touched">
+                O nome é obrigatório.
+              </div>
             </div>
 
             <div class="row align-items-end">
               <div class="col-md-8">
                 <label for="cep" class="form-label">CEP</label>
                 <input type="text" formControlName="cep" class="form-control border-2" id="cep"
-                  placeholder="Informe o CEP">
+                  placeholder="Informe o CEP"
+                  [ngClass]="{'is-invalid': cadastroBancoForm.get('cep')?.invalid && cadastroBancoForm.get('cep')?.touched}">
+                <div class="text-danger small mt-1"
+                  *ngIf="cadastroBancoForm.get('cep')?.invalid && cadastroBancoForm.get('cep')?.touched">
+                  O CEP é obrigatório.
+                </div>
               </div>
               <div class="col-md-4">
-                <button type="button" class="btn btn-custom w-100 fw-semibold" (blur)="carregaEnderecoViaCep()" (click)="carregaEnderecoViaCep()"
-                  style="background-color: #4A2E1B; color: #fff;">
+                <button type="button" class="btn btn-custom w-100 fw-semibold" (blur)="carregaEnderecoViaCep()"
+                  (click)="carregaEnderecoViaCep()" style="background-color: #4A2E1B; color: #fff;"
+                  [style.margin-bottom]="cadastroBancoForm.get('cep')?.invalid && cadastroBancoForm.get('cep')?.touched ? '23px' : '0px'">
                   Buscar
-                </button>
+                  </button>
               </div>
             </div>
           </div>
@@ -49,12 +60,22 @@
           <div class="col-md-6">
             <label for="logradouro" class="form-label">Logradouro</label>
             <input type="text" formControlName="logradouro" class="form-control border-2" id="logradouro"
-              placeholder="Digite o logradouro">
+              placeholder="Digite o logradouro"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('logradouro')?.invalid && cadastroBancoForm.get('logradouro')?.touched}">
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('logradouro')?.invalid && cadastroBancoForm.get('logradouro')?.touched">
+              O logradouro é obrigatório.
+            </div>
           </div>
           <div class="col-md-2">
             <label for="numero" class="form-label">Número</label>
             <input type="text" formControlName="numero" class="form-control border-2" id="numero"
-              placeholder="Digite o número">
+              placeholder="Digite o número"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('numero')?.invalid && cadastroBancoForm.get('numero')?.touched}">
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('numero')?.invalid && cadastroBancoForm.get('numero')?.touched">
+              Obrigatorio.
+            </div>
           </div>
           <div class="col-md-4">
             <label for="complemento" class="form-label">Complemento</label>
@@ -67,22 +88,38 @@
           <div class="col-md-4">
             <label for="bairro" class="form-label">Bairro</label>
             <input type="text" formControlName="bairro" class="form-control border-2" id="bairro"
-              placeholder="Digite o bairro">
+              placeholder="Digite o bairro"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('bairro')?.invalid && cadastroBancoForm.get('bairro')?.touched}">
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('bairro')?.invalid && cadastroBancoForm.get('bairro')?.touched">
+              O bairro é obrigatório.
+            </div>
           </div>
+
           <div class="col-md-5">
             <label for="cidade" class="form-label">Cidade</label>
-            <select formControlName="localidade" class="form-select border-2" id="cidade">
+            <select formControlName="municipio" class="form-select border-2" id="cidade"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('municipio')?.invalid && cadastroBancoForm.get('municipio')?.touched}">
               <option [ngValue]="null" disabled selected>Selecione uma cidade</option>
               <option [value]="item.id" *ngFor="let item of listaDeMunicipios">{{ item.nome }}</option>
             </select>
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('municipio')?.invalid && cadastroBancoForm.get('municipio')?.touched">
+              A cidade é obrigatória.
+            </div>
           </div>
 
           <div class="col-md-3">
             <label for="uf" class="form-label">UF</label>
-            <select formControlName="uf" class="form-select border-2" id="uf" (blur)="carregaDadosMunicipio()">
+            <select formControlName="uf" class="form-select border-2" id="uf" (blur)="carregaDadosMunicipio()"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('uf')?.invalid && cadastroBancoForm.get('uf')?.touched}">
               <option [ngValue]="null" disabled selected>Selecione um UF</option>
-              <option [value]="item.id" *ngFor="let item of listaDeEstados">{{ item.nome }}</option>
+              <option [value]="item.id" *ngFor="let item of listaDeEstados">{{ item.sigla }}</option>
             </select>
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('uf')?.invalid && cadastroBancoForm.get('uf')?.touched">
+              O UF é obrigatório.
+            </div>
           </div>
         </div>
 
@@ -90,17 +127,28 @@
           <div class="col-md-6">
             <label for="latitude" class="form-label">Latitude</label>
             <input type="text" formControlName="latitude" class="form-control border-2" id="latitude"
-              placeholder="Digite a latitude">
+              placeholder="Digite a latitude"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('latitude')?.invalid && cadastroBancoForm.get('latitude')?.touched}">
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('latitude')?.invalid && cadastroBancoForm.get('latitude')?.touched">
+              A latitude é obrigatória.
+            </div>
           </div>
           <div class="col-md-6">
             <label for="longitude" class="form-label">Longitude</label>
             <input type="text" formControlName="longitude" class="form-control border-2" id="longitude"
-              placeholder="Digite a longitude">
+              placeholder="Digite a longitude"
+              [ngClass]="{'is-invalid': cadastroBancoForm.get('longitude')?.invalid && cadastroBancoForm.get('longitude')?.touched}">
+            <div class="text-danger small mt-1"
+              *ngIf="cadastroBancoForm.get('longitude')?.invalid && cadastroBancoForm.get('longitude')?.touched">
+              A longitude é obrigatória.
+            </div>
           </div>
         </div>
 
         <div class="d-flex justify-content-end mt-4">
-          <button type="submit" class="btn px-5 fw-semibold" style="background-color: #4A2E1B; color: #fff;">
+          <button type="submit" class="btn px-5 fw-semibold" style="background-color: #4A2E1B; color: #fff;"
+            (click)="salvar()">
             Cadastrar
           </button>
         </div>

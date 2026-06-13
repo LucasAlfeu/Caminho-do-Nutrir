@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Municipio } from '../../class/Municipio';
 import { Cep } from '../../class/Cep';
+import { ToastrService } from 'ngx-toastr';
+import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
 
 @Component({
   selector: 'app-cadastrar-banco',
@@ -25,7 +27,9 @@ export class CadastrarBanco {
   constructor(
     protected estadosService: EstadosService,
     private cdRef: ChangeDetectorRef,
-    protected fb: FormBuilder
+    private toastr: ToastrService,
+    protected fb: FormBuilder,
+    private bancoLeiteService: BancoLeiteService,
   ) {
     this.dadosCep = new Cep();
   }
@@ -37,31 +41,29 @@ export class CadastrarBanco {
 
   createForm() {
     this.cadastroBancoForm = this.fb.group({
-      nome: [''],
-      cep: [''],
-      logradouro: [''],
-      numero: [''],
+      nome: ['', Validators.compose([Validators.required])],
+      cep: ['', Validators.compose([Validators.required])],
+      logradouro: ['', Validators.compose([Validators.required])],
+      numero: ['', Validators.compose([Validators.required])],
       complemento: [''],
-      bairro: [''],
-      localidade: [null],
-      uf: [null],
-      latitude: [''],
-      longitude: [''],
+      bairro: ['', Validators.compose([Validators.required])],
+      municipio: [null, Validators.compose([Validators.required])],
+      uf: [null, Validators.compose([Validators.required])],
+      latitude: ['', Validators.compose([Validators.required])],
+      longitude: ['', Validators.compose([Validators.required])],
       descricao: ['']
     })
 
-    this.cadastroBancoForm.get('localidade')?.disable();
+    this.cadastroBancoForm.get('municipio')?.disable();
   }
 
   carregaEnderecoViaCep() {
     const cep = this.cadastroBancoForm.get('cep')?.value
-    console.log("clicou", cep)
     if (cep) {
       this.estadosService.buscaDadosCep(cep).subscribe({
         next: (res: Cep) => {
           this.dadosCep = res
           this.preencheFormulario()
-          console.log(this.dadosCep)
         }
       })
     } else {
@@ -74,7 +76,6 @@ export class CadastrarBanco {
     const estadoEncontrado = this.listaDeEstados.find(estado => estado.sigla === siglaUf);
     this.carregarMunicipios(String(estadoEncontrado?.sigla))
     setTimeout(() => {
-      console.log("municipiuos", this.listaDeMunicipios)
 
       if (!estadoEncontrado) {
         console.error("Estado não encontrado na lista.");
@@ -88,7 +89,7 @@ export class CadastrarBanco {
       );
 
       if (cidadeEncontrada) {
-        this.cadastroBancoForm.get('localidade')?.setValue(cidadeEncontrada.id);
+        this.cadastroBancoForm.get('municipio')?.setValue(cidadeEncontrada.id);
       } else {
         console.warn("Cidade não encontrada na lista de municípios carregada.");
       }
@@ -104,7 +105,6 @@ export class CadastrarBanco {
     this.estadosService.buscarEstados().subscribe({
       next: (estados: Estado[]) => {
         this.listaDeEstados = estados;
-        console.log(this.listaDeEstados)
         this.cdRef.detectChanges();
       },
       error: (err) => {
@@ -137,7 +137,7 @@ export class CadastrarBanco {
     if (UfSelecionada !== null) {
       const estadoEncontrado = this.listaDeEstados.find(estado => estado.id == UfSelecionada);
       this.carregarMunicipios(String(estadoEncontrado?.sigla))
-      this.cadastroBancoForm.get('localidade')?.enable();
+      this.cadastroBancoForm.get('municipio')?.enable();
     } else {
       return
     }
@@ -145,18 +145,50 @@ export class CadastrarBanco {
 
   desabilitaCamposEndereco() {
     this.cadastroBancoForm.get('uf')?.disable();
-    this.cadastroBancoForm.get('localidade')?.disable();
+    this.cadastroBancoForm.get('municipio')?.disable();
     this.cadastroBancoForm.get('logradouro')?.disable();
     this.cadastroBancoForm.get('bairro')?.disable();
   }
 
   salvar() {
+    this.cadastroBancoForm.markAllAsTouched();
+
     if (!this.cadastroBancoForm.valid) {
+      this.toastr.error("Revise os campos")
       return
     }
 
     let dadosForm = this.cadastroBancoForm.getRawValue();
+    const auxMunicipio = this.listaDeMunicipios.find((mun) => {
+      return mun.id === Number(dadosForm['municipio'])
+    })
 
-    console.log(dadosForm)
+    const auxUf = this.listaDeEstados.find((uf) => {
+      return uf.id === Number(dadosForm['uf'])
+    })
+
+    dadosForm['municipio'] = auxMunicipio?.nome
+    dadosForm['uf'] = auxUf?.sigla
+    dadosForm['dataUltimaAtualizacao'] = new Date().toLocaleDateString('sv-SE');
+
+    this.bancoLeiteService.cadastrarBancoLeite(dadosForm).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.toastr.success("Banco cadastrado com sucesso")
+        this.cadastroBancoForm.reset();
+      },
+      error: (err) => {
+        const errosValidacao = err.error?.errors?.body;
+
+        if (errosValidacao) {
+          Object.keys(errosValidacao).forEach((campo) => {
+            const mensagem = errosValidacao[campo];
+            this.toastr.error(mensagem, 'Erro de Validação');
+          });
+        } else {
+          this.toastr.error('Ocorreu um erro ao tentar cadastrar.', 'Erro');
+        }
+      }
+    })
   }
 }

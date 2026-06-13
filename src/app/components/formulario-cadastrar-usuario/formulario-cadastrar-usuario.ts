@@ -49,7 +49,7 @@ export class FormularioCadastrarUsuario {
 
     if (senha && confirmaSenha && senha !== confirmaSenha) {
       this.toastr.error("As senhas precisam ser iguais", 'Erro');
-      // return
+      return
     }
 
 
