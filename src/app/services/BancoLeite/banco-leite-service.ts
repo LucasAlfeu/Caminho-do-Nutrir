@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
+import { BancoLeite } from '../../class/BancoLeite';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class BancoLeiteService {
     }
 
     return throwError(() => new Error('Usuário não autenticado.'));
+  }
+
+  listBancoLeite(){
+    return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`)
   }
 }
