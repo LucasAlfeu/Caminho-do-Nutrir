@@ -13,6 +13,25 @@ export class UsuarioService {
   ) { }
 
   listarUsuarios(): Observable<HttpResponse<Usuario[]>> {
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.get<Usuario[]>(`${environment.apiUrl}/usuario`, {
+        observe: 'response',
+        headers: headers
+      });
+    }
+
+    return throwError(() => new Error('Usuário não autenticado.'));
+  }
+
+  habilitarUsuario(idUsuario: number) {
   const aux = localStorage.getItem('usuario');
 
   if (aux != null) {
@@ -22,12 +41,79 @@ export class UsuarioService {
       'Authorization': `Bearer ${user.accessToken}`
     });
 
-    return this.http.get<Usuario[]>(`${environment.apiUrl}/usuario`, {
-      observe: 'response',
-      headers: headers
-    });
+    return this.http.put<Usuario>(
+      `${environment.apiUrl}/usuario/${idUsuario}/habilitar`,
+      {},
+      {
+        observe: 'response',
+        headers: headers
+      }
+    );
   }
 
   return throwError(() => new Error('Usuário não autenticado.'));
 }
+
+  tornarAdm(idUsuario: number){
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.put<Usuario>(`${environment.apiUrl}/usuario/${idUsuario}/tornar-administrador`,
+      {},
+      {
+        observe: 'response',
+        headers: headers
+      });
+    }
+
+    return throwError(() => new Error('Usuário não autenticado.'));
+  }
+
+  desabilitarUsuario(idUsuario: number){
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.put<Usuario>(`${environment.apiUrl}/usuario/${idUsuario}/desabilitar`,
+      {},
+      {
+        observe: 'response',
+        headers: headers
+      });
+    }
+
+    return throwError(() => new Error('Usuário não autenticado.'));
+  }
+
+  deletarUsuario(idUsuario: number){
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.put<Usuario>(`${environment.apiUrl}/usuario/${idUsuario}`,
+      {},
+      {
+        observe: 'response',
+        headers: headers
+      });
+    }
+
+    return throwError(() => new Error('Usuário não autenticado.'));
+  }
 }
