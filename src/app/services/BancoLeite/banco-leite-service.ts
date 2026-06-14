@@ -28,9 +28,39 @@ export class BancoLeiteService {
     return throwError(() => new Error('Usuário não autenticado.'));
   }
 
-  listBancoLeite(){
-    return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`,{
-    observe: 'response'
-  })
+  listBancoLeite() {
+    return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`, {
+      observe: 'response'
+    })
+  }
+
+  buscarBancoLeite(idBanco: number) {
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.get<BancoLeite>(`${environment.apiUrl}/banco-leite/${idBanco}`, { headers })
+    }
+    return throwError(() => new Error('Usuário não autenticado.'));
+  }
+
+  atualizarBancoLeite(dados: any) {
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.put<BancoLeite>(`${environment.apiUrl}/banco-leite/${dados.id}`, dados, { headers })
+    }
+    return throwError(() => new Error('Usuário não autenticado.'));
   }
 }

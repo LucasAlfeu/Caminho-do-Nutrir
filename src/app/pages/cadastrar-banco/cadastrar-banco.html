@@ -149,7 +149,8 @@
         <div class="d-flex justify-content-end mt-4">
           <button type="submit" class="btn px-5 fw-semibold" style="background-color: #4A2E1B; color: #fff;"
             (click)="salvar()">
-            Cadastrar
+            <span *ngIf="!indEdicao">Cadastrar</span>
+            <span *ngIf="indEdicao">Atualizar</span>
           </button>
         </div>
       </form>

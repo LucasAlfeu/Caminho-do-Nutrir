@@ -7,6 +7,8 @@ import { Municipio } from '../../class/Municipio';
 import { Cep } from '../../class/Cep';
 import { ToastrService } from 'ngx-toastr';
 import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BancoLeite } from '../../class/BancoLeite';
 
 @Component({
   selector: 'app-cadastrar-banco',
@@ -24,19 +26,31 @@ export class CadastrarBanco {
   cadastroBancoForm!: FormGroup;
   dadosCep: Cep;
 
+  bancoLeite: BancoLeite | null = null;
+
+  indEdicao: boolean = false
+
   constructor(
     protected estadosService: EstadosService,
     private cdRef: ChangeDetectorRef,
     private toastr: ToastrService,
     protected fb: FormBuilder,
     private bancoLeiteService: BancoLeiteService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.dadosCep = new Cep();
   }
 
   ngOnInit() {
+    this.indEdicao = this.router.url.includes("/editar/");
+
     this.createForm();
     this.carregaEstados();
+
+    if(this.indEdicao){
+      this.buscarBanco();
+    }
   }
 
   createForm() {
@@ -55,6 +69,49 @@ export class CadastrarBanco {
     })
 
     this.cadastroBancoForm.get('municipio')?.disable();
+  }
+
+  buscarBanco(){
+    const idBancoLeite = Number(this.route.snapshot.paramMap.get('id'));
+
+    if(!idBancoLeite || idBancoLeite <= 0) return
+
+    this.bancoLeiteService.buscarBancoLeite(idBancoLeite).subscribe({
+      next: (res) => {
+        this.bancoLeite = BancoLeite.map(res);
+        this.atualizaFormulario();
+      }, error: (err) => {
+        this.toastr.error("Não foi possível recuperar os dados do banco de leite")
+      }
+    })
+  }
+
+  atualizaFormulario() {
+    if (!this.bancoLeite) return;
+
+    this.cadastroBancoForm.patchValue(this.bancoLeite);
+    const estadoSalvo = this.listaDeEstados.find(e => e.sigla === this.bancoLeite?.uf);
+
+    if (estadoSalvo) {
+      this.cadastroBancoForm.get('uf')?.setValue(estadoSalvo.id);
+
+      this.estadosService.buscarMunicipios(estadoSalvo.sigla).subscribe({
+        next: (municipios) => {
+          this.listaDeMunicipios = municipios;
+          this.cadastroBancoForm.get('municipio')?.enable();
+
+          const cidadeSalva = this.listaDeMunicipios.find(m => m.nome.toLowerCase() === this.bancoLeite?.municipio.toLowerCase());
+          if (cidadeSalva) {
+            this.cadastroBancoForm.get('municipio')?.setValue(cidadeSalva.id);
+          }
+
+          this.cadastroBancoForm.get('logradouro')?.setValue(this.bancoLeite?.logradouro);
+          this.cadastroBancoForm.get('bairro')?.setValue(this.bancoLeite?.bairro);
+
+          this.cdRef.detectChanges();
+        }
+      });
+    }
   }
 
   carregaEnderecoViaCep() {
@@ -106,6 +163,10 @@ export class CadastrarBanco {
       next: (estados: Estado[]) => {
         this.listaDeEstados = estados;
         this.cdRef.detectChanges();
+
+        if (this.indEdicao) {
+          this.buscarBanco();
+        }
       },
       error: (err) => {
         console.error('Erro ao buscar estados:', err);
@@ -167,28 +228,30 @@ export class CadastrarBanco {
       return uf.id === Number(dadosForm['uf'])
     })
 
-    dadosForm['municipio'] = auxMunicipio?.nome
-    dadosForm['uf'] = auxUf?.sigla
+    dadosForm['municipio'] = auxMunicipio?.nome;
+    dadosForm['uf'] = auxUf?.sigla;
     dadosForm['dataUltimaAtualizacao'] = new Date().toLocaleDateString('sv-SE');
 
-    this.bancoLeiteService.cadastrarBancoLeite(dadosForm).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.toastr.success("Banco cadastrado com sucesso")
-        this.cadastroBancoForm.reset();
-      },
-      error: (err) => {
-        const errosValidacao = err.error?.errors?.body;
+    if (this.indEdicao && this.bancoLeite) {
+      dadosForm['id'] = this.bancoLeite.id;
 
-        if (errosValidacao) {
-          Object.keys(errosValidacao).forEach((campo) => {
-            const mensagem = errosValidacao[campo];
-            this.toastr.error(mensagem, 'Erro de Validação');
-          });
-        } else {
-          this.toastr.error('Ocorreu um erro ao tentar cadastrar.', 'Erro');
+      this.bancoLeiteService.atualizarBancoLeite(dadosForm).subscribe({
+        next: (res) => {
+          this.toastr.success("Banco atualizado com sucesso!");
+        },
+        error: (err) => this.toastr.error("Erro ao atualizar banco")
+      });
+
+    } else {
+      this.bancoLeiteService.cadastrarBancoLeite(dadosForm).subscribe({
+        next: (res) => {
+          this.toastr.success("Banco cadastrado com sucesso");
+          this.cadastroBancoForm.reset();
+        },
+        error: (err) => {
+            this.toastr.error("Erro ao cadastrar Banco de Leite")
         }
-      }
-    })
+      });
+    }
   }
 }
