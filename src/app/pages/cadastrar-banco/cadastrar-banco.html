@@ -10,7 +10,8 @@
     <div class="form-container shadow-sm p-4 bg-white rounded-3">
 
       <h2 class="section-title mb-4 fs-5 fw-bold">
-        Cadastrar Banco de Leite Humano
+        <span *ngIf="!indEdicao">Cadastrar Banco de Leite Humano</span>
+        <span *ngIf="indEdicao">Atualizar Banco de Leite Humano</span>
       </h2>
 
       <form [formGroup]="cadastroBancoForm">
