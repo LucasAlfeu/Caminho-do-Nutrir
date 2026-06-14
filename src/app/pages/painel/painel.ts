@@ -7,10 +7,11 @@ import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service
 import { BancoLeite } from '../../class/BancoLeite';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-painel',
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, RouterLink],
   templateUrl: './painel.html',
   styleUrl: './painel.css',
 })

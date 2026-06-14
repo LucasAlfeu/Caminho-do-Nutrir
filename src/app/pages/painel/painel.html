@@ -57,15 +57,7 @@
               <th scope="col" class="py-3" style="width: 15%;">Ações</th>
             </tr>
           </thead>
-          <!-- <tbody>
-            <tr *ngFor="let banco of listBancos">
-              <th scope="row" class="text-secondary fw-normal">{{ banco.id.toString().padStart(4, '0') }}</th>
-              <td class="text-start ps-4">{{ banco.nome }}</td>
-              <td>{{ banco.dataUltimaAtualizacao }}</td>
-              <td></td>
-            </tr>
 
-          </tbody> -->
           <tbody>
             @for (banco of listBancos; track banco.id) {
             <tr>
@@ -74,7 +66,14 @@
               </th>
               <td class="text-start ps-4">{{ banco.nome }}</td>
               <td>{{ banco.dataUltimaAtualizacao | date: 'dd/MM/yyyy' }}</td>
-              <td></td>
+              <td>
+                <div>
+                  <a [routerLink]="['/painel/cadastrar-banco/editar', banco.id]"
+                    title="Editar Banco">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                </div>
+              </td>
             </tr>
             } @empty {
             <tr>

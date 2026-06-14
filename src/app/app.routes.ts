@@ -13,44 +13,48 @@ import { Perfil } from './pages/perfil/perfil';
 
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: Home
-    },
-    {
-        path: 'entrar',
-        component: Entrar
-    },
-    {
-        path: 'cadastrar',
-        component: Cadastrar
-    },
-    {
-        path: 'mapa',
-        component: Mapa
-    },
+  {
+    path: '',
+    component: Home
+  },
+  {
+    path: 'entrar',
+    component: Entrar
+  },
+  {
+    path: 'cadastrar',
+    component: Cadastrar
+  },
+  {
+    path: 'mapa',
+    component: Mapa
+  },
 
-    {
-        path: 'painel',
-        component: PainelLayoutComponent,
-        children: [
-            {
-                path: '',
-                component: Painel,
-                pathMatch: 'full'
-            },
-            {
-                path: 'cadastrar-banco',
-                component: CadastrarBanco,
-            },
-            {
-                path: 'liberar-usuario',
-                component: LiberarUsuario,
-            },
-             {
-                path: 'perfil',
-                component: Perfil,
-            },
-        ]
-    }
+  {
+    path: 'painel',
+    component: PainelLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: Painel,
+        pathMatch: 'full'
+      },
+      {
+        path: 'cadastrar-banco',
+        component: CadastrarBanco,
+      },
+      {
+        path: 'cadastrar-banco/editar/:id',
+        component: CadastrarBanco
+      },
+      {
+        path: 'liberar-usuario',
+        component: LiberarUsuario,
+      },
+      {
+        path: 'perfil',
+        component: Perfil,
+      },
+    ]
+  }
 ];
