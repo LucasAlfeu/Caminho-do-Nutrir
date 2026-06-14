@@ -4,6 +4,13 @@ body {
   overflow: hidden; /* Evita scrolls globais */
 }
 
+.bg-header-custom {
+  background-color: #D3A280;
+  color: #211915;
+  height: 85px;
+  flex-shrink: 0;
+}
+
 /* O pulo do gato para preencher a tela até o final (descontando o menu) */
 .wrapper-conteudo {
   display: flex;

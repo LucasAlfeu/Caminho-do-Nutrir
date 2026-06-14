@@ -1,7 +1,11 @@
 <div class="wrapper-conteudo bg-main-custom flex-grow-1 overflow-auto">
 
+  <header class="bg-header-custom px-4 d-flex flex-column justify-content-center shadow-sm">
+    <h1 class="h3 fw-bold mb-0">Bancos de Leite Humano</h1>
+    <p class="mb-0 text-muted small">Gerenciamento de bancos cadastrados no sistema</p>
+  </header>
+
   <section class="p-4 p-md-5">
-    <div class="fs-3 fw-bold mb-4 text-dark">Olá, nome do Usuário</div>
 
     <div class="painel__form">
       <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
@@ -15,54 +19,39 @@
 
       <div class="table-responsive shadow-sm rounded-3 border">
         <table class="table table-hover align-middle mb-0 bg-white">
-          <thead class="text-white" style="background-color: #4A2C1D;">
+          <thead class="table-dark align-middle text-white" style="background-color: #4A2C1D; --bs-table-bg: #4A2C1D;">
             <tr>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0 w-25">Usuário</th>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0 w-50">Permissão</th>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0 w-25 text-end">Ações</th>
+              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 40%;">Nome</th>
+              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 20%;">Matrícula</th>
+              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 15%;">Liberado</th>
+              <th scope="col" class="py-3 px-4 fw-semibold border-0 text-end" style="width: 25%;">Ações</th>
             </tr>
           </thead>
           <tbody class="border-top-0">
-            <!-- <tr>
-              <td class="px-4 py-3">Usuário 01</td>
-              <td class="px-4 py-3 text-warning fw-semibold">Aguardando aprovação</td>
+            @for (usuario of listUsuarios; track usuario.id) {
+            <tr>
+              <td class="px-4 py-3 text-dark fw-medium">{{ usuario.nome }}</td>
+              <td class="px-4 py-3 text-secondary">{{ usuario.matricula }}</td>
+              <td class="px-4 py-3 fw-semibold">
+                <span [class]="usuario.indLiberado ? 'text-success' : 'text-warning'">
+                  {{ usuario.indLiberado ? 'Sim' : 'Não' }}
+                </span>
+              </td>
               <td class="px-4 py-3 text-end">
                 <div class="d-flex justify-content-end gap-2">
-                  <button class="btn_acao btn__reprovar" title="Reprovar"></button>
-                  <button class="btn_acao btn__aprovar" title="Aprovar"></button>
+                  <button class="btn_acao text-danger" title="Reprovar"><i class="bi bi-x-circle"></i></button>
+                  <button class="btn_acao text-success" title="Aprovar"><i class="bi bi-check-lg"></i></button>
+                  <button class="btn_acao text-secondary" title="Tornar Administrador"><i class="bi bi-person-lock"></i></button>
                 </div>
               </td>
             </tr>
+            } @empty {
             <tr>
-              <td class="px-4 py-3">Usuário 02</td>
-              <td class="px-4 py-3 text-warning fw-semibold">Aguardando aprovação</td>
-              <td class="px-4 py-3 text-end">
-                <div class="d-flex justify-content-end gap-2">
-                  <button class="btn_acao btn__reprovar" title="Reprovar"></button>
-                  <button class="btn_acao btn__aprovar" title="Aprovar"></button>
-                </div>
+              <td colspan="4" class="text-center py-4 text-secondary">
+                Nenhum usuário pendente de liberação.
               </td>
             </tr>
-            <tr>
-              <td class="px-4 py-3">Usuário 03</td>
-              <td class="px-4 py-3 text-success fw-semibold">Aprovado</td>
-              <td class="px-4 py-3 text-end">
-                <div class="d-flex justify-content-end gap-2">
-                  <button class="btn_acao btn__reprovar" title="Bloquear"></button>
-                </div>
-              </td>
-            </tr> -->
-            <tr>
-              <td class="px-4 py-3">Usuário 04</td>
-              <td class="px-4 py-3 text-warning fw-semibold">Aguardando aprovação</td>
-              <td class="px-4 py-3 text-end">
-                <div class="d-flex justify-content-end gap-2">
-                  <button class="btn_acao" title="Reprovar"><i class="bi bi-x-circle"></i></button>
-                  <button class="btn_acao " title="Aprovar"><i class="bi bi-check-lg"></i></button>
-                  <button class="btn_acao " title="Tornar Administrador"><i class="bi bi-person-lock"></i></button>
-                </div>
-              </td>
-            </tr>
+            }
           </tbody>
         </table>
       </div>
