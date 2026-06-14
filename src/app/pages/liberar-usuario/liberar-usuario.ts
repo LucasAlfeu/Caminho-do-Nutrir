@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class LiberarUsuario {
 
   listUsuarios: Usuario[] | null = null;
+  totalUser: number = 0;
 
   constructor(
     private toastr: ToastrService,
@@ -26,7 +27,9 @@ export class LiberarUsuario {
   listarUsuarios(){
     this.usuarioService.listarUsuarios().subscribe({
       next: (res) => {
-        this.listUsuarios = res
+        this.listUsuarios = res.body;
+        const totalCount = res.headers.get('X-Total-Count');
+        this.totalUser = totalCount ? parseInt(totalCount, 10) : 0;
         console.log(res)
       },
       error: (err) => {
