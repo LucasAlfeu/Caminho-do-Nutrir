@@ -29,6 +29,8 @@ export class BancoLeiteService {
   }
 
   listBancoLeite(){
-    return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`)
+    return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`,{
+    observe: 'response'
+  })
   }
 }

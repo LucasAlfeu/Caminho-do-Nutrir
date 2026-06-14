@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from '../../class/Usuario';
 
 @Component({
   selector: 'app-menu-lateal',
@@ -9,7 +10,15 @@ import { Router } from '@angular/router';
 })
 export class MenuLateal {
 
+  @Input() usuario: Usuario | null = null;
+
   constructor(private router: Router) { }
+
+  ngOnChanges(changes: SimpleChanges): void{
+    if(changes['usuario']){
+      this.usuario = changes['usuario'].currentValue;
+    }
+  }
 
   sair(){
     localStorage.clear();

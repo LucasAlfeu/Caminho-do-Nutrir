@@ -16,7 +16,8 @@ import { DatePipe } from '@angular/common';
 })
 export class Painel {
   usuario: Usuario | null = null;
-  listBancos: BancoLeite[] = []
+  listBancos: BancoLeite[] = [];
+  totalBancos: number = 0;
 
   constructor(
     private router: Router,
@@ -26,19 +27,16 @@ export class Painel {
   ) { }
 
   ngOnInit() {
-    const dadosUsuario = this.autenticacaoService.verificaLogin();
-
-    if (dadosUsuario) {
-      this.usuario = Usuario.map(dadosUsuario);
-    }
-
     this.listarBancosLeite();
   }
 
-  listarBancosLeite(){
+  listarBancosLeite() {
     this.bancoLeiteService.listBancoLeite().subscribe({
       next: (res) => {
-        this.listBancos = res;
+        this.listBancos = res.body ?? [];
+
+        const totalCount = res.headers.get('X-Total-Count');
+        this.totalBancos = totalCount ? parseInt(totalCount, 10) : 0;
       },
       error: (err) => {
         this.toastr.error("Não foi possível carregar os Bancos de Leite")
