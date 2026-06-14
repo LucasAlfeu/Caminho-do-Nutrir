@@ -25,7 +25,6 @@ export class ModalMark {
 
     if (this.modalInstance) {
       this.endereco = endereco
-      console.log(endereco)
       this.modalInstance.show();
     } else {
       console.error("Não foi possível encontrar o elemento #meuModal no HTML.");

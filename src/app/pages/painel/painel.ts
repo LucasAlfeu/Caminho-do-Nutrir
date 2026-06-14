@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from '../../class/Usuario';
@@ -8,14 +8,18 @@ import { BancoLeite } from '../../class/BancoLeite';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ModalMark } from '../../components/modal-mark/modal-mark';
 
 @Component({
   selector: 'app-painel',
-  imports: [CommonModule, DatePipe, RouterLink],
+  imports: [CommonModule, DatePipe, RouterLink, ModalMark],
   templateUrl: './painel.html',
   styleUrl: './painel.css',
 })
 export class Painel {
+
+  @ViewChild('modalMark') modalDetalhe!: ModalMark;
+
   usuario: Usuario | null = null;
   listBancos: BancoLeite[] = [];
   totalBancos: number = 0;
@@ -47,5 +51,9 @@ export class Painel {
 
   goTo() {
     this.router.navigate(['painel/cadastrar-banco']);
+  }
+
+  openModalDetalhe(banco: any){
+    this.modalDetalhe.abrirModal(banco);
   }
 }
