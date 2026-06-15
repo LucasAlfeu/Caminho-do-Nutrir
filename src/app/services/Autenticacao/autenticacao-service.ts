@@ -66,5 +66,9 @@ export class AutenticacaoService {
       return false
     }
   }
+
+  recuperaSenha(dados: any) {
+    return this.http.put(`${environment.apiUrl}/recuperar-senha`, dados)
+  }
 }
 

@@ -31,7 +31,7 @@
               <input type="text" class="form-control py-2" id="recuperar-matricula" formControlName="matricula"
                 placeholder="Digite sua matrícula" [ngClass]="{'is-invalid': campoInvalido('matricula')}">
 
-              <div class="text-danger small mt-1" *ngIf="campoInvalido('usuario')">
+              <div class="text-danger small mt-1" *ngIf="campoInvalido('matricula')">
                 O usuário é obrigatório.
               </div>
             </div>
@@ -41,7 +41,7 @@
               <input type="email" class="form-control py-2" id="recuperar-email" formControlName="email"
                 placeholder="Digite seu email" [ngClass]="{'is-invalid': campoInvalido('email')}">
 
-              <div class="text-danger small mt-1" *ngIf="campoInvalido('usuario')">
+              <div class="text-danger small mt-1" *ngIf="campoInvalido('email')">
                 O usuário é obrigatório.
               </div>
             </div>
@@ -50,8 +50,8 @@
               <label class="form-label fw-bold text-dark">Nova Senha</label>
               <div class="position-relative">
                 <input [type]="showPassword ? 'text' : 'password'" class="form-control py-2 pe-5"
-                  formControlName="senha" placeholder="Digite a nova senha"
-                  [ngClass]="{'__invalid': campoInvalido('senha')}">
+                  formControlName="novaSenha" placeholder="Digite a nova novaSenha"
+                  [ngClass]="{'__invalid': campoInvalido('novaSenha')}">
 
                 <span class="position-absolute top-50 end-0 translate-middle-y me-3"
                   style="cursor: pointer; color: #6c757d; z-index: 10;" (click)="showPassword = !showPassword">
