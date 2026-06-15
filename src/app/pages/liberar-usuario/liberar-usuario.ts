@@ -44,7 +44,6 @@ export class LiberarUsuario {
         this.listUsuarios = res.body ? [...res.body] : [];
         const totalCount = res.headers.get('X-Total-Count');
         this.totalUser = totalCount ? parseInt(totalCount, 10) : 0;
-        console.log(res)
       },
       error: (err) => {
         console.log(err)
@@ -65,7 +64,6 @@ export class LiberarUsuario {
   habilitarUsuario(usuario: any){
     this.usuarioService.habilitarUsuario(usuario.id).subscribe({
       next: (res) => {
-        console.log(res)
         this.toastr.success("Usuário liberado com sucesso");
         this.listarUsuarios();
         this.fecharModalAprorarAcao();
@@ -80,7 +78,6 @@ export class LiberarUsuario {
   tornarADM(usuario: any){
     this.usuarioService.tornarAdm(usuario.id).subscribe({
       next: (res) => {
-        console.log(res)
         this.toastr.success(`O usuário ${usuario.nome} agora é administrador`);
         this.listarUsuarios();
         this.fecharModalAprorarAcao();
@@ -95,7 +92,6 @@ export class LiberarUsuario {
   desabilitarUsuario(usuario: any){
     this.usuarioService.desabilitarUsuario(usuario.id).subscribe({
       next: (res) => {
-        console.log(res)
         this.toastr.success("Usuário desabilitado com sucesso")
         this.listarUsuarios();
         this.fecharModalAprorarAcao();
@@ -110,7 +106,6 @@ export class LiberarUsuario {
   deletarUsuario(usuario: any){
     this.usuarioService.deletarUsuario(usuario.id).subscribe({
       next: (res) => {
-        console.log(res)
         this.toastr.success("Usuário desabilitado com sucesso")
         this.listarUsuarios();
         this.fecharModalAprorarAcao();

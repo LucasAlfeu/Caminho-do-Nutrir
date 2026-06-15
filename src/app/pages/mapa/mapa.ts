@@ -5,6 +5,7 @@ import { BancoLeite } from '../../class/BancoLeite';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
 
 @Component({
   selector: 'app-mapa',
@@ -17,11 +18,16 @@ export class Mapa {
 
   constructor(
     private bancoLeiteService: BancoLeiteService,
+    private autenticacaoService: AutenticacaoService,
     private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
     this.listarBancosLeite();
+  }
+
+  validaUsuarioLogado(){
+    return this.autenticacaoService.validaUsuarioLogado()
   }
 
   listarBancosLeite() {

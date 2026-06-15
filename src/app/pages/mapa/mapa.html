@@ -23,7 +23,7 @@
         <li>
           <a href="/#doacao" class="text-white text-decoration-none fw-semibold">Doação</a>
         </li>
-        <li>
+        <li *ngIf="validaUsuarioLogado()">
           <a href="painel" class="text-white text-decoration-none fw-semibold">Painel</a>
         </li>
         <li>

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entrar',
-  imports: [ ReactiveFormsModule, CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './entrar.html',
   styleUrl: './entrar.css',
 })
@@ -21,23 +21,23 @@ export class Entrar {
     private toastr: ToastrService,
     private autenticacaoService: AutenticacaoService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createForm()
   }
 
-  createForm(){
+  createForm() {
     this.form = this.fb.group({
       usuario: ['', Validators.compose([Validators.required])],
       senha: ['', Validators.compose([Validators.required])]
     })
   }
 
-  enviarCredenciais(){
-    if(!this.form) return;
+  enviarCredenciais() {
+    if (!this.form) return;
 
-    if(this.form.invalid) {
+    if (this.form.invalid) {
       this.toastr.error('Usuario e senha são obrigatórios', 'Erro');
       return
     }
@@ -47,13 +47,19 @@ export class Entrar {
     };
 
     this.autenticacaoService.entrar(credenciais).subscribe({
-      next:(user) => {
-        console.log(user)
-        localStorage.setItem("usuario", JSON.stringify(user));
-        this.toastr.success("Login feito com sucesso")
-        setTimeout(() => {
-          this.router.navigate(['/painel']);
-        }, 200)
+      next: (user) => {
+        if (user.indLiberado) {
+          localStorage.setItem("usuario", JSON.stringify(user));
+          setTimeout(() => {
+            this.router.navigate(['/painel']);
+          }, 200)
+          return
+        } else {
+          this.toastr.error("Seu acesso ainda não foi liberado. Fale com o responsável para concluir a habilitação.")
+        }
+
+
+
       },
       error: (err) => {
         this.form.get('senha')?.setValue("");

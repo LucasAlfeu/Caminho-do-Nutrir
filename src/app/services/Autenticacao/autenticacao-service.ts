@@ -41,5 +41,30 @@ export class AutenticacaoService {
       return null;
     }
   }
+
+  verificaAdministrador(): boolean{
+    const usuarioLogado = localStorage.getItem("usuario");
+
+    if (usuarioLogado !== null) {
+      const user = JSON.parse(usuarioLogado);
+
+      return user.indAdm ? true : false;
+    } else {
+      return false;
+    }
+  }
+
+  // Retorna se tem usuário logado ou não
+  validaUsuarioLogado(): boolean{
+    const usuarioLogado = localStorage.getItem("usuario");
+
+    if(usuarioLogado !== null){
+      const user = JSON.parse(usuarioLogado);
+
+      return user ? true : false
+    } else {
+      return false
+    }
+  }
 }
 
