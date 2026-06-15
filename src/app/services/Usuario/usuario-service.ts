@@ -116,4 +116,25 @@ export class UsuarioService {
 
     return throwError(() => new Error('Usuário não autenticado.'));
   }
+
+  atualizarUsuario(dados: any){
+    const aux = localStorage.getItem('usuario');
+
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+
+      return this.http.put<Usuario>(`${environment.apiUrl}/usuario/${user.id}`,
+      dados,
+      {
+        observe: 'response',
+        headers: headers
+      });
+    }
+
+    return throwError(() => new Error('Usuário não autenticado.'));
+  }
 }

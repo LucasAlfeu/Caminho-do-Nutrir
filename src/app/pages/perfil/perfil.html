@@ -8,7 +8,7 @@
   <div class="container-fluid p-4 bg-main-custom">
 
     <div class="form-container shadow-sm p-4 bg-white rounded-3">
-      <app-formulario-cadastrar-usuario [indEdicao]="true"></app-formulario-cadastrar-usuario>
+      <app-formulario-cadastrar-usuario (cadastrar)="atualizar($event)" [indEdicao]="true"></app-formulario-cadastrar-usuario>
     </div>
 
   </div>
