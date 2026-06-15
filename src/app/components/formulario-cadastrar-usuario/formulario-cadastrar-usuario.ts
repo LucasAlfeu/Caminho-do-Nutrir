@@ -39,10 +39,7 @@ export class FormularioCadastrarUsuario {
   _cadastrar() {
     if (!this.form) return;
 
-    if (this.form.invalid) {
-      this.toastr.error('Revise os campos obrigatórios', 'Erro');
-      return
-    }
+    this.form.markAllAsTouched();
 
     const senha = this.form.get('senha')?.value
     const confirmaSenha = this.form.get('confirmaSenha')?.value
@@ -61,6 +58,10 @@ export class FormularioCadastrarUsuario {
       usuario: this.form.get('usuario')?.value,
     };
 
-    this.cadastrar.emit(dadosCadastrais);
+    // this.cadastrar.emit(dadosCadastrais);
+  }
+
+  campoInvalido(campo: string): boolean{
+    return Boolean(this.form.get(campo)?.invalid && this.form.get(campo)?.touched)
   }
 }

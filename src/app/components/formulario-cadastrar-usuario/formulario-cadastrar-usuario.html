@@ -7,17 +7,32 @@
   <div class="row g-4 mb-5">
     <div class="col-12 col-md-6">
       <label class="form-label fw-bold text-dark">Nome</label>
-      <input type="text" class="form-control py-2" formControlName="nome" placeholder="Digite seu nome">
+      <input type="text" class="form-control py-2" formControlName="nome" placeholder="Digite seu nome"
+        [ngClass]="{'is-invalid': campoInvalido('nome')}">
+
+      <div class="text-danger small mt-1" *ngIf="campoInvalido('nome')">
+        O nome é obrigatório.
+      </div>
     </div>
 
     <div class="col-12 col-md-6">
       <label class="form-label fw-bold text-dark">Email</label>
-      <input type="email" class="form-control py-2" formControlName="email" placeholder="Digite seu email">
+      <input type="email" class="form-control py-2" formControlName="email" placeholder="Digite seu email"
+        [ngClass]="{'is-invalid': campoInvalido('email')}">
+
+      <div class="text-danger small mt-1" *ngIf="campoInvalido('email')">
+        O email é obrigatório.
+      </div>
     </div>
 
     <div class="col-12 col-md-6">
       <label class="form-label fw-bold text-dark">Matrícula</label>
-      <input type="text" class="form-control py-2" formControlName="matricula" placeholder="Digite sua matrícula">
+      <input type="text" class="form-control py-2" formControlName="matricula" placeholder="Digite sua matrícula"
+        [ngClass]="{'is-invalid': campoInvalido('matricula')}">
+
+      <div class="text-danger small mt-1" *ngIf="campoInvalido('matricula')">
+        A matrícula é obrigatório.
+      </div>
     </div>
   </div>
 
@@ -26,7 +41,12 @@
   <div class="row g-4 mb-5">
     <div class="col-12 col-md-6">
       <label class="form-label fw-bold text-dark">Usuário</label>
-      <input type="text" class="form-control py-2" formControlName="usuario" placeholder="Digite seu usuário">
+      <input type="text" class="form-control py-2" formControlName="usuario" placeholder="Digite seu usuário"
+        [ngClass]="{'is-invalid': campoInvalido('usuario')}">
+
+      <div class="text-danger small mt-1" *ngIf="campoInvalido('usuario')">
+        O usuário é obrigatório.
+      </div>
     </div>
   </div>
 
@@ -36,7 +56,7 @@
       <label class="form-label fw-bold text-dark">Senha</label>
       <div class="position-relative">
         <input [type]="showPassword ? 'text' : 'password'" class="form-control py-2 pe-5" formControlName="senha"
-          placeholder="Digite sua senha">
+          placeholder="Digite sua senha" [ngClass]="{'is-invalid': campoInvalido('senha')}">
 
         <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #6c757d;"
           (click)="showPassword = !showPassword">
@@ -57,6 +77,10 @@
               d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
           </svg>
         </span>
+
+        <div class="text-danger small mt-1" *ngIf="campoInvalido('senha')">
+          A senha é obrigatório.
+        </div>
       </div>
     </div>
 
@@ -64,7 +88,8 @@
       <label class="form-label fw-bold text-dark">Confirma senha</label>
       <div class="position-relative">
         <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control py-2 pe-5"
-          formControlName="confirmaSenha" placeholder="Confirme a senha">
+          formControlName="confirmaSenha" placeholder="Confirme a senha"
+          [ngClass]="{'is-invalid': campoInvalido('confirmaSenha')}">
 
         <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #6c757d;"
           (click)="showConfirmPassword = !showConfirmPassword">
@@ -85,6 +110,10 @@
               d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
           </svg>
         </span>
+
+        <div class="text-danger small mt-1" *ngIf="campoInvalido('confirmaSenha')">
+          A confirmação da senha é obrigatório.
+        </div>
       </div>
     </div>
 
