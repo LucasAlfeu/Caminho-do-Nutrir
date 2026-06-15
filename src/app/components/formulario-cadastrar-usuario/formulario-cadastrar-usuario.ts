@@ -30,13 +30,14 @@ export class FormularioCadastrarUsuario {
   ) { }
 
   ngOnInit() {
-    const dadosUsuario = this.autenticacaoService.verificaLogin();
-    if (dadosUsuario) {
-      this.usuario = Usuario.map(dadosUsuario);
-    }
+
     this.createForm()
 
-    if(this.indEdicao){
+    if (this.indEdicao) {
+      const dadosUsuario = this.autenticacaoService.verificaLogin();
+      if (dadosUsuario) {
+        this.usuario = Usuario.map(dadosUsuario);
+      }
       this.atualizaFormulario()
     }
   }
@@ -84,15 +85,15 @@ export class FormularioCadastrarUsuario {
   }
 
   atualizaFormulario() {
-  if (this.usuario != null) {
-    (Object.keys(this.usuario) as (keyof Usuario)[]).forEach((campo) => {
-      if (this.form.get(campo as string) != null) {
-        const valor = this.usuario![campo];
-        this.form.get(campo as string)?.setValue(valor);
-      }
-    });
+    if (this.usuario != null) {
+      (Object.keys(this.usuario) as (keyof Usuario)[]).forEach((campo) => {
+        if (this.form.get(campo as string) != null) {
+          const valor = this.usuario![campo];
+          this.form.get(campo as string)?.setValue(valor);
+        }
+      });
+    }
   }
-}
 
   campoInvalido(campo: string): boolean {
     return Boolean(this.form.get(campo)?.invalid && this.form.get(campo)?.touched)
