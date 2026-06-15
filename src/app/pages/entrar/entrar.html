@@ -18,8 +18,8 @@
       </div>
 
       <div class="position-relative mb-5">
-        <input [type]="showPassword ? 'text' : 'password'" class="form-control py-2 pe-5 input-underlined" formControlName="senha"
-          placeholder="Digite sua senha">
+        <input [type]="showPassword ? 'text' : 'password'" class="form-control py-2 pe-5 input-underlined"
+          formControlName="senha" placeholder="Digite sua senha">
 
         <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #221f1f;"
           (click)="showPassword = !showPassword">
@@ -49,8 +49,11 @@
     <div class="d-flex justify-content-between mt-2">
       <a href="/cadastrar" class="text-decoration-none fw-bold"
         style="color: #1a1a1a; font-size: 0.95rem;">Cadastrar</a>
-      <a href="#" class="text-decoration-none fw-bold" style="color: #1a1a1a; font-size: 0.95rem;">Perdeu a senha?</a>
+      <button (click)="openMoalRecuperarSenha()" class="text-decoration-none fw-bold"
+        style="color: #1a1a1a; font-size: 0.95rem; background: transparent; border: none;">Perdeu a senha?</button>
     </div>
 
   </div>
 </main>
+
+<app-modal-recuperar-senha #modalRecuperarSenha></app-modal-recuperar-senha>

@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ModalRecuperarSenha } from '../../components/modal-recuperar-senha/modal-recuperar-senha';
 
 @Component({
   selector: 'app-entrar',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ModalRecuperarSenha],
   templateUrl: './entrar.html',
   styleUrl: './entrar.css',
 })
 export class Entrar {
+
+  @ViewChild('modalRecuperarSenha') modalRecuperarSenha!: ModalRecuperarSenha;
 
   form!: FormGroup;
   showPassword = false;
@@ -66,5 +69,9 @@ export class Entrar {
         this.toastr.error(err.error.errors.default)
       }
     })
+  }
+
+  openMoalRecuperarSenha(){
+    this.modalRecuperarSenha.abrirModal();
   }
 }
