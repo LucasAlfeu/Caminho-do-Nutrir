@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Usuario } from '../../class/Usuario';
+import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
 
 @Component({
   selector: 'app-formulario-cadastrar-usuario',
@@ -10,19 +12,39 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './formulario-cadastrar-usuario.css',
 })
 export class FormularioCadastrarUsuario {
+
+  @Input() indEdicao: boolean = false;
+
   @Output() cadastrar = new EventEmitter();
 
   form!: FormGroup;
   showPassword = false;
   showConfirmPassword = false;
 
+  usuario: Usuario | null = null;
+
   constructor(
     protected fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private autenticacaoService: AutenticacaoService,
   ) { }
 
   ngOnInit() {
+    const dadosUsuario = this.autenticacaoService.verificaLogin();
+    if (dadosUsuario) {
+      this.usuario = Usuario.map(dadosUsuario);
+    }
     this.createForm()
+
+    if(this.indEdicao){
+      this.atualizaFormulario()
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['indEdicao']) {
+      this.indEdicao = changes['indEdicao'].currentValue;
+    }
   }
 
   createForm() {
@@ -58,10 +80,21 @@ export class FormularioCadastrarUsuario {
       usuario: this.form.get('usuario')?.value,
     };
 
-    // this.cadastrar.emit(dadosCadastrais);
+    this.cadastrar.emit(dadosCadastrais);
   }
 
-  campoInvalido(campo: string): boolean{
+  atualizaFormulario() {
+  if (this.usuario != null) {
+    (Object.keys(this.usuario) as (keyof Usuario)[]).forEach((campo) => {
+      if (this.form.get(campo as string) != null) {
+        const valor = this.usuario![campo];
+        this.form.get(campo as string)?.setValue(valor);
+      }
+    });
+  }
+}
+
+  campoInvalido(campo: string): boolean {
     return Boolean(this.form.get(campo)?.invalid && this.form.get(campo)?.touched)
   }
 }
