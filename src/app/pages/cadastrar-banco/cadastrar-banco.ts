@@ -1,13 +1,14 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { EstadosService } from '../../services/Estados/estado-service';
-import { Estado } from '../../class/Estado';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
+import { EstadosService } from '../../services/Estados/estado-service';
+import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
+import { Estado } from '../../class/Estado';
 import { Municipio } from '../../class/Municipio';
 import { Cep } from '../../class/Cep';
-import { ToastrService } from 'ngx-toastr';
-import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BancoLeite } from '../../class/BancoLeite';
 
 @Component({
@@ -19,16 +20,14 @@ import { BancoLeite } from '../../class/BancoLeite';
   templateUrl: './cadastrar-banco.html',
   styleUrl: './cadastrar-banco.css',
 })
-export class CadastrarBanco {
+export class CadastrarBanco implements OnInit {
 
   listaDeEstados: Estado[] = [];
   listaDeMunicipios: Municipio[] = [];
   cadastroBancoForm!: FormGroup;
   dadosCep: Cep;
-
   bancoLeite: BancoLeite | null = null;
-
-  indEdicao: boolean = false
+  indEdicao: boolean = false;
 
   constructor(
     protected estadosService: EstadosService,
@@ -42,51 +41,56 @@ export class CadastrarBanco {
     this.dadosCep = new Cep();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.indEdicao = this.router.url.includes("/editar/");
-
     this.createForm();
     this.carregaEstados();
-
-    if(this.indEdicao){
-      this.buscarBanco();
-    }
   }
 
-  createForm() {
+  createForm(): void {
     this.cadastroBancoForm = this.fb.group({
-      nome: ['', Validators.compose([Validators.required])],
-      cep: ['', Validators.compose([Validators.required])],
-      logradouro: ['', Validators.compose([Validators.required])],
-      numero: ['', Validators.compose([Validators.required])],
+      nome: ['', Validators.required],
+      cep: ['', Validators.required],
+      logradouro: ['', Validators.required],
+      numero: ['', Validators.required],
       complemento: [''],
-      bairro: ['', Validators.compose([Validators.required])],
-      municipio: [null, Validators.compose([Validators.required])],
-      uf: [null, Validators.compose([Validators.required])],
-      latitude: ['', Validators.compose([Validators.required])],
-      longitude: ['', Validators.compose([Validators.required])],
+      bairro: ['', Validators.required],
+      municipio: [{ value: null, disabled: true }, Validators.required],
+      uf: [null, Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
       descricao: ['']
-    })
-
-    this.cadastroBancoForm.get('municipio')?.disable();
+    });
   }
 
-  buscarBanco(){
-    const idBancoLeite = Number(this.route.snapshot.paramMap.get('id'));
+  carregaEstados(): void {
+    this.estadosService.buscarEstados().subscribe({
+      next: (estados: Estado[]) => {
+        this.listaDeEstados = estados;
+        this.cdRef.detectChanges();
 
-    if(!idBancoLeite || idBancoLeite <= 0) return
+        if (this.indEdicao) {
+          this.buscarBanco();
+        }
+      },
+      error: (err) => console.error('Erro ao buscar estados:', err)
+    });
+  }
+
+  buscarBanco(): void {
+    const idBancoLeite = Number(this.route.snapshot.paramMap.get('id'));
+    if (!idBancoLeite || idBancoLeite <= 0) return;
 
     this.bancoLeiteService.buscarBancoLeite(idBancoLeite).subscribe({
       next: (res) => {
         this.bancoLeite = BancoLeite.map(res);
         this.atualizaFormulario();
-      }, error: (err) => {
-        this.toastr.error("Não foi possível recuperar os dados do banco de leite")
-      }
-    })
+      },
+      error: () => this.toastr.error("Não foi possível recuperar os dados do banco de leite")
+    });
   }
 
-  atualizaFormulario() {
+  atualizaFormulario(): void {
     if (!this.bancoLeite) return;
 
     this.cadastroBancoForm.patchValue(this.bancoLeite);
@@ -100,133 +104,110 @@ export class CadastrarBanco {
           this.listaDeMunicipios = municipios;
           this.cadastroBancoForm.get('municipio')?.enable();
 
-          const cidadeSalva = this.listaDeMunicipios.find(m => m.nome.toLowerCase() === this.bancoLeite?.municipio.toLowerCase());
+          const cidadeSalva = this.listaDeMunicipios.find(
+            m => m.nome.toLowerCase() === this.bancoLeite?.municipio.toLowerCase()
+          );
+
           if (cidadeSalva) {
             this.cadastroBancoForm.get('municipio')?.setValue(cidadeSalva.id);
           }
 
           this.cadastroBancoForm.get('logradouro')?.setValue(this.bancoLeite?.logradouro);
           this.cadastroBancoForm.get('bairro')?.setValue(this.bancoLeite?.bairro);
-
           this.cdRef.detectChanges();
         }
       });
     }
   }
 
-  carregaEnderecoViaCep() {
-    const cep = this.cadastroBancoForm.get('cep')?.value
-    if (cep) {
-      this.estadosService.buscaDadosCep(cep).subscribe({
-        next: (res: Cep) => {
-          this.dadosCep = res
-          this.preencheFormulario()
-        }
-      })
-    } else {
-      return;
-    }
-  }
+  carregaEnderecoViaCep(): void {
+    let cep = this.cadastroBancoForm.get('cep')?.value;
+    if (!cep) return;
 
-  preencheFormulario() {
-    const siglaUf = this.dadosCep.uf;
-    const estadoEncontrado = this.listaDeEstados.find(estado => estado.sigla === siglaUf);
-    this.carregarMunicipios(String(estadoEncontrado?.sigla))
-    setTimeout(() => {
+    cep = cep.replace(/\D/g, '');
 
-      if (!estadoEncontrado) {
-        console.error("Estado não encontrado na lista.");
-        return;
-      }
-
-      this.cadastroBancoForm.get('uf')?.setValue(estadoEncontrado.id);
-
-      const cidadeEncontrada = this.listaDeMunicipios.find(
-        cidade => cidade.nome.toLowerCase() === this.dadosCep.localidade.toLowerCase()
-      );
-
-      if (cidadeEncontrada) {
-        this.cadastroBancoForm.get('municipio')?.setValue(cidadeEncontrada.id);
-      } else {
-        console.warn("Cidade não encontrada na lista de municípios carregada.");
-      }
-
-      this.cadastroBancoForm.get('logradouro')?.setValue(this.dadosCep.logradouro);
-      this.cadastroBancoForm.get('bairro')?.setValue(this.dadosCep.bairro);
-
-      this.desabilitaCamposEndereco();
-    }, 300)
-  }
-
-  carregaEstados() {
-    this.estadosService.buscarEstados().subscribe({
-      next: (estados: Estado[]) => {
-        this.listaDeEstados = estados;
-        this.cdRef.detectChanges();
-
-        if (this.indEdicao) {
-          this.buscarBanco();
-        }
+    this.estadosService.buscaDadosCep(cep).subscribe({
+      next: (res: Cep) => {
+        this.dadosCep = res;
+        this.preencheFormulario();
       },
-      error: (err) => {
-        console.error('Erro ao buscar estados:', err);
-      },
-      complete: () => {
-        console.log('Busca de estados completa.');
-      }
+      error: () => this.toastr.error("Erro ao buscar o CEP informado.")
     });
   }
 
-  carregarMunicipios(uf: string) {
-    this.estadosService.buscarMunicipios(uf).subscribe({
+  preencheFormulario(): void {
+    const siglaUf = this.dadosCep.uf;
+    const estadoEncontrado = this.listaDeEstados.find(estado => estado.sigla === siglaUf);
+
+    if (!estadoEncontrado) {
+      console.error("Estado não encontrado na lista.");
+      return;
+    }
+
+    this.estadosService.buscarMunicipios(String(estadoEncontrado.sigla)).subscribe({
       next: (municipios: Municipio[]) => {
         this.listaDeMunicipios = municipios;
+
+        this.cadastroBancoForm.patchValue({
+          uf: estadoEncontrado.id,
+          logradouro: this.dadosCep.logradouro,
+          bairro: this.dadosCep.bairro
+        });
+
+        const cidadeEncontrada = this.listaDeMunicipios.find(
+          cidade => cidade.nome.toLowerCase() === this.dadosCep.localidade.toLowerCase()
+        );
+
+        if (cidadeEncontrada) {
+          this.cadastroBancoForm.get('municipio')?.setValue(cidadeEncontrada.id);
+        }
+
+        this.desabilitaCamposEndereco();
         this.cdRef.detectChanges();
       },
-      error: (err: any) => {
-        console.error("Erro ao buscar municípios: ", err)
-      },
-      complete: () => {
-        console.log('Busca de estados completa.');
-      }
-    })
+      error: (err) => console.error("Erro ao buscar municípios através do CEP: ", err)
+    });
   }
 
-  carregaDadosMunicipio() {
-    const UfSelecionada = this.cadastroBancoForm.get('uf')?.value
+  carregaDadosMunicipio(): void {
+    const ufSelecionada = this.cadastroBancoForm.get('uf')?.value;
+    if (ufSelecionada === null || ufSelecionada === undefined) return;
 
-    if (UfSelecionada !== null) {
-      const estadoEncontrado = this.listaDeEstados.find(estado => estado.id == UfSelecionada);
-      this.carregarMunicipios(String(estadoEncontrado?.sigla))
-      this.cadastroBancoForm.get('municipio')?.enable();
-    } else {
-      return
+    const estadoEncontrado = this.listaDeEstados.find(estado => estado.id == ufSelecionada);
+    if (estadoEncontrado) {
+      this.estadosService.buscarMunicipios(String(estadoEncontrado.sigla)).subscribe({
+        next: (municipios: Municipio[]) => {
+          this.listaDeMunicipios = municipios;
+          this.cadastroBancoForm.get('municipio')?.enable();
+          this.cdRef.detectChanges();
+        }
+      });
     }
   }
 
-  desabilitaCamposEndereco() {
+  desabilitaCamposEndereco(): void {
     this.cadastroBancoForm.get('uf')?.disable();
     this.cadastroBancoForm.get('municipio')?.disable();
     this.cadastroBancoForm.get('logradouro')?.disable();
     this.cadastroBancoForm.get('bairro')?.disable();
   }
 
-  salvar() {
+  salvar(): void {
     this.cadastroBancoForm.markAllAsTouched();
 
-    if (!this.cadastroBancoForm.valid) {
-      this.toastr.error("Revise os campos")
-      return
+    if (!this.cadastroBancoForm.valid && !this.cadastroBancoForm.get('uf')?.disabled) {
+      this.toastr.error("Revise os campos");
+      return;
     }
 
-    let dadosForm = this.cadastroBancoForm.getRawValue();
-    const auxMunicipio = this.listaDeMunicipios.find((mun) => {
-      return mun.id === Number(dadosForm['municipio'])
-    })
+    const dadosForm = this.cadastroBancoForm.getRawValue();
 
-    const auxUf = this.listaDeEstados.find((uf) => {
-      return uf.id === Number(dadosForm['uf'])
-    })
+    if (dadosForm['cep']) {
+      dadosForm['cep'] = String(dadosForm['cep']).replace(/\D/g, '');
+    }
+
+    const auxMunicipio = this.listaDeMunicipios.find(mun => mun.id === Number(dadosForm['municipio']));
+    const auxUf = this.listaDeEstados.find(uf => uf.id === Number(dadosForm['uf']));
 
     dadosForm['municipio'] = auxMunicipio?.nome;
     dadosForm['uf'] = auxUf?.sigla;
@@ -236,21 +217,16 @@ export class CadastrarBanco {
       dadosForm['id'] = this.bancoLeite.id;
 
       this.bancoLeiteService.atualizarBancoLeite(dadosForm).subscribe({
-        next: (res) => {
-          this.toastr.success("Banco atualizado com sucesso!");
-        },
-        error: (err) => this.toastr.error("Erro ao atualizar banco")
+        next: () => this.toastr.success("Banco atualizado com sucesso!"),
+        error: () => this.toastr.error("Erro ao atualizar banco")
       });
-
     } else {
       this.bancoLeiteService.cadastrarBancoLeite(dadosForm).subscribe({
-        next: (res) => {
+        next: () => {
           this.toastr.success("Banco cadastrado com sucesso");
           this.cadastroBancoForm.reset();
         },
-        error: (err) => {
-            this.toastr.error("Erro ao cadastrar Banco de Leite")
-        }
+        error: () => this.toastr.error("Erro ao cadastrar Banco de Leite")
       });
     }
   }
