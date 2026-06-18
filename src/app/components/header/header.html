@@ -13,6 +13,9 @@
       <li>
         <a href="/#doacao" class="text-white text-decoration-none fw-semibold">Doação</a>
       </li>
+        <li *ngIf="validaUsuarioLogado()">
+          <a href="painel" class="text-white text-decoration-none fw-semibold">Painel</a>
+        </li>
       <li>
         <a href="mapa" class="btn btn-light fw-bold px-3 py-1">Mapa</a>
       </li>
