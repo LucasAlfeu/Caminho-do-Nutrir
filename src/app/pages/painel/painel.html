@@ -8,7 +8,7 @@
   <main class="main-container">
     <div class="bg-white-panel p-4 shadow-sm rounded-3">
 
-      <div class="row align-items-center mb-3 g-3 flex-shrink-0">
+      <div class="row align-items-end mb-3 g-3 flex-shrink-0 d-flex justify-content-between">
         <div class="col-6 col-md-3">
           <div class="bg-card-custom p-3 rounded-3 shadow-sm">
             <h2 class="fs-6 fw-normal mb-1">Total de Bancos</h2>
@@ -20,22 +20,22 @@
         <div class="col-md-2 d-none d-md-block"></div>
 
         <div class="col-12 col-md-4 d-flex flex-column align-items-end justify-content-center">
-          <div class="text-end mb-2">
+          <!-- <div class="text-end mb-2">
             <span class="text-muted small"><i class="fa-solid fa-baby me-1"></i> Bebê e leite materno</span>
-          </div>
+          </div> -->
           <button class="btn btn-custom-blue px-4 py-2 rounded-pill fw-semibold text-nowrap" (click)="goTo()">
             <i class="fa-solid fa-plus me-1"></i> Adicionar Banco
           </button>
         </div>
       </div>
 
-      <div class="row mb-3 g-2 flex-shrink-0">
+      <div [formGroup]="form" class="row mb-3 g-2 flex-shrink-0">
         <div class="col">
-          <input type="text" class="form-control form-control-lg border-2" placeholder="Buscar por banco"
+          <input type="text" class="form-control form-control-lg border-2" formControlName="filtroBanco" placeholder="Buscar por banco"
             aria-label="Buscar por banco">
         </div>
         <div class="col-auto">
-          <button class="btn btn-custom-dark btn-lg px-5 fw-semibold">Buscar</button>
+          <button class="btn btn-custom-dark btn-lg px-5 fw-semibold" (click)="filtrarPontos()">Buscar</button>
         </div>
       </div>
 

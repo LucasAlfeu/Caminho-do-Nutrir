@@ -9,10 +9,11 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ModalMark } from '../../components/modal-mark/modal-mark';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-painel',
-  imports: [CommonModule, DatePipe, RouterLink, ModalMark],
+  imports: [CommonModule, DatePipe, RouterLink, ModalMark, ReactiveFormsModule],
   templateUrl: './painel.html',
   styleUrl: './painel.css',
 })
@@ -23,16 +24,25 @@ export class Painel {
   usuario: Usuario | null = null;
   listBancos: BancoLeite[] = [];
   totalBancos: number = 0;
+  form!: FormGroup;
 
   constructor(
     private router: Router,
     private autenticacaoService: AutenticacaoService,
     private bancoLeiteService: BancoLeiteService,
     private toastr: ToastrService,
+    protected fb: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.createForm();
     this.listarBancosLeite();
+  }
+
+  createForm(){
+    this.form = this.fb.group({
+      filtroBanco: ['']
+    })
   }
 
   listarBancosLeite() {
@@ -55,5 +65,13 @@ export class Painel {
 
   openModalDetalhe(banco: any){
     this.modalDetalhe.abrirModal(banco);
+  }
+
+  filtrarPontos(){
+    if(!this.form) return;
+
+    const filtroString = this.form.get('filtroBanco')?.value
+
+    console.log(filtroString)
   }
 }

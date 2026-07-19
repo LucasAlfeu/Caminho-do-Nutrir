@@ -10,6 +10,7 @@ import { CadastrarBanco } from './pages/cadastrar-banco/cadastrar-banco';
 import { LiberarUsuario } from './pages/liberar-usuario/liberar-usuario';
 import { Mapa } from './pages/mapa/mapa';
 import { Perfil } from './pages/perfil/perfil';
+import { Categorias } from './pages/categorias/categorias';
 
 
 export const routes: Routes = [
@@ -54,6 +55,10 @@ export const routes: Routes = [
       {
         path: 'perfil',
         component: Perfil,
+      },
+      {
+        path: 'categorias',
+        component: Categorias,
       },
     ]
   }
