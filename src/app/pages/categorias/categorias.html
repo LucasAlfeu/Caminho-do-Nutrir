@@ -1,1 +1,85 @@
-<p>categorias works!</p>
+<body>
+  <div class="d-flex w-100 h-100 m-0 p-0 align-items-stretch">
+    <div class="content-area d-flex flex-column m-0 p-0">
+
+      <header class="bg-header-custom w-100 px-4 d-flex flex-column justify-content-center shadow-sm flex-shrink-0">
+        <h1 class="h3 fw-bold mb-0">Bancos de Leite Humano</h1>
+        <p class="mb-0 text-muted-custom small">Gerenciamento de bancos cadastrados no sistema</p>
+      </header>
+
+      <main class="main-workspace p-4">
+        <div class="bg-white-panel p-4 shadow-sm rounded-3">
+
+          <div class="row align-items-start mb-4 g-4 flex-shrink-0">
+            <div class="col-12 col-md-8 col-lg-9">
+              <h2 class="h4 fw-bold mb-3 text-dark">Categorização de Pontos no Mapa</h2>
+              <p class="text-secondary mb-0 lh-base" style="font-size: 0.95rem;">
+                A categorização é essencial para garantir que o mapa seja intuitivo e organizado. Ao classificar cada
+                localização, permitimos que os usuários filtrem as informações com precisão e identifiquem rapidamente
+                os diferentes tipos de serviços através de ícones personalizados no mapa.
+              </p>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+              <div class="bg-card-custom p-3 rounded-3 shadow-sm">
+                <h3 class="fs-5 fw-normal mb-1">Total de Categorias</h3>
+                <span class="display-6 fw-bold d-block mb-1">4</span>
+                <small class="text-white-50">cadastradas no sistema</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4 g-2 align-items-center flex-shrink-0">
+            <div class="col">
+              <input type="text" class="form-control form-control-lg border-2" placeholder="Buscar por categoria">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-custom-dark btn-lg px-4 fw-semibold">Buscar</button>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-custom-blue btn-lg px-3 fw-semibold text-nowrap rounded-3">
+                <i class="fa-solid fa-plus me-1"></i> Adicionar Categoria
+              </button>
+            </div>
+          </div>
+
+          <div class="border-custom-container p-0 bg-white">
+            <div class="table-responsive h-100">
+              <table class="table table-hover align-middle mb-0 text-center w-100">
+                <thead class="table-custom-header">
+                  <tr>
+                    <th scope="col" class="py-3" style="width: 15%;">Número</th>
+                    <th scope="col" class="py-3" style="width: 50%;">Nome</th>
+                    <th scope="col" class="py-3" style="width: 20%;">Cor</th>
+                    <th scope="col" class="py-3" style="width: 15%;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-secondary fw-normal">00001</th>
+                    <td class="text-start ps-4">Exemplo categoria 01</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-secondary fw-normal">00002</th>
+                    <td class="text-start ps-4">Exemplo categoria 02</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-secondary fw-normal">00003</th>
+                    <td class="text-start ps-4">Exemplo categoria 03</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+  </div>
+</body>
