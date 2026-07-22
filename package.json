@@ -29,6 +29,7 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@simonwep/pickr": "^1.10.0",
     "@types/leaflet": "^1.9.21",
     "bootstrap": "^5.3.8",
     "leaflet": "^1.9.4",
