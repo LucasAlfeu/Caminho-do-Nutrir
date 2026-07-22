@@ -22,7 +22,7 @@
             <div class="col-12 col-md-4 col-lg-3">
               <div class="bg-card-custom p-3 rounded-3 shadow-sm">
                 <h3 class="fs-5 fw-normal mb-1">Total de Categorias</h3>
-                <span class="display-6 fw-bold d-block mb-1">4</span>
+                <span class="display-6 fw-bold d-block mb-1">{{ totalCategoria }}</span>
                 <small class="text-white-50">cadastradas no sistema</small>
               </div>
             </div>
@@ -54,22 +54,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row" class="text-secondary fw-normal">00001</th>
-                    <td class="text-start ps-4">Exemplo categoria 01</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-secondary fw-normal">00002</th>
-                    <td class="text-start ps-4">Exemplo categoria 02</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-secondary fw-normal">00003</th>
-                    <td class="text-start ps-4">Exemplo categoria 03</td>
-                    <td></td>
+                  <tr *ngFor="let categoria of listCategorias">
+                    <th scope="row" class="text-secondary fw-normal align-middle">{{ categoria.id }}</th>
+                    <td class="text-center ps-4 align-middle">{{ categoria.nome }}</td>
+
+                    <td class="text-center ps-4 align-middle">
+                      <div style="width: 20px; height: 20px; margin: 0 auto;" [style.backgroundColor]="categoria.cor">
+                      </div>
+                    </td>
+
                     <td></td>
                   </tr>
                 </tbody>
