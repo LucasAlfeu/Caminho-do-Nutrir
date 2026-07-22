@@ -36,7 +36,7 @@
               <button class="btn btn-custom-dark btn-lg px-4 fw-semibold">Buscar</button>
             </div>
             <div class="col-auto">
-              <button class="btn btn-custom-blue btn-lg px-3 fw-semibold text-nowrap rounded-3">
+              <button class="btn btn-custom-blue btn-lg px-3 fw-semibold text-nowrap rounded-3" (click)="openModalCategoria()">
                 <i class="fa-solid fa-plus me-1"></i> Adicionar Categoria
               </button>
             </div>
@@ -76,3 +76,5 @@
 
   </div>
 </body>
+
+<app-modal-categoria #modalCategoria></app-modal-categoria>

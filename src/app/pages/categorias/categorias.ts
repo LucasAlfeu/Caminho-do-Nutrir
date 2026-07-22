@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriaService } from '../../services/Categoria/categoria';
 import { Categoria } from '../../class/Categoria';
 import { CommonModule } from '@angular/common';
+import { ModalCategoria } from '../../components/modal-categoria/modal-categoria';
 
 @Component({
   selector: 'app-categorias',
-  imports: [CommonModule],
+  imports: [CommonModule, ModalCategoria],
   templateUrl: './categorias.html',
   styleUrl: './categorias.css',
 })
 export class Categorias implements OnInit {
-
+  @ViewChild('modalCategoria') modalCategoria!: ModalCategoria;
 
   listCategorias: Categoria[] = [];
   totalCategoria: string = '';
@@ -34,5 +35,9 @@ export class Categorias implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  openModalCategoria() {
+    this.modalCategoria.abrirModal()
   }
 }
