@@ -40,4 +40,8 @@ export class Categorias implements OnInit {
   openModalCategoria() {
     this.modalCategoria.abrirModal()
   }
+
+  salvar(e: any){
+    console.log("Componente pai", e)
+  }
 }
