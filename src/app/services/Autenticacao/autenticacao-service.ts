@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../class/Usuario';
 import { ToastrService } from 'ngx-toastr';
@@ -17,6 +17,20 @@ export class AutenticacaoService {
     private toastr: ToastrService,
     private router: Router,
   ) { }
+
+  autenticacaoAPI(){
+    const aux = localStorage.getItem('usuario');
+    let headers;
+    if (aux != null) {
+      const user = JSON.parse(aux);
+
+      headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
+    }
+
+    return headers;
+  }
 
   entrar(dados: any) {
     return this.http.post<Usuario>(`${environment.apiUrl}/entrar`, dados);
