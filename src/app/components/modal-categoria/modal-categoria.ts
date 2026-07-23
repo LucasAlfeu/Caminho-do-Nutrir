@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import Pickr from '@simonwep/pickr';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Categoria } from '../../class/Categoria';
 
 
 declare var bootstrap: any;
@@ -19,9 +20,13 @@ export class ModalCategoria implements AfterViewInit {
 
   @Output() salvar = new EventEmitter();
 
+  // private categoria: Categoria = new Categoria();
   private modalInstance: any;
   private pickrInstance: any;
   public corSelecionada: string = '#ff0000';
+  private indEdicao: boolean = false;
+  private indDetalhe: boolean = false;
+  private indCadastro: boolean = false;
 
   form!: FormGroup;
 
@@ -79,10 +84,44 @@ export class ModalCategoria implements AfterViewInit {
     }
   }
 
-  abrirModal() {
+  getIndEdicao(): boolean {
+    return this.indEdicao
+  }
+  getIndDetalhe(): boolean {
+    return this.indDetalhe
+  }
+  getIndCadastro(): boolean {
+    return this.indCadastro
+  }
+
+  setIndEdicao(newIndEdicao: boolean) {
+    this.indEdicao = newIndEdicao;
+  }
+  setIndDetalhe(newIndDetalhe: boolean) {
+    this.indDetalhe = newIndDetalhe;
+  }
+  setIndCadastro(newIndCadastro: boolean) {
+    this.indCadastro = newIndCadastro;
+  }
+
+  abrirModal(tipoAbertura: number, categoriaSelecionada?: Categoria) {
+    this.setIndCadastro(false);
+    this.setIndEdicao(false);
+    this.setIndDetalhe(false);
+
+    // 2. Ativa apenas a opção correta
+    if(tipoAbertura == 1) {
+      this.setIndCadastro(true);
+    } else if (tipoAbertura == 2) {
+      this.setIndEdicao(true);
+    } else {
+      this.setIndDetalhe(true);
+    }
+
     if (this.modalInstance) {
       this.modalInstance.show();
     }
+
   }
 
   fecharModal() {

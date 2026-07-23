@@ -3,7 +3,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Categoria</h5>
+        <h5 class="modal-title" id="exampleModalLabel">
+          <span *ngIf="getIndCadastro()">Cadastrar Categoria</span>
+          <span *ngIf="getIndEdicao()">Editar Categoria</span>
+          <span *ngIf="getIndDetalhe()">Detalhe da Categoria</span>
+        </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"
           style="border: none; background: transparent;">
           <span aria-hidden="true">&times;</span>
@@ -49,7 +53,10 @@
       </div>
       <div class="modal-footer d-flex justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fecharModal()">Fechar</button>
-        <button type="button" class="btn btn-primary" (click)="_salvar()">Salvar</button>
+        <button type="button" class="btn btn-primary" *ngIf="getIndCadastro() || getIndEdicao()" (click)="_salvar()">
+          <span *ngIf="getIndCadastro()">Cadastrar</span>
+          <span *ngIf="getIndEdicao()">Atualizar</span>
+        </button>
       </div>
     </div>
   </div>

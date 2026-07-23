@@ -37,8 +37,14 @@ export class Categorias implements OnInit {
     })
   }
 
-  openModalCategoria() {
-    this.modalCategoria.abrirModal()
+  openModalCategoria(tipoAbertura: number, categoriaSelecionada?: Categoria) {
+    console.log(tipoAbertura)
+    console.log(categoriaSelecionada)
+    if(tipoAbertura == 1){
+      this.modalCategoria.abrirModal(tipoAbertura)
+    } else {
+      this.modalCategoria.abrirModal(tipoAbertura, categoriaSelecionada)
+    }
   }
 
   salvar(dados: any){
