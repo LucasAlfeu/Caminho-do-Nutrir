@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxMaskDirective } from 'ngx-mask';
 
 import { EstadosService } from '../../services/Estados/estado-service';
 import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
@@ -10,12 +11,15 @@ import { Estado } from '../../class/Estado';
 import { Municipio } from '../../class/Municipio';
 import { Cep } from '../../class/Cep';
 import { BancoLeite } from '../../class/BancoLeite';
+import { CategoriaService } from '../../services/Categoria/categoria';
+import { Categoria } from '../../class/Categoria';
 
 @Component({
   selector: 'app-cadastrar-banco',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskDirective
   ],
   templateUrl: './cadastrar-banco.html',
   styleUrl: './cadastrar-banco.css',
@@ -24,6 +28,7 @@ export class CadastrarBanco implements OnInit {
 
   listaDeEstados: Estado[] = [];
   listaDeMunicipios: Municipio[] = [];
+  listCategoria: Categoria[] = [];
   cadastroBancoForm!: FormGroup;
   dadosCep: Cep;
   bancoLeite: BancoLeite | null = null;
@@ -37,6 +42,7 @@ export class CadastrarBanco implements OnInit {
     private bancoLeiteService: BancoLeiteService,
     private router: Router,
     private route: ActivatedRoute,
+    private categoriaService: CategoriaService,
   ) {
     this.dadosCep = new Cep();
   }
@@ -45,6 +51,7 @@ export class CadastrarBanco implements OnInit {
     this.indEdicao = this.router.url.includes("/editar/");
     this.createForm();
     this.carregaEstados();
+    this.buscarCategorias();
   }
 
   createForm(): void {
@@ -59,7 +66,9 @@ export class CadastrarBanco implements OnInit {
       uf: [null, Validators.required],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      descricao: ['']
+      classificacao: ['', Validators.required],
+      descricao: [''],
+      telefone: [''],
     });
   }
 
@@ -92,6 +101,7 @@ export class CadastrarBanco implements OnInit {
 
   atualizaFormulario(): void {
     if (!this.bancoLeite) return;
+    console.log(this.bancoLeite)
 
     this.cadastroBancoForm.patchValue(this.bancoLeite);
     const estadoSalvo = this.listaDeEstados.find(e => e.sigla === this.bancoLeite?.uf);
@@ -192,9 +202,30 @@ export class CadastrarBanco implements OnInit {
     this.cadastroBancoForm.get('bairro')?.disable();
   }
 
+  buscarCategorias(){
+    this.categoriaService.listarCategorias().subscribe({
+      next: (res) => {
+        this.listCategoria = res.body || []
+        console.log(res.body)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
   salvar(): void {
     this.cadastroBancoForm.markAllAsTouched();
 
+    Object.keys(this.cadastroBancoForm.controls).forEach(key => {
+      const controlErrors = this.cadastroBancoForm.get(key)?.errors;
+      if (controlErrors != null) {
+        console.log('Campo com erro: ' + key, controlErrors);
+      }
+    });
+
+    console.log("!this.cadastroBancoForm.valid", !this.cadastroBancoForm.valid)
+    console.log("!this.cadastroBancoForm.get('uf')?.disabled", !this.cadastroBancoForm.get('uf')?.disabled)
     if (!this.cadastroBancoForm.valid && !this.cadastroBancoForm.get('uf')?.disabled) {
       this.toastr.error("Revise os campos");
       return;
@@ -211,7 +242,6 @@ export class CadastrarBanco implements OnInit {
 
     dadosForm['municipio'] = auxMunicipio?.nome;
     dadosForm['uf'] = auxUf?.sigla;
-    dadosForm['dataUltimaAtualizacao'] = new Date().toLocaleDateString('sv-SE');
 
     if (this.indEdicao && this.bancoLeite) {
       dadosForm['id'] = this.bancoLeite.id;

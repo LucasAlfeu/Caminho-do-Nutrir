@@ -1,5 +1,6 @@
 export interface IBancoLeite {
   id: number;
+  classificacao: number;
   nome: string;
   descricao?: string;
   cep: string;
@@ -12,12 +13,15 @@ export interface IBancoLeite {
   longitude: string;
   latitude: string;
   dataUltimaAtualizacao: string;
+  telefone?: string
 }
 
 export class BancoLeite implements IBancoLeite {
   id: number;
+  classificacao: number;
   nome: string;
   descricao?: string;
+  telefone?: string
   cep: string;
   logradouro: string;
   bairro: string;
@@ -31,8 +35,10 @@ export class BancoLeite implements IBancoLeite {
 
   constructor(dados: IBancoLeite) {
     this.id = dados.id;
+    this.classificacao = dados.classificacao;
     this.nome = dados.nome;
     this.descricao = dados.descricao;
+    this.telefone = dados.telefone;
     this.cep = dados.cep;
     this.logradouro = dados.logradouro;
     this.bairro = dados.bairro;

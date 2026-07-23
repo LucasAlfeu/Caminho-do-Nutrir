@@ -28,6 +28,27 @@
               </div>
             </div>
 
+            <div class="mb-3">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="tel" formControlName="telefone" class="form-control border-2" id="telefone"
+                placeholder="Digite o telefone Para contato"
+                autocomplete="tel"
+                maxlength="15"
+                mask="(00) 0000-0000||(00) 00000-0000">
+            </div>
+
+            <div class="mb-3">
+              <label for="classificacao" class="form-label">Classificação</label>
+              <select name="" formControlName="classificacao" class="form-control border-2" id="classificacao" >
+                <option >Selecione uma classificação</option>
+                <option [ngValue]="categoria.id" *ngFor="let categoria of listCategoria">{{ categoria.nome }}</option>
+              </select>
+              <div class="text-danger small mt-1"
+                  *ngIf="cadastroBancoForm.get('classificacao')?.invalid && cadastroBancoForm.get('classificacao')?.touched">
+                  A categoria é obrigatória.
+                </div>
+            </div>
+
             <div class="row align-items-end">
               <div class="col-md-8">
                 <label for="cep" class="form-label">CEP</label>
