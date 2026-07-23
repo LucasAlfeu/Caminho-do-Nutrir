@@ -129,6 +129,7 @@ export class ModalCategoria implements AfterViewInit {
     } else if (tipoAbertura == 2) {
       this.setIndEdicao(true);
       this.atualizaFormulário();
+      this.habilitarCampos();
     } else {
       this.setIndDetalhe(true);
       this.atualizaFormulário();
@@ -176,6 +177,12 @@ export class ModalCategoria implements AfterViewInit {
     this.form.get("nome")?.disable();
     this.form.get("descricao")?.disable();
     this.pickrInstance.disable();
+  }
+
+  habilitarCampos(){
+    this.form.get("nome")?.enable();
+    this.form.get("descricao")?.enable();
+    this.pickrInstance.enable();
   }
 
   _salvar(){
