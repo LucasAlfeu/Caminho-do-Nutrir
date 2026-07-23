@@ -20,7 +20,7 @@ export class ModalCategoria implements AfterViewInit {
 
   @Output() salvar = new EventEmitter();
 
-  // private categoria: Categoria = new Categoria();
+  private categoria: Categoria | null = null;
   private modalInstance: any;
   private pickrInstance: any;
   public corSelecionada: string = '#ff0000';
@@ -105,23 +105,39 @@ export class ModalCategoria implements AfterViewInit {
   }
 
   abrirModal(tipoAbertura: number, categoriaSelecionada?: Categoria) {
+    this.categoria = null;
     this.setIndCadastro(false);
     this.setIndEdicao(false);
     this.setIndDetalhe(false);
 
-    // 2. Ativa apenas a opção correta
+    if(categoriaSelecionada){
+      this.categoria = categoriaSelecionada;
+    }
+
+    // 1- Cadastro , 2- Edicao, 3- Detalhe
     if(tipoAbertura == 1) {
       this.setIndCadastro(true);
+
+      // Reseta para uma cor padrão ao cadastrar
+      this.corSelecionada = '#ff0000';
+      setTimeout(() => {
+        if (this.pickrInstance) {
+          this.pickrInstance.setColor(this.corSelecionada);
+        }
+      }, 0);
+
     } else if (tipoAbertura == 2) {
       this.setIndEdicao(true);
+      this.atualizaFormulário();
     } else {
       this.setIndDetalhe(true);
+      this.atualizaFormulário();
+      this.desabilitarCampos();
     }
 
     if (this.modalInstance) {
       this.modalInstance.show();
     }
-
   }
 
   fecharModal() {
@@ -142,6 +158,26 @@ export class ModalCategoria implements AfterViewInit {
     return Boolean(this.form.get(campo)?.invalid && this.form.get(campo)?.touched)
   }
 
+  atualizaFormulário() {
+    if (this.categoria) {
+      this.form.get("nome")?.setValue(this.categoria.nome);
+      this.form.get("descricao")?.setValue(this.categoria.descricao);
+      this.corSelecionada = this.categoria.cor;
+
+      setTimeout(() => {
+        if (this.pickrInstance) {
+          this.pickrInstance.setColor(this.corSelecionada);
+        }
+      }, 250);
+    }
+  }
+
+  desabilitarCampos(){
+    this.form.get("nome")?.disable();
+    this.form.get("descricao")?.disable();
+    this.pickrInstance.disable();
+  }
+
   _salvar(){
     if (!this.form) return;
 
@@ -149,8 +185,11 @@ export class ModalCategoria implements AfterViewInit {
 
     const dados = {
       ...this.form.getRawValue(),
-      cor: this.corSelecionada
+      cor: this.corSelecionada,
+      id: this.categoria?.id
     }
+
+    console.log(dados)
 
     this.salvar.emit(dados);
 
