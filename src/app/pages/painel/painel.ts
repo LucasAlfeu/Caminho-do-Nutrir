@@ -48,7 +48,7 @@ export class Painel {
   listarBancosLeite() {
     this.bancoLeiteService.listBancoLeite().subscribe({
       next: (res) => {
-        this.listBancos = res.body ?? [];
+        this.listBancos = res.body?.reverse() ?? [];
 
         const totalCount = res.headers.get('X-Total-Count');
         this.totalBancos = totalCount ? parseInt(totalCount, 10) : 0;
