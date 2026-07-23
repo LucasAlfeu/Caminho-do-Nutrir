@@ -17,7 +17,7 @@ export class Categorias implements OnInit {
   listCategorias: Categoria[] = [];
   totalCategoria: string = '';
 
-  constructor( private categoriaService: CategoriaService, private toastr: ToastrService,) {
+  constructor(private categoriaService: CategoriaService, private toastr: ToastrService,) {
 
   }
 
@@ -25,7 +25,7 @@ export class Categorias implements OnInit {
     this.buscarCategorias();
   }
 
-  buscarCategorias(){
+  buscarCategorias() {
     this.categoriaService.listarCategorias().subscribe({
       next: (res) => {
         this.totalCategoria = res.headers.get("x-total-count") || "0"
@@ -38,31 +38,37 @@ export class Categorias implements OnInit {
   }
 
   openModalCategoria(tipoAbertura: number, categoriaSelecionada?: Categoria) {
-    console.log(tipoAbertura)
-    console.log(categoriaSelecionada)
-    if(tipoAbertura == 1){
+    if (tipoAbertura == 1) {
       this.modalCategoria.abrirModal(tipoAbertura)
     } else {
       this.modalCategoria.abrirModal(tipoAbertura, categoriaSelecionada)
     }
   }
 
-  salvar(dados: any){
-    console.log("Componente pai", dados)
+  salvar(dados: any) {
+    const isEdicao = !!dados.id;
 
-    this.categoriaService.cadastrarCategoria(dados).subscribe({
-      next: (res) => {
-        console.log(res);
+    const operacao$ = isEdicao
+      ? this.categoriaService.atualizarCategoria(dados.id, dados)
+      : this.categoriaService.cadastrarCategoria(dados);
+
+    const mensagemSucesso = isEdicao ? "Categoria atualizada com sucesso" : "Categoria cadastrada com sucesso";
+    const mensagemErroFallback = isEdicao ? "Não foi possível atualizar" : "Não foi possível cadastrar";
+
+    operacao$.subscribe({
+      next: () => {
         this.buscarCategorias();
-        this.toastr.success("Categoria cadastrada com sucesso", "Sucesso")
+        this.toastr.success(mensagemSucesso, "Sucesso");
       },
       error: (err) => {
-        if(err.error && err.error.errors && err.error.errors.default) {
-          this.toastr.error(err.error.errors.default, "Erro")
-          return;
+        const mensagemErroBackend = err.error?.errors?.default;
+
+        if (mensagemErroBackend) {
+          this.toastr.error(mensagemErroBackend, "Erro");
+        } else {
+          this.toastr.error(mensagemErroFallback, "Erro");
         }
-        this.toastr.error("Não foi possível cadastrar")
       }
-    })
+    });
   }
 }

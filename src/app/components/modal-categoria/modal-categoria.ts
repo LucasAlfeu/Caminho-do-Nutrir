@@ -189,8 +189,6 @@ export class ModalCategoria implements AfterViewInit {
       id: this.categoria?.id
     }
 
-    console.log(dados)
-
     this.salvar.emit(dados);
 
     this.fecharModal();

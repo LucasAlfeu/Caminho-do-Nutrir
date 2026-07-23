@@ -25,4 +25,9 @@ export class CategoriaService {
     const headers = this.autenticacaoService.autenticacaoAPI()
     return this.http.post<Categoria>(`${environment.apiUrl}/classificacao`, dados, { headers })
   }
+
+  atualizarCategoria(idCategoria: number, dados: any) {
+    const headers = this.autenticacaoService.autenticacaoAPI()
+    return this.http.put<Categoria>(`${environment.apiUrl}/classificacao/${idCategoria}`, dados, { headers })
+  }
 }
