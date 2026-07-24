@@ -1,3 +1,5 @@
+import { Categoria } from "./Categoria";
+
 export interface IBancoLeite {
   id: number;
   classificacao: number;
@@ -32,6 +34,7 @@ export class BancoLeite implements IBancoLeite {
   longitude: string;
   latitude: string;
   dataUltimaAtualizacao: string;
+  categoria: Categoria | null = null;
 
   constructor(dados: IBancoLeite) {
     this.id = dados.id;

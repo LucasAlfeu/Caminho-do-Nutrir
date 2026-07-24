@@ -120,11 +120,11 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
       const lat = Number(banco.latitude);
       const lng = Number(banco.longitude);
 
-      const cor = String(banco.classificacao) || '#e62222';
+      const cor = banco.categoria?.cor || '#e62222';
 
       if (!isNaN(lat) && !isNaN(lng)) {
         const marker = L.marker([lat, lng], {
-          icon: this.criarIconeDinamico('#e62222')
+          icon: this.criarIconeDinamico(cor)
         });
 
         marker.on('click', () => {
