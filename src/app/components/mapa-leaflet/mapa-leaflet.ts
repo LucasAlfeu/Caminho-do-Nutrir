@@ -5,18 +5,6 @@ import { BancoLeite } from '../../class/BancoLeite';
 
 declare var bootstrap: any;
 
-const defaultIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
-
-L.Marker.prototype.options.icon = defaultIcon;
-
 @Component({
   selector: 'app-mapa-leaflet',
   standalone: true,
@@ -58,7 +46,6 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
       return;
     }
 
-    // Mantemos as coordenadas antigas como "fallback" padrão caso o usuário recuse a localização
     this.map = L.map('mapaContainer', {
       center: [-22.5003437, -44.1227801],
       zoom: 15,
@@ -109,6 +96,21 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
     }
   }
 
+  private criarIconeDinamico(corHex: string): L.DivIcon {
+    return L.divIcon({
+      className: 'custom-div-icon',
+      html: `
+        <div class="map-marker shadow d-flex justify-content-center align-items-center"
+             style="width: 18px; height: 18px; border-radius: 50% 50% 0 50%; transform: rotate(45deg); background-color: ${corHex};">
+            <div class="marker-inner bg-white rounded-circle shadow-sm" style="width: 8px; height: 8px;"></div>
+        </div>
+      `,
+      iconSize: [20, 20],
+      iconAnchor: [10, 20],
+      popupAnchor: [0, -20]
+    });
+  }
+
   private renderizarMarcadores(): void {
     if (!this.map || !this.markersGroup) return;
 
@@ -118,8 +120,12 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
       const lat = Number(banco.latitude);
       const lng = Number(banco.longitude);
 
+      const cor = String(banco.classificacao) || '#e62222';
+
       if (!isNaN(lat) && !isNaN(lng)) {
-        const marker = L.marker([lat, lng]);
+        const marker = L.marker([lat, lng], {
+          icon: this.criarIconeDinamico('#e62222')
+        });
 
         marker.on('click', () => {
           this.modalElement.abrirModal(banco);
