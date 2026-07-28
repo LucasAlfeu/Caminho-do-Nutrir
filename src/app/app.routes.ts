@@ -11,6 +11,7 @@ import { LiberarUsuario } from './pages/liberar-usuario/liberar-usuario';
 import { Mapa } from './pages/mapa/mapa';
 import { Perfil } from './pages/perfil/perfil';
 import { Categorias } from './pages/categorias/categorias';
+import { IndicarEstacao } from './modules/estacao/pages/indicar-estacao/indicar-estacao';
 
 
 export const routes: Routes = [
@@ -29,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'mapa',
     component: Mapa
+  },
+  {
+    path: 'indicacao',
+    component: IndicarEstacao
   },
 
   {
