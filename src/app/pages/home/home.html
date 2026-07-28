@@ -109,31 +109,46 @@
 
   <section id="mapa" class="py-4 row">
     <div class="container d-flex justify-content-center">
-      <div class="card border-0 p-4 text-white w-100" style="background-color: #a67c52; border-radius: 12px;">
-        <div class="row align-items-stretch g-4 m-0">
+      <div class="card border-0 p-4 text-white w-100 shadow-sm" style="background-color: #a67c52; border-radius: 12px;">
+        <div class="row align-items-center g-4 m-0">
 
-          <div class="col-12 col-md-7 d-flex align-items-center ps-0 pe-md-4">
-            <h2 class="fw-bold display-5 mb-0 lh-sm" style="font-size: 80px;">
-              Conheça o Banco de Leite Humano mais Próximo
+          <!-- Coluna de Texto e Ações -->
+          <div class="col-12 col-md-7 ps-0 pe-md-4">
+            <h2 class="fw-bold display-6 mb-3 lh-sm">
+              Rede de Bancos de Leite Humano
             </h2>
+
+            <p class="fs-5 mb-2">
+              Encontre o ponto de coleta mais próximo de você e ajude a salvar vidas.
+            </p>
+            <p class="mb-4 text-white-50">
+              Conhece algum local que não está no mapa? Sua indicação nos ajuda a expandir essa rede de solidariedade.
+            </p>
+
+            <!-- Botões de Ação Agrupados -->
+            <div class="d-flex flex-column flex-sm-row gap-3 mt-2">
+              <a href="/mapa" class="btn btn-light btn-lg fw-bold" style="color: #a67c52; font-size: 1rem;">
+                Acessar o Mapa
+              </a>
+              <a href="#" style="font-size: 1rem;" class="btn btn-outline-light btn-lg btn-indicar">
+                Indicar Ponto
+              </a>
+            </div>
           </div>
 
-          <div class="col-12 col-md-5 p-0">
-            <img src="/images/mapa.png" alt="Mapa demonstrando a localização dos bancos de leite"
-              class="img-fluid rounded-3 h-100 w-100" style="object-fit: cover; min-height: 200px;">
-          </div>
-
-        </div>
-
-        <div class="row m-0 mt-3">
-          <div class="col-12 col-md-5 offset-md-7 p-0 text-md-start text-start">
-            <a href="/mapa" class="text-white fw-bold text-uppercase text-decoration-underline"
-              style="letter-spacing: 1px;">
-              Acessar o Mapa
+          <!-- Coluna da Imagem -->
+          <div class="col-12 col-md-5 p-0 text-center">
+            <a href="/mapa" aria-label="Acessar o mapa interativo">
+              <img src="/images/mapa.png"
+                  alt="Pré-visualização do mapa de localização dos bancos de leite"
+                  class="img-fluid rounded-3 shadow"
+                  style="object-fit: cover; min-height: 250px; width: 100%; transition: transform 0.3s ease;"
+                  onmouseover="this.style.transform='scale(1.02)'"
+                  onmouseout="this.style.transform='scale(1)'">
             </a>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   </section>

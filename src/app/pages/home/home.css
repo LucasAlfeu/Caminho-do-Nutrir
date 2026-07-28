@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.btn-indicar:hover{
+  color: #a67c52;
+}
+
 @media (max-width: 992px) {
   .main_home {
     max-width: 95vw;
