@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormularioCadastrarUsuario } from '../../../../components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
-import { CadastrarBanco } from '../../../../pages/cadastrar-banco/cadastrar-banco';
+import { FormularioCadastrarUsuario } from '../../../usuario/components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
+import { CadastrarBanco } from '../cadastrar-banco/cadastrar-banco';
 
 @Component({
   selector: 'app-indicar-estacao',

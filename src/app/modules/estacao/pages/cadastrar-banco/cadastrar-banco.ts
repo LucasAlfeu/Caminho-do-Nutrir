@@ -5,14 +5,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxMaskDirective } from 'ngx-mask';
 
-import { EstadosService } from '../../services/Estados/estado-service';
-import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
-import { Estado } from '../../class/Estado';
-import { Municipio } from '../../class/Municipio';
-import { Cep } from '../../class/Cep';
-import { BancoLeite } from '../../class/BancoLeite';
-import { CategoriaService } from '../../services/Categoria/categoria';
-import { Categoria } from '../../class/Categoria';
+import { EstadosService } from '../../../../services/Estados/estado-service';
+import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
+import { Estado } from '../../../../class/Estado';
+import { Municipio } from '../../../../class/Municipio';
+import { Cep } from '../../../../class/Cep';
+import { BancoLeite } from '../../../../class/BancoLeite';
+import { CategoriaService } from '../../../../services/Categoria/categoria';
+import { Categoria } from '../../../../class/Categoria';
 
 @Component({
   selector: 'app-cadastrar-banco',

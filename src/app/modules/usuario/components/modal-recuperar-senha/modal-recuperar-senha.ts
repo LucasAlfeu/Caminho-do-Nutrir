@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 
 declare var bootstrap: any;
 

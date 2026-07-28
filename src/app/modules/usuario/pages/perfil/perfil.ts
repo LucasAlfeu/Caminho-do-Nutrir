@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormularioCadastrarUsuario } from '../../components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
-import { UsuarioService } from '../../services/Usuario/usuario-service';
+import { UsuarioService } from '../../../../services/Usuario/usuario-service';
 import { ToastrService } from 'ngx-toastr';
+import { FormularioCadastrarUsuario } from '../../components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
 
 
 @Component({

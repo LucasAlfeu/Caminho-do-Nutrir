@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Usuario } from '../../class/Usuario';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
-import { BancoLeiteService } from '../../services/BancoLeite/banco-leite-service';
-import { BancoLeite } from '../../class/BancoLeite';
+import { Usuario } from '../../../../class/Usuario';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
+import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
+import { BancoLeite } from '../../../../class/BancoLeite';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ModalMark } from '../../components/modal-mark/modal-mark';
+import { ModalMark } from '../../../../components/modal-mark/modal-mark';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({

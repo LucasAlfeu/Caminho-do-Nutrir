@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Usuario } from '../../class/Usuario';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { Usuario } from '../../../../class/Usuario';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 
 @Component({
   selector: 'app-formulario-cadastrar-usuario',

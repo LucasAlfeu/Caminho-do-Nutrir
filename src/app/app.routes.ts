@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { Entrar } from './pages/entrar/entrar';
-import { Cadastrar } from './pages/cadastrar/cadastrar';
+import { Entrar } from './modules/usuario/pages/entrar/entrar';
+import { Cadastrar } from './modules/usuario/pages/cadastrar/cadastrar';
 
 // Componentes do Painel
-import { Painel } from './pages/painel/painel';
+import { Painel } from './modules/usuario/pages/painel/painel';
 import { PainelLayoutComponent } from './components/painel-layout-component/painel-layout-component';
-import { CadastrarBanco } from './pages/cadastrar-banco/cadastrar-banco';
-import { LiberarUsuario } from './pages/liberar-usuario/liberar-usuario';
+import { CadastrarBanco } from './modules/estacao/pages/cadastrar-banco/cadastrar-banco';
+import { LiberarUsuario } from './modules/usuario/pages/liberar-usuario/liberar-usuario';
 import { Mapa } from './pages/mapa/mapa';
-import { Perfil } from './pages/perfil/perfil';
+import { Perfil } from './modules/usuario/pages/perfil/perfil';
 import { Categorias } from './pages/categorias/categorias';
 import { IndicarEstacao } from './modules/estacao/pages/indicar-estacao/indicar-estacao';
 

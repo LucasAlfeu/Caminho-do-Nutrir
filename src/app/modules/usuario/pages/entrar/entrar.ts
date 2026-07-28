@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ModalRecuperarSenha } from '../../components/modal-recuperar-senha/modal-recuperar-senha';
