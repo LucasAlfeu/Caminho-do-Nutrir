@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { FormularioCadastrarUsuario } from '../../../usuario/components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
-import { CadastrarBanco } from '../cadastrar-banco/cadastrar-banco';
+import { FormIndicarEstacao } from '../../components/form-indicar-estacao/form-indicar-estacao';
 
 @Component({
   selector: 'app-indicar-estacao',
-  imports: [],
+  imports: [FormIndicarEstacao],
   templateUrl: './indicar-estacao.html',
   styleUrl: './indicar-estacao.css',
 })

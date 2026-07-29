@@ -1,0 +1,151 @@
+<form *ngIf="form" [formGroup]="form" class="mt-3">
+
+  <!-- Dados do Local -->
+  <div class="row g-3">
+    <div class="col-12">
+      <h5 class="mb-1">Dados do Local</h5>
+    </div>
+
+    <div class="col-md-7">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome do local</label>
+        <input type="text" formControlName="nome" class="form-control border-2" id="nome"
+          placeholder="Ex: Banco de Leite Humano XYZ"
+          [ngClass]="{'is-invalid': form.get('nome')?.invalid && form.get('nome')?.touched}">
+        <div class="text-danger small mt-1" *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">
+          O nome é obrigatório.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="cep" class="form-label">CEP</label>
+        <div class="input-group">
+          <input type="text" formControlName="cep" class="form-control border-2" id="cep" placeholder="00000-000"
+            mask="00000-000" (blur)="carregaEnderecoViaCep()"
+            [ngClass]="{'is-invalid': form.get('cep')?.invalid && form.get('cep')?.touched}">
+
+          <button type="button" class="btn fw-semibold text-white px-4" (click)="carregaEnderecoViaCep()"
+            style="background-color: #4A2E1B; border-color: #4A2E1B;">
+            Buscar
+          </button>
+        </div>
+        <div class="text-danger small mt-1" *ngIf="form.get('cep')?.invalid && form.get('cep')?.touched">
+          O CEP é obrigatório.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea formControlName="descricao" class="form-control border-2" id="descricao" rows="5"
+          placeholder="Adicione informações adicionais sobre o local..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Endereço -->
+  <div class="row g-3 mt-2">
+    <div class="col-md-6">
+      <label for="logradouro" class="form-label">Logradouro</label>
+      <input type="text" formControlName="logradouro" class="form-control border-2" id="logradouro"
+        placeholder="Ex: Rua, Avenida..."
+        [ngClass]="{'is-invalid': form.get('logradouro')?.invalid && form.get('logradouro')?.touched}">
+      <div class="text-danger small mt-1" *ngIf="form.get('logradouro')?.invalid && form.get('logradouro')?.touched">
+        O logradouro é obrigatório.
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label for="numero" class="form-label">Número</label>
+      <input type="text" formControlName="numero" class="form-control border-2" id="numero" placeholder="Ex: 123"
+        [ngClass]="{'is-invalid': form.get('numero')?.invalid && form.get('numero')?.touched}">
+      <div class="text-danger small mt-1" *ngIf="form.get('numero')?.invalid && form.get('numero')?.touched">
+        O número é obrigatório.
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <label for="complemento" class="form-label">Complemento</label>
+      <input type="text" formControlName="complemento" class="form-control border-2" id="complemento"
+        placeholder="Ex: Sala, Andar, Bloco">
+    </div>
+  </div>
+
+  <!-- Localidade -->
+  <div class="row g-3 mt-1">
+    <div class="col-md-4">
+      <label for="bairro" class="form-label">Bairro</label>
+      <input type="text" formControlName="bairro" class="form-control border-2" id="bairro"
+        placeholder="Digite o bairro"
+        [ngClass]="{'is-invalid': form.get('bairro')?.invalid && form.get('bairro')?.touched}">
+      <div class="text-danger small mt-1" *ngIf="form.get('bairro')?.invalid && form.get('bairro')?.touched">
+        O bairro é obrigatório.
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <label for="cidade" class="form-label">Cidade</label>
+      <select formControlName="municipio" class="form-select border-2" id="cidade"
+        [ngClass]="{'is-invalid': form.get('municipio')?.invalid && form.get('municipio')?.touched}">
+        <option [ngValue]="null" disabled selected>Selecione uma cidade</option>
+        <option [value]="item.id" *ngFor="let item of listaDeMunicipios">{{ item.nome }}</option>
+      </select>
+      <div class="text-danger small mt-1" *ngIf="form.get('municipio')?.invalid && form.get('municipio')?.touched">
+        A cidade é obrigatória.
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="uf" class="form-label">UF</label>
+      <select formControlName="uf" class="form-select border-2" id="uf" (change)="carregaDadosMunicipio()"
+        [ngClass]="{'is-invalid': form.get('uf')?.invalid && form.get('uf')?.touched}">
+        <option [ngValue]="null" disabled selected>Selecione um UF</option>
+        <option [value]="item.id" *ngFor="let item of listaDeEstados">{{ item.sigla }}</option>
+      </select>
+      <div class="text-danger small mt-1" *ngIf="form.get('uf')?.invalid && form.get('uf')?.touched">
+        O UF é obrigatório.
+      </div>
+    </div>
+  </div>
+
+  <!-- Informações para contato -->
+
+  <div class="row g-3 mt-4">
+    <!-- Agrupando o título e o texto em uma coluna de 100% (col-12) para alinhar corretamente no grid do Bootstrap -->
+    <div class="col-12">
+      <h5 class="mb-1">Informações de contato</h5>
+      <p class="text-muted small mb-2">
+        Para que possamos informar se a sua solicitação foi aprovada ou recusada, pedimos que preencha seu nome e e-mail
+        abaixo.
+      </p>
+    </div>
+
+    <div class="col-md-6">
+      <label for="nomeUsuario" class="form-label">Nome</label>
+      <input type="text" formControlName="nomeUsuario" class="form-control border-2" id="nomeUsuario"
+        placeholder="Digite seu nome"
+        [ngClass]="{'is-invalid': form.get('nomeUsuario')?.invalid && form.get('nomeUsuario')?.touched}">
+
+      <!-- Correção: Estava referenciando "latitude" e com o texto errado -->
+      <div class="text-danger small mt-1" *ngIf="form.get('nomeUsuario')?.invalid && form.get('nomeUsuario')?.touched">
+        O nome é obrigatório.
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="emailUsuario" class="form-label">E-mail</label>
+      <!-- Alterado type="text" para type="email" (melhora o teclado no celular) -->
+      <input type="email" formControlName="emailUsuario" class="form-control border-2" id="emailUsuario"
+        placeholder="Digite seu e-mail"
+        [ngClass]="{'is-invalid': form.get('emailUsuario')?.invalid && form.get('emailUsuario')?.touched}">
+
+      <div class="text-danger small mt-1"
+        *ngIf="form.get('emailUsuario')?.invalid && form.get('emailUsuario')?.touched">
+        <!-- Verificação dupla: checa se está vazio ou se o formato do e-mail é inválido -->
+        <span *ngIf="form.get('emailUsuario')?.errors?.['required']">O e-mail é obrigatório.</span>
+        <span *ngIf="form.get('emailUsuario')?.errors?.['email']">Digite um e-mail válido.</span>
+      </div>
+    </div>
+  </div>
+</form>
