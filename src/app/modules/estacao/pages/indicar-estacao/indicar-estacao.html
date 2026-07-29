@@ -22,9 +22,11 @@
 
   <div class="col-12 col-lg-8 bg-white p-5 form-scrollable d-flex flex-column">
 
-    <h2 class="fw-bold mb-2">Indicar local</h2>
-    <!-- <p class="mb-5">Já possui conta? <a href="/entrar" class="text-decoration-none" style="color: #6a73fa;">Acesse aqui</a></p> -->
+    <h2 class="fw-bold mb-3">Indicar local</h2>
 
-    <app-form-indicar-estacao></app-form-indicar-estacao>
+    <div class="ml-3 mb-lg-1">
+      <app-form-indicar-estacao #formSolicitar (cadastrar)="cadastrar($event)"></app-form-indicar-estacao>
+    </div>
+
   </div>
 </div>

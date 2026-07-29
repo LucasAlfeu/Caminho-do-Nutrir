@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormIndicarEstacao } from '../../components/form-indicar-estacao/form-indicar-estacao';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-indicar-estacao',
@@ -9,8 +10,12 @@ import { FormIndicarEstacao } from '../../components/form-indicar-estacao/form-i
 })
 export class IndicarEstacao {
 
+  constructor(private router: Router){}
+
 
   cadastrar(dados: any){
     console.log(dados)
   }
+
+
 }

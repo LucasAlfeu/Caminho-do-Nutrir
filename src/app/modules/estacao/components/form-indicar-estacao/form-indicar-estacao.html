@@ -18,6 +18,13 @@
       </div>
 
       <div class="mb-3">
+        <label for="nome" class="form-label">Telefone do local</label>
+        <input type="text" formControlName="telefone" class="form-control border-2" id="telefone"
+          placeholder="Ex: (00) 0000-0000">
+
+      </div>
+
+      <div class="mb-3">
         <label for="cep" class="form-label">CEP</label>
         <div class="input-group">
           <input type="text" formControlName="cep" class="form-control border-2" id="cep" placeholder="00000-000"
@@ -112,7 +119,6 @@
   <!-- Informações para contato -->
 
   <div class="row g-3 mt-4">
-    <!-- Agrupando o título e o texto em uma coluna de 100% (col-12) para alinhar corretamente no grid do Bootstrap -->
     <div class="col-12">
       <h5 class="mb-1">Informações de contato</h5>
       <p class="text-muted small mb-2">
@@ -127,7 +133,6 @@
         placeholder="Digite seu nome"
         [ngClass]="{'is-invalid': form.get('nomeUsuario')?.invalid && form.get('nomeUsuario')?.touched}">
 
-      <!-- Correção: Estava referenciando "latitude" e com o texto errado -->
       <div class="text-danger small mt-1" *ngIf="form.get('nomeUsuario')?.invalid && form.get('nomeUsuario')?.touched">
         O nome é obrigatório.
       </div>
@@ -135,17 +140,25 @@
 
     <div class="col-md-6">
       <label for="emailUsuario" class="form-label">E-mail</label>
-      <!-- Alterado type="text" para type="email" (melhora o teclado no celular) -->
       <input type="email" formControlName="emailUsuario" class="form-control border-2" id="emailUsuario"
         placeholder="Digite seu e-mail"
         [ngClass]="{'is-invalid': form.get('emailUsuario')?.invalid && form.get('emailUsuario')?.touched}">
 
       <div class="text-danger small mt-1"
         *ngIf="form.get('emailUsuario')?.invalid && form.get('emailUsuario')?.touched">
-        <!-- Verificação dupla: checa se está vazio ou se o formato do e-mail é inválido -->
         <span *ngIf="form.get('emailUsuario')?.errors?.['required']">O e-mail é obrigatório.</span>
         <span *ngIf="form.get('emailUsuario')?.errors?.['email']">Digite um e-mail válido.</span>
       </div>
     </div>
   </div>
 </form>
+
+<div class="d-flex justify-content-between mt-5 mb-1">
+  <button type="button" class="btn btn-secondary px-4 fw-semibold" (click)="voltar()">
+    Voltar
+  </button>
+  <button type="submit" class="btn fw-semibold text-white px-4" style="background-color: #4A2E1B;"
+    (click)="_cadastrar()">
+    Cadastrar
+  </button>
+</div>

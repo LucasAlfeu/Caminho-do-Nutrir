@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
 import { EstadosService } from '../../../../services/Estados/estado-service';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Cep } from '../../../../class/Cep';
 import { Municipio } from '../../../../class/Municipio';
 import { Estado } from '../../../../class/Estado';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-indicar-estacao',
@@ -20,6 +21,8 @@ import { Estado } from '../../../../class/Estado';
 })
 export class FormIndicarEstacao {
 
+  @Output() public cadastrar = new EventEmitter();
+
   form!: FormGroup;
   dadosCep: Cep;
   listaDeMunicipios: Municipio[] = [];
@@ -30,10 +33,7 @@ export class FormIndicarEstacao {
     private cdRef: ChangeDetectorRef,
     private toastr: ToastrService,
     protected fb: FormBuilder,
-    // private bancoLeiteService: BancoLeiteService,
-    // private router: Router,
-    // private route: ActivatedRoute,
-    // private categoriaService: CategoriaService,
+    private router: Router,
   ) {
     this.dadosCep = new Cep();
   }
@@ -138,12 +138,25 @@ export class FormIndicarEstacao {
       next: (estados: Estado[]) => {
         this.listaDeEstados = estados;
         this.cdRef.detectChanges();
-
-        // if (this.indEdicao) {
-        //   this.buscarBanco();
-        // }
       },
       error: (err) => console.error('Erro ao buscar estados:', err)
     });
+  }
+
+  voltar(): void {
+    this.router.navigate(['/']);
+  }
+
+  _cadastrar() {
+    let dadosFormulario = this.form.getRawValue();
+    Object.keys(dadosFormulario).forEach(element => {
+      const valor = dadosFormulario[element];
+
+      if (valor === '' || valor === null) {
+        delete dadosFormulario[element];
+      }
+    });
+
+    this.cadastrar.emit(dadosFormulario);
   }
 }
