@@ -16,6 +16,7 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   private map: L.Map | undefined;
   private markersGroup: L.LayerGroup | undefined;
   private permissaoModal: any;
+  private userMarker: L.Marker | undefined;
 
   @ViewChild('modalMark') modalElement!: ModalMark;
   @ViewChild('modalPermissao') modalPermissaoRef!: ElementRef;
@@ -95,6 +96,7 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
 
           if (this.map) {
             this.map.setView([lat, lng], 15);
+            this.adicionarMarcadorUsuario(lat, lng);
           }
         },
         (error) => {
@@ -113,6 +115,33 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
 
   recusarLocalizacao(): void {
     this.permissaoModal?.hide();
+  }
+
+  private adicionarMarcadorUsuario(lat: number, lng: number): void {
+    if (!this.map) return;
+
+    if (this.userMarker) {
+      this.map.removeLayer(this.userMarker);
+    }
+
+    const iconUser = L.divIcon({
+      className: 'custom-user-icon',
+      html: `
+        <div class="pulse-container">
+          <div class="pulse-ring"></div>
+          <div class="pulse-dot"></div>
+        </div>
+      `,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+
+    this.userMarker = L.marker([lat, lng], {
+      icon: iconUser,
+      zIndexOffset: 1000
+    }).addTo(this.map);
+
+    this.userMarker.bindPopup('<b>Você está aqui</b>');
   }
 
   private criarIconeDinamico(corHex: string): L.DivIcon {
