@@ -41,6 +41,10 @@ export class BancoLeiteService {
     return throwError(() => new Error('Usuário não autenticado.'));
   }
 
+  solicitarEstacao(dados: any){
+    return this.http.post(`${environment.apiUrl}/solicitar-banco-leite`, dados)
+  }
+
   listBancoLeite() {
     return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`, {
       observe: 'response'

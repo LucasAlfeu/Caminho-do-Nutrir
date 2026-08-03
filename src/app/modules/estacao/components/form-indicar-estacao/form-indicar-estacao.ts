@@ -61,6 +61,10 @@ export class FormIndicarEstacao {
     });
   }
 
+  limparFormulário(){
+    this.form.reset();
+  }
+
   carregaEnderecoViaCep(): void {
     let cep = this.form.get('cep')?.value;
     if (!cep) return;
