@@ -8,7 +8,7 @@ import { Painel } from './modules/usuario/pages/painel/painel';
 import { PainelLayoutComponent } from './components/painel-layout-component/painel-layout-component';
 import { CadastrarBanco } from './modules/estacao/pages/cadastrar-banco/cadastrar-banco';
 import { LiberarUsuario } from './modules/usuario/pages/liberar-usuario/liberar-usuario';
-import { Mapa } from './pages/mapa/mapa';
+import { Mapa } from './modules/mapa/pages/mapa/mapa';
 import { Perfil } from './modules/usuario/pages/perfil/perfil';
 import { Categorias } from './pages/categorias/categorias';
 import { IndicarEstacao } from './modules/estacao/pages/indicar-estacao/indicar-estacao';

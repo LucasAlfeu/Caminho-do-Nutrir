@@ -8,7 +8,7 @@ import { BancoLeite } from '../../../../class/BancoLeite';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { ModalMark } from '../../../../components/modal-mark/modal-mark';
+import { ModalMark } from '../../../mapa/components/modal-mark/modal-mark';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({

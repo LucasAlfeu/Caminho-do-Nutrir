@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { ModalMark } from '../modal-mark/modal-mark';
-import { BancoLeite } from '../../class/BancoLeite';
+import { BancoLeite } from '../../../../class/BancoLeite';
 
 declare var bootstrap: any;
 
@@ -94,7 +94,7 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
           const lng = position.coords.longitude;
 
           if (this.map) {
-            this.map.setView([lat, lng], 14);
+            this.map.setView([lat, lng], 15);
           }
         },
         (error) => {
