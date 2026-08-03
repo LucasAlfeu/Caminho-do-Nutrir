@@ -12,7 +12,7 @@ import { Mapa } from './modules/mapa/pages/mapa/mapa';
 import { Perfil } from './modules/usuario/pages/perfil/perfil';
 import { Categorias } from './pages/categorias/categorias';
 import { IndicarEstacao } from './modules/estacao/pages/indicar-estacao/indicar-estacao';
-import { ValidarSolicitacao } from './modules/estacao/validar-solicitacao/validar-solicitacao';
+import { ValidarSolicitacao } from './modules/estacao/pages/validar-solicitacao/validar-solicitacao';
 
 
 export const routes: Routes = [
