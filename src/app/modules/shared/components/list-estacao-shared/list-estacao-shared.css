@@ -1,0 +1,17 @@
+.table-custom-header {
+  --bs-table-bg: #4A2E1B;
+  --bs-table-color: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE e Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Oculta a barra de rolagem no Chrome, Safari e WebKit */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
