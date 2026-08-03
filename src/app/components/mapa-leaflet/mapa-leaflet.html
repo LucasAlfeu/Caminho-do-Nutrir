@@ -1,3 +1,23 @@
 <div id="mapaContainer" class="w-100 h-100"></div>
 
 <app-modal-mark #modalMark></app-modal-mark>
+
+<div class="modal fade" #modalPermissao tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title">Compartilhar localização</h6>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0">
+          Para podermos exibir os pontos de coleta e as estações ligadas a Rede Brasileira de Bancos de Leite Humano próximos a você,
+          poderia compartilhar sua localização?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="recusarLocalizacao()">Agora não</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="permitirLocalizacao()">Compartilhar</button>
+      </div>
+    </div>
+  </div>
+</div>

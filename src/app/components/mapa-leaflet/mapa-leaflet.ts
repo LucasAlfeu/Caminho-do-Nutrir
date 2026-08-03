@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { ModalMark } from '../modal-mark/modal-mark';
 import { BancoLeite } from '../../class/BancoLeite';
@@ -15,13 +15,16 @@ declare var bootstrap: any;
 export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   private map: L.Map | undefined;
   private markersGroup: L.LayerGroup | undefined;
+  private permissaoModal: any;
 
   @ViewChild('modalMark') modalElement!: ModalMark;
+  @ViewChild('modalPermissao') modalPermissaoRef!: ElementRef;
 
   @Input() listBancos?: BancoLeite[];
 
   ngAfterViewInit(): void {
     this.initMap();
+    this.abrirModalPermissao();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -35,6 +38,10 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy(): void {
+    if (this.permissaoModal) {
+      this.permissaoModal.dispose();
+      this.permissaoModal = undefined;
+    }
     if (this.map) {
       this.map.remove();
       this.map = undefined;
@@ -47,10 +54,9 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
     }
 
     this.map = L.map('mapaContainer', {
-      center: [-22.5003437, -44.1227801],
-      zoom: 15,
       zoomControl: false,
-    });
+      worldCopyJump: true
+    }).setView([0, 0], 2);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -61,9 +67,6 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
 
     this.renderizarMarcadores();
 
-    // Tenta centralizar na localização de quem está acessando
-    this.obterLocalizacaoUsuario();
-
     setTimeout(() => {
       if (this.map) {
         this.map.invalidateSize();
@@ -71,7 +74,19 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
     }, 100);
   }
 
-  private obterLocalizacaoUsuario(): void {
+  private abrirModalPermissao(): void {
+    if (!this.modalPermissaoRef) return;
+
+    this.permissaoModal = new bootstrap.Modal(this.modalPermissaoRef.nativeElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
+    this.permissaoModal.show();
+  }
+
+  permitirLocalizacao(): void {
+    this.permissaoModal?.hide();
+
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -96,12 +111,16 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
     }
   }
 
+  recusarLocalizacao(): void {
+    this.permissaoModal?.hide();
+  }
+
   private criarIconeDinamico(corHex: string): L.DivIcon {
     return L.divIcon({
       className: 'custom-div-icon',
       html: `
         <div class="map-marker shadow d-flex justify-content-center align-items-center"
-             style="width: 18px; height: 18px; border-radius: 50% 50% 0 50%; transform: rotate(45deg); background-color: ${corHex};">
+             style="width: 20px; height: 20px; border-radius: 50% 50% 0 50%; transform: rotate(45deg); background-color: ${corHex}; border: 1px solid #00000084">
             <div class="marker-inner bg-white rounded-circle shadow-sm" style="width: 8px; height: 8px;"></div>
         </div>
       `,
