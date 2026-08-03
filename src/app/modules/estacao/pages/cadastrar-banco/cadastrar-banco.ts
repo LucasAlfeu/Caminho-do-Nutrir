@@ -224,8 +224,6 @@ export class CadastrarBanco implements OnInit {
       }
     });
 
-    console.log("!this.cadastroBancoForm.valid", !this.cadastroBancoForm.valid)
-    console.log("!this.cadastroBancoForm.get('uf')?.disabled", !this.cadastroBancoForm.get('uf')?.disabled)
     if (!this.cadastroBancoForm.valid && !this.cadastroBancoForm.get('uf')?.disabled) {
       this.toastr.error("Revise os campos");
       return;

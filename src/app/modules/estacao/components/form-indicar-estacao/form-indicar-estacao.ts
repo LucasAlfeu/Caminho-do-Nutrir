@@ -161,6 +161,12 @@ export class FormIndicarEstacao {
       }
     });
 
+    const auxMunicipio = this.listaDeMunicipios.find(mun => mun.id === Number(dadosFormulario['municipio']));
+    const auxUf = this.listaDeEstados.find(uf => uf.id === Number(dadosFormulario['uf']));
+
+    dadosFormulario['municipio'] = auxMunicipio?.nome;
+    dadosFormulario['uf'] = auxUf?.sigla;
+
     this.cadastrar.emit(dadosFormulario);
   }
 }

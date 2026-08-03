@@ -22,18 +22,19 @@ export class IndicarEstacao {
 
 
   cadastrar(dados: any){
-    this.estacaoService.solicitarEstacao(dados).subscribe({
-      next: (res) => {
-        this.toastr.success("Tudo certo com a sua solicitação! Nossa equipe já está analisando e retornará em breve.")
-        this.formSolicitar.limparFormulário();
-        setTimeout(()=>{
-          this.router.navigate(['/']);
-        }, 500)
-      }, error: (err) => {
-        console.log(err)
-        this.toastr.error("Não foi possível cadastrar uma solicitação")
-      }
-    })
+    console.log(dados)
+    // this.estacaoService.solicitarEstacao(dados).subscribe({
+    //   next: (res) => {
+    //     this.toastr.success("Tudo certo com a sua solicitação! Nossa equipe já está analisando e retornará em breve.")
+    //     this.formSolicitar.limparFormulário();
+    //     setTimeout(()=>{
+    //       this.router.navigate(['/']);
+    //     }, 500)
+    //   }, error: (err) => {
+    //     console.log(err)
+    //     this.toastr.error("Não foi possível cadastrar uma solicitação")
+    //   }
+    // })
   }
 
 
