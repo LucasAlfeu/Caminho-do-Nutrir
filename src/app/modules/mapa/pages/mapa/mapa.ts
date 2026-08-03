@@ -31,11 +31,10 @@ export class Mapa {
   }
 
   listarBancosLeite() {
-    this.bancoLeiteService.listBancoLeite().subscribe({
+    const indValidado = false
+    this.bancoLeiteService.listBancoLeite(indValidado).subscribe({
       next: (res) => {
-        this.listBancos = res.body?.filter((estacao) => {
-          return estacao.indValidado == true
-        }) ?? [];
+        this.listBancos = res.body  ?? [];
       },
       error: (err) => {
         this.toastr.error("Não foi possível carregar os Bancos de Leite")

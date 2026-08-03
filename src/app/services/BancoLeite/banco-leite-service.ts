@@ -45,11 +45,18 @@ export class BancoLeiteService {
     return this.http.post(`${environment.apiUrl}/solicitar-banco-leite`, dados)
   }
 
-  listBancoLeite() {
-    return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`, {
-      observe: 'response'
-    })
+  listBancoLeite(apenasValidados?: boolean) {
+  let params = new HttpParams();
+
+  if (apenasValidados !== undefined) {
+    params = params.set('indValidado', apenasValidados);
   }
+
+  return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`, {
+    params,
+    observe: 'response'
+  });
+}
 
   buscarBancoLeite(idBanco: number) {
     const aux = localStorage.getItem('usuario');

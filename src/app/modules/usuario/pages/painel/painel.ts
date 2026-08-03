@@ -46,7 +46,8 @@ export class Painel {
   }
 
   listarBancosLeite() {
-    this.bancoLeiteService.listBancoLeite().subscribe({
+    const indValidado = true
+    this.bancoLeiteService.listBancoLeite(indValidado).subscribe({
       next: (res) => {
         this.listBancos = res.body?.reverse() ?? [];
 
