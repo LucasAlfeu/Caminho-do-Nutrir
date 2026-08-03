@@ -33,7 +33,9 @@ export class Mapa {
   listarBancosLeite() {
     this.bancoLeiteService.listBancoLeite().subscribe({
       next: (res) => {
-        this.listBancos = res.body?? [];
+        this.listBancos = res.body?.filter((estacao) => {
+          return estacao.indValidado == true
+        }) ?? [];
       },
       error: (err) => {
         this.toastr.error("Não foi possível carregar os Bancos de Leite")
