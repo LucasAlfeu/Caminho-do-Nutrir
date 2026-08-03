@@ -1,7 +1,9 @@
-<div class="d-flex">
+<div class="d-flex vh-100 overflow-hidden">
+
+  <!-- Lado Esquerdo (Fixo) -->
   <div
-    class="col-12 col-lg-4 bg-brown-custom text-white d-flex flex-column justify-content-between text-center p-5 sidebar-fixed"
-    style="background: #8c5730; height: auto;">
+    class="col-12 col-lg-4 text-white d-flex flex-column justify-content-between text-center p-5 sidebar-fixed h-100"
+    style="background: #8c5730; overflow-y: auto;">
     <div class="mt-4">
       <h1 class="fw-bold display-4 lh-sm">Caminho<br>do Nutrir</h1>
     </div>
@@ -20,7 +22,8 @@
     </div>
   </div>
 
-  <div class="col-12 col-lg-8 bg-white p-5 form-scrollable d-flex flex-column">
+  <!-- Lado Direito (Formulário com Scroll) -->
+  <div class="col-12 col-lg-8 bg-white p-5 form-scrollable d-flex flex-column h-100" style="overflow-y: auto;">
 
     <h2 class="fw-bold mb-3">Indicar local</h2>
 

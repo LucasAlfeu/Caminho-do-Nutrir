@@ -1,0 +1,9 @@
+.sidebar-fixed {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.form-scrollable {
+  height: 100vh;
+  overflow-y: auto;
+}
