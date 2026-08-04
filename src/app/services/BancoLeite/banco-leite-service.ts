@@ -116,4 +116,8 @@ export class BancoLeiteService {
     console.log(headers)
     return this.http.put(`${environment.apiUrl}/solicitar-banco-leite/${idSolicitacao}`, null , { headers })
   }
+
+  cadastrarReporte(dados: any){
+    return this.http.post(`${environment.apiUrl}/reporte`, dados)
+  }
 }

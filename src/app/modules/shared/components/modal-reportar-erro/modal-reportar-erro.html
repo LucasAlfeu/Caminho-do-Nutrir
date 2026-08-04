@@ -4,7 +4,7 @@
 
       <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
         <h4 class="modal-title fw-bold" id="exampleModalLabel" style="color: #4A2E1B;">
-          Reportar Erro
+          relatoar Erro
         </h4>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"></button>
       </div>
@@ -25,11 +25,11 @@
             rows="5"
             placeholder="Ex: O telefone de contato mudou, ou o endereço listado está em um número diferente da rua..."
             style="resize: none;"
-            formControlName="report"
-            [ngClass]="{'is-invalid': form.get('report')?.invalid && form.get('report')?.touched}"
+            formControlName="relato"
+            [ngClass]="{'is-invalid': form.get('relato')?.invalid && form.get('relato')?.touched}"
           ></textarea>
           <div class="text-danger small mt-1"
-            *ngIf="form.get('report')?.invalid && form.get('report')?.touched">
+            *ngIf="form.get('relato')?.invalid && form.get('relato')?.touched">
               É obrigatório a mensagem.
           </div>
 

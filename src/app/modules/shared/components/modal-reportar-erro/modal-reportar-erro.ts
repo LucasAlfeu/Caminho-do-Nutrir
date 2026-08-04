@@ -30,7 +30,7 @@ export class ModalReportarErro {
 
   createForm(){
     this.form = this.fb.group({
-      report: ['', Validators.required]
+      relato: ['', Validators.required]
     })
   }
 
@@ -68,6 +68,7 @@ export class ModalReportarErro {
     }
 
     const dadosForm = this.form.getRawValue();
+    console.log(dadosForm)
     this.enviarRelatorio.emit(dadosForm);
   }
 }

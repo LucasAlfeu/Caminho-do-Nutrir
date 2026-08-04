@@ -83,10 +83,25 @@ export class ModalMark {
 
   reportarErro(){
     this.modalReportarErro.abrirModal();
-    console.log('Erro reportado')
   }
 
   enviarRelatorio(dados: any){
-    console.log('Dados do formulário', dados)
+    if(this.endereco && this.endereco.id){
+      const dadosParaEnvio = {
+      ...dados,
+      idEstacao: this.endereco.id
+    }
+
+    this.estacaoService.cadastrarReporte(dadosParaEnvio).subscribe({
+      next: (res) => {
+        this.toastrService.success("Reporte cadastrado com sucesso!");
+        this.modalReportarErro.fecharModal();
+        console.log(res)
+      }, error: (err) => {
+        this.toastrService.error("Não foi possível cadastrar o reporte, pedimos para que entre em contato com nossa equipe!")
+        console.log(err)
+      }
+    })
+    }
   }
 }
