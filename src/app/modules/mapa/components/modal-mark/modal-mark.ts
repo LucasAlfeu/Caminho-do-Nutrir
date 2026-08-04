@@ -5,24 +5,30 @@ import { NgxMaskPipe } from 'ngx-mask';
 import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
 import { ModalReportarErro } from '../../../shared/components/modal-reportar-erro/modal-reportar-erro';
 import { Router } from '@angular/router';
+import { ModalConfirmarAcao } from '../../../shared/components/modal-confirmar-acao/modal-confirmar-acao';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modal-mark',
-  imports: [CommonModule, NgxMaskPipe, ModalReportarErro],
+  imports: [CommonModule, NgxMaskPipe, ModalReportarErro, ModalConfirmarAcao],
   templateUrl: './modal-mark.html',
   styleUrl: './modal-mark.css',
 })
 export class ModalMark {
   @ViewChild('meuModal') modalElement!: ElementRef;
   @ViewChild('modalReportarErro') modalReportarErro!: ModalReportarErro;
+  @ViewChild('modalFinalizarReporte') modalFinalizarReporte!: ModalConfirmarAcao;
 
   @Input() indLogado: boolean = false;
 
   private modalInstance: any;
   endereco: any;
   estacao: any;
+  reporteSelecionado: any;
+
+  mensagemModalFinalizarReporte: string = "Confirme se os dados estão corretos. Deseja finalizar o reporte?";
+  tituloModalFinalizarReporte: string = "Finalizar Reporte";
 
   constructor(
     protected toastrService: ToastrService,
@@ -90,6 +96,11 @@ export class ModalMark {
     this.modalReportarErro.abrirModal(r);
   }
 
+  openModalFinalizarReporte(reporte: any){
+    this.reporteSelecionado = reporte;
+    this.modalFinalizarReporte.abrirModal()
+  }
+
 
   enviarRelatorio(dados: any){
     if(this.endereco && this.endereco.id){
@@ -114,5 +125,21 @@ export class ModalMark {
   navegarEdicao(id: number){
     this.router.navigate(['/painel/cadastrar-banco/editar', id])
     this.fecharModal();
+  }
+
+  finalizarReporte(e: any){
+    if(this.reporteSelecionado && this.reporteSelecionado.id){
+      this.estacaoService.finalizarReporte(this.reporteSelecionado.id).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.toastrService.success("Reporte finalizado com sucesso");
+          this.buscarEstacao();
+          this.modalFinalizarReporte.fecharModal();
+        }, error: (err) => {
+          console.log(err)
+          this.toastrService.error("Não foi possível finalizar o reporte");
+        }
+      })
+    }
   }
 }

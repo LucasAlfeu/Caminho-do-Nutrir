@@ -1,0 +1,45 @@
+<div #meuModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Adicionado modal-dialog-centered para exibir no meio da tela -->
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <!-- Bordas arredondadas e sombra elegante -->
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+
+      <!-- Cabeçalho sem linha divisória, com botão de fechar atualizado -->
+      <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
+        <h5 class="modal-title fw-bold text-dark" id="exampleModalLabel">
+          {{ titulo }}
+        </h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"></button>
+      </div>
+
+      <!-- Corpo com texto levemente suavizado para melhor leitura -->
+      <div class="modal-body px-4 py-3">
+        <p class="text-muted mb-0" style="font-size: 1rem;">
+          {{ mensagem }}
+        </p>
+      </div>
+
+      <!-- Rodapé com botões alinhados à direita (Padrão moderno) -->
+      <div class="modal-footer border-top-0 pt-2 pb-4 px-4 d-flex justify-content-end gap-2">
+        <button
+          type="button"
+          class="btn btn-light px-4 py-2"
+          data-dismiss="modal"
+          (click)="fecharModal()"
+          style="border-radius: 8px; font-weight: 500;">
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-success text-white px-4 py-2 shadow-sm"
+          (click)="_confirmarAcao()"
+          style="border-radius: 8px; font-weight: 500;">
+          Confirmar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

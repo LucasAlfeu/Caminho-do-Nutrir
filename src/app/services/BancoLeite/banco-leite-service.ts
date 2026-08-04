@@ -112,12 +112,16 @@ export class BancoLeiteService {
   }
 
   validarSolicitacao(idSolicitacao: number){
-    const headers = this.autenticacaoService.autenticacaoAPI()
-    console.log(headers)
+    const headers = this.autenticacaoService.autenticacaoAPI();
     return this.http.put(`${environment.apiUrl}/solicitar-banco-leite/${idSolicitacao}`, null , { headers })
   }
 
   cadastrarReporte(dados: any){
     return this.http.post(`${environment.apiUrl}/reporte`, dados)
+  }
+
+  finalizarReporte(id: number){
+    const headers = this.autenticacaoService.autenticacaoAPI();
+    return this.http.delete(`${environment.apiUrl}/reporte/${id}`, { headers });
   }
 }

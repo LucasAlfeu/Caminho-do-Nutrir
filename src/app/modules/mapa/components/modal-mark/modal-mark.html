@@ -104,14 +104,19 @@
                   <td class="text-start">
                     <div class="d-flex gap-3 justify-content-start align-items-center">
 
-                      <button title="Detalhes" aria-label="Ver detalhes" class="p-0 bg-transparent border-0"
-                        style="color: #4f4f4f;" (click)="navegarEdicao(estacao.id)">
+                      <button title="Editar" aria-label="Editar" class="p-0 bg-transparent border-0"
+                        style="color: #2196F3;" (click)="navegarEdicao(estacao.id)">
                         <i class="bi bi-pencil-square"></i>
                       </button>
 
                       <button title="Detalhes" aria-label="Ver detalhes" class="p-0 bg-transparent border-0"
-                        style="color: #4f4f4f;" (click)="openModalReportarErro(report)">
+                        style="color: #898989;" (click)="openModalReportarErro(report)">
                         <i class="bi bi-search"></i>
+                      </button>
+
+                      <button title="Concluir reporte" aria-label="Concluir reporte" class="p-0 bg-transparent border-0"
+                        style="color: #28a745;" (click)="openModalFinalizarReporte(report)">
+                        <i class="bi bi-check-lg"></i>
                       </button>
 
                     </div>
@@ -180,3 +185,10 @@
 </div>
 
 <app-modal-reportar-erro #modalReportarErro (enviarRelatorio)="enviarRelatorio($event)"></app-modal-reportar-erro>
+
+<app-modal-confirmar-acao
+  #modalFinalizarReporte
+  [titulo]="tituloModalFinalizarReporte"
+  [mensagem]="mensagemModalFinalizarReporte"
+  (confirmarAcao)="finalizarReporte($event)"
+></app-modal-confirmar-acao>
