@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { NgxMaskPipe } from 'ngx-mask';
 import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
-import { IBancoLeite } from '../../../../class/BancoLeite';
+import { ModalReportarErro } from '../../../shared/components/modal-reportar-erro/modal-reportar-erro';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modal-mark',
-  imports: [CommonModule, NgxMaskPipe],
+  imports: [CommonModule, NgxMaskPipe, ModalReportarErro],
   templateUrl: './modal-mark.html',
   styleUrl: './modal-mark.css',
 })
 export class ModalMark {
   @ViewChild('meuModal') modalElement!: ElementRef;
+  @ViewChild('modalReportarErro') modalReportarErro!: ModalReportarErro;
 
   @Input() indLogado: boolean = false;
 
@@ -81,6 +82,11 @@ export class ModalMark {
   }
 
   reportarErro(){
+    this.modalReportarErro.abrirModal();
     console.log('Erro reportado')
+  }
+
+  enviarRelatorio(dados: any){
+    console.log('Dados do formulário', dados)
   }
 }

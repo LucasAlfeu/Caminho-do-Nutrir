@@ -1,0 +1,55 @@
+<div #meuModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content border-0 shadow">
+
+      <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
+        <h4 class="modal-title fw-bold" id="exampleModalLabel" style="color: #4A2E1B;">
+          Reportar Erro
+        </h4>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"></button>
+      </div>
+
+      <div class="modal-body px-4 py-4">
+
+        <p class="text-muted mb-4">
+          Encontrou alguma informação incorreta neste local? Por favor, descreva o erro abaixo com o máximo de detalhes possível para que nossa equipe possa analisar e corrigir.
+        </p>
+
+        <form [formGroup]="form" class="mb-2">
+          <label for="descricaoErro" class="form-label fw-medium text-dark">
+            Descrição do problema <span class="text-danger">*</span>
+          </label>
+          <textarea
+            class="form-control bg-light"
+            id="descricaoErro"
+            rows="5"
+            placeholder="Ex: O telefone de contato mudou, ou o endereço listado está em um número diferente da rua..."
+            style="resize: none;"
+            formControlName="report"
+            [ngClass]="{'is-invalid': form.get('report')?.invalid && form.get('report')?.touched}"
+          ></textarea>
+          <div class="text-danger small mt-1"
+            *ngIf="form.get('report')?.invalid && form.get('report')?.touched">
+              É obrigatório a mensagem.
+          </div>
+
+          <div class="form-text text-muted mt-2" style="font-size: 0.8rem;">
+            <i class="bi bi-info-circle me-1"></i> Evite incluir dados pessoais ou sensíveis neste campo.
+          </div>
+        </form>
+
+      </div>
+
+      <div class="modal-footer border-top-0 pt-0 pb-4 px-4 d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary px-4 py-2" data-dismiss="modal" (click)="fecharModal()">
+          Cancelar
+        </button>
+
+        <button type="button" class="btn text-white px-4 py-2" style="background-color: #4A2E1B; font-weight: 500;" (click)="_enviarRelatorio()">
+          <i class="bi bi-send me-2"></i> Enviar Relatório
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
