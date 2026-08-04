@@ -39,7 +39,11 @@
         </div>
       </div> -->
 
-      <app-list-estacao-shared [listBancos]="listBancos" [indSolicitacao]="true"></app-list-estacao-shared>
+      <app-list-estacao-shared
+        [listBancos]="listBancos"
+        [indSolicitacao]="true"
+        (atualizarListagem)="atualizarListagem($event)"
+      ></app-list-estacao-shared>
 
     </div>
   </main>

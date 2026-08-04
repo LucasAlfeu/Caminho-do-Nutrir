@@ -44,6 +44,11 @@
               <i class="bi bi-search"></i>
             </button>
 
+            <button (click)="openModalDeletarSolicitacao(banco)" title="Detalhes" aria-label="Ver detalhes do banco de leite"
+              class="p-0 bg-transparent border-0" style="color: #797878;">
+              <i class="bi bi-trash"></i>
+            </button>
+
 
           </div>
         </td>
@@ -60,3 +65,5 @@
 </div>
 
 <app-modal-mark #modalMark></app-modal-mark>
+
+<app-modal-deletar-solicitacao #modalDeletarSolicitacao (deletarSolicitacao)="deletarSolicitacao($event)"></app-modal-deletar-solicitacao>

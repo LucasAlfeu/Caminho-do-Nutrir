@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { throwError } from 'rxjs';
 import { BancoLeite } from '../../class/BancoLeite';
+import { AutenticacaoService } from '../Autenticacao/autenticacao-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BancoLeiteService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private autenticacaoService: AutenticacaoService
   ) { }
 
   cadastrarBancoLeite(dados: any) {
@@ -74,33 +76,38 @@ export class BancoLeiteService {
   }
 
   atualizarBancoLeite(dados: any) {
-  const aux = localStorage.getItem('usuario');
+    const aux = localStorage.getItem('usuario');
 
-  if (aux) {
-    const user = JSON.parse(aux);
+    if (aux) {
+      const user = JSON.parse(aux);
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${user.accessToken}`
-    });
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${user.accessToken}`
+      });
 
-    const params = new HttpParams()
-      .set('nomeUsuario', user.nome)
-      .set('emailUsuario', user.email);
+      const params = new HttpParams()
+        .set('nomeUsuario', user.nome)
+        .set('emailUsuario', user.email);
 
-    const payloadParaSalvar = {
-      ...dados,
-      idClassificacao: dados.classificacao || dados.idClassificacao
-    };
+      const payloadParaSalvar = {
+        ...dados,
+        idClassificacao: dados.classificacao || dados.idClassificacao
+      };
 
-    delete payloadParaSalvar.classificacao;
+      delete payloadParaSalvar.classificacao;
 
-    return this.http.put<BancoLeite>(
-      `${environment.apiUrl}/banco-leite/${dados.id}`,
-      payloadParaSalvar,
-      { headers, params }
-    );
+      return this.http.put<BancoLeite>(
+        `${environment.apiUrl}/banco-leite/${dados.id}`,
+        payloadParaSalvar,
+        { headers, params }
+      );
+    }
+
+    return throwError(() => new Error('Usuário não autenticado.'));
   }
 
-  return throwError(() => new Error('Usuário não autenticado.'));
-}
+  deletarSolicitacao(idSolicitacao: number){
+    const headers = this.autenticacaoService.autenticacaoAPI()
+    return this.http.delete(`${environment.apiUrl}/banco-leite/${idSolicitacao}`, { headers })
+  }
 }

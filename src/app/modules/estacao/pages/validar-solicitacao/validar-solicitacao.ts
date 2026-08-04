@@ -27,8 +27,6 @@ export class ValidarSolicitacao {
     this.listarBancosLeite();
   }
 
-
-
   listarBancosLeite() {
     const indValidado = false
     this.bancoLeiteService.listBancoLeite(indValidado).subscribe({
@@ -40,6 +38,10 @@ export class ValidarSolicitacao {
         this.toastr.error("Não foi possível carregar os Bancos de Leite")
       }
     })
+  }
+
+  atualizarListagem(e: any): void {
+    this.listarBancosLeite();
   }
 
 }
