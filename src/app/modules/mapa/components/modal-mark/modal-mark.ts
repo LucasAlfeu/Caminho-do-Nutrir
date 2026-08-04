@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxMaskPipe } from 'ngx-mask';
 import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
 import { ModalReportarErro } from '../../../shared/components/modal-reportar-erro/modal-reportar-erro';
+import { Router } from '@angular/router';
 
 declare var bootstrap: any;
 
@@ -23,7 +24,11 @@ export class ModalMark {
   endereco: any;
   estacao: any;
 
-  constructor(protected toastrService: ToastrService, private estacaoService: BancoLeiteService) { }
+  constructor(
+    protected toastrService: ToastrService,
+    private estacaoService: BancoLeiteService,
+    private router: Router
+  ) { }
 
   ngOnInit(){
 
@@ -104,5 +109,10 @@ export class ModalMark {
       }
     })
     }
+  }
+
+  navegarEdicao(id: number){
+    this.router.navigate(['/painel/cadastrar-banco/editar', id])
+    this.fecharModal();
   }
 }
