@@ -10,10 +10,16 @@ import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ModalMark } from '../../../mapa/components/modal-mark/modal-mark';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ListEstacaoShared } from '../../../shared/components/list-estacao-shared/list-estacao-shared';
 
 @Component({
   selector: 'app-painel',
-  imports: [CommonModule, DatePipe, RouterLink, ModalMark, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ModalMark,
+    ReactiveFormsModule,
+    ListEstacaoShared
+  ],
   templateUrl: './painel.html',
   styleUrl: './painel.css',
 })

@@ -39,8 +39,8 @@
         </div>
       </div>
 
-      <div class="border-custom-container p-0">
-        <table class="table table-hover align-middle mb-0 text-center w-100">
+      <!-- <div class="border-custom-container p-0">
+         <table class="table table-hover align-middle mb-0 text-center w-100">
           <thead>
             <tr class="table-custom-header">
               <th scope="col" class="text-start py-3" style="width: 5%;">ID</th>
@@ -87,7 +87,12 @@
             }
           </tbody>
         </table>
-      </div>
+      </div> -->
+
+      <app-list-estacao-shared
+        [listBancos]="listBancos"
+        [indTabelaInicio]="true"
+        ></app-list-estacao-shared>
 
     </div>
   </main>
