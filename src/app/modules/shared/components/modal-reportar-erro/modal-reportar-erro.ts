@@ -5,6 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 
 declare var bootstrap: any;
 
+interface IReporte {
+  id: number,
+  relato: string
+}
+
 @Component({
   selector: 'app-modal-reportar-erro',
   imports: [CommonModule, ReactiveFormsModule],
@@ -18,6 +23,9 @@ export class ModalReportarErro {
 
   private modalInstance: any;
   form!: FormGroup;
+  reporte: IReporte | undefined;
+
+  indAdministrador: boolean = false;
 
   constructor(
     protected fb: FormBuilder,
@@ -40,7 +48,15 @@ export class ModalReportarErro {
     }
   }
 
-  abrirModal() {
+  abrirModal(reporte?:IReporte) {
+
+    if(reporte) {
+      this.reporte = reporte;
+      this.indAdministrador = true
+      this.atualizaFormulario();
+      this.desabilitaFormulário();
+    }
+
     if (this.modalInstance) {
       this.modalInstance.show();
     }
@@ -49,6 +65,8 @@ export class ModalReportarErro {
   fecharModal() {
     if (this.modalInstance) {
       this.modalInstance.hide();
+      this.indAdministrador = false
+      this.limparFormulario();
     }
   }
 
@@ -70,5 +88,21 @@ export class ModalReportarErro {
     const dadosForm = this.form.getRawValue();
     console.log(dadosForm)
     this.enviarRelatorio.emit(dadosForm);
+  }
+
+  atualizaFormulario(){
+    if(this.reporte && this.reporte.id > 0) {
+      this.form.get('relato')?.setValue(this.reporte.relato);
+    }
+  }
+
+  limparFormulario() {
+    this.form.reset();
+  }
+
+  desabilitaFormulário(){
+    Object.keys(this.form).forEach((campo) => {
+      this.form.get(campo)?.disable();
+    })
   }
 }

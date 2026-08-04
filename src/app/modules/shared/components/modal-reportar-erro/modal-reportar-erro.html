@@ -1,40 +1,51 @@
-<div #meuModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div #meuModal class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content border-0 shadow">
+    <div class="modal-content border-0 shadow-lg">
 
-      <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
-        <h4 class="modal-title fw-bold" id="exampleModalLabel" style="color: #4A2E1B;">
-          relatoar Erro
+      <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 d-flex align-items-center">
+        <h4 class="modal-title fw-bold d-flex align-items-center" id="exampleModalLabel" style="color: #4A2E1B;">
+          <i class="bi bi-flag-fill me-2 fs-5"></i> Reportar Erro
         </h4>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"></button>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"
+          (click)="fecharModal()"></button>
       </div>
 
       <div class="modal-body px-4 py-4">
 
-        <p class="text-muted mb-4">
-          Encontrou alguma informação incorreta neste local? Por favor, descreva o erro abaixo com o máximo de detalhes possível para que nossa equipe possa analisar e corrigir.
-        </p>
+        <div class="mb-4 text-secondary" style="font-size: 0.95rem;">
+
+          <div *ngIf="!indAdministrador; else usuarioComum">
+            <i class="bi bi-info-circle-fill me-2" style="color: #4A2E1B;"></i>
+            Encontrou alguma informação incorreta neste local? Por favor, descreva o erro abaixo com o máximo de
+            detalhes possível para que nossa equipe possa analisar e corrigir.
+          </div>
+
+          <ng-template #usuarioComum>
+            <div>
+              Abaixo está a sugestão de correção enviada para este local. Analise as informações antes de aplicar as mudanças no mapa.
+            </div>
+          </ng-template>
+
+        </div>
 
         <form [formGroup]="form" class="mb-2">
           <label for="descricaoErro" class="form-label fw-medium text-dark">
             Descrição do problema <span class="text-danger">*</span>
           </label>
-          <textarea
-            class="form-control bg-light"
-            id="descricaoErro"
-            rows="5"
+
+          <textarea class="form-control bg-light" id="descricaoErro" rows="5"
             placeholder="Ex: O telefone de contato mudou, ou o endereço listado está em um número diferente da rua..."
-            style="resize: none;"
-            formControlName="relato"
-            [ngClass]="{'is-invalid': form.get('relato')?.invalid && form.get('relato')?.touched}"
-          ></textarea>
-          <div class="text-danger small mt-1"
+            style="resize: none;" formControlName="relato" [readonly]="indAdministrador"
+            [ngClass]="{'is-invalid': form.get('relato')?.invalid && form.get('relato')?.touched}"></textarea>
+
+          <div class="text-danger small mt-1 d-flex align-items-center"
             *ngIf="form.get('relato')?.invalid && form.get('relato')?.touched">
-              É obrigatório a mensagem.
+            <i class="bi bi-exclamation-circle me-1"></i> A mensagem é obrigatória.
           </div>
 
-          <div class="form-text text-muted mt-2" style="font-size: 0.8rem;">
-            <i class="bi bi-info-circle me-1"></i> Evite incluir dados pessoais ou sensíveis neste campo.
+          <div class="form-text text-muted mt-2 d-flex align-items-center" style="font-size: 0.8rem;">
+            <i class="bi bi-shield-lock me-1"></i> Evite incluir dados pessoais ou sensíveis neste campo.
           </div>
         </form>
 
@@ -42,10 +53,12 @@
 
       <div class="modal-footer border-top-0 pt-0 pb-4 px-4 d-flex justify-content-between">
         <button type="button" class="btn btn-outline-secondary px-4 py-2" data-dismiss="modal" (click)="fecharModal()">
-          Cancelar
+          <span *ngIf="!indAdministrador">Cancelar</span>
+          <span *ngIf="indAdministrador">Fechar</span>
         </button>
 
-        <button type="button" class="btn text-white px-4 py-2" style="background-color: #4A2E1B; font-weight: 500;" (click)="_enviarRelatorio()">
+        <button *ngIf="!indAdministrador" type="button" class="btn text-white px-4 py-2 shadow-sm"
+          style="background-color: #4A2E1B; font-weight: 500;" (click)="_enviarRelatorio()">
           <i class="bi bi-send me-2"></i> Enviar Relatório
         </button>
       </div>

@@ -81,9 +81,10 @@ export class ModalMark {
     })
   }
 
-  reportarErro(){
-    this.modalReportarErro.abrirModal();
+  openModalReportarErro(r?: any){
+    this.modalReportarErro.abrirModal(r);
   }
+
 
   enviarRelatorio(dados: any){
     if(this.endereco && this.endereco.id){
