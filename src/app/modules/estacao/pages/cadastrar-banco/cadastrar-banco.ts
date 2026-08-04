@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,18 +13,21 @@ import { Cep } from '../../../../class/Cep';
 import { BancoLeite } from '../../../../class/BancoLeite';
 import { CategoriaService } from '../../../../services/Categoria/categoria';
 import { Categoria } from '../../../../class/Categoria';
+import { ModalValidarSolicitacao } from '../../components/modal-validar-solicitacao/modal-validar-solicitacao';
 
 @Component({
   selector: 'app-cadastrar-banco',
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    ModalValidarSolicitacao
   ],
   templateUrl: './cadastrar-banco.html',
   styleUrl: './cadastrar-banco.css',
 })
 export class CadastrarBanco implements OnInit {
+  @ViewChild('modalValidarSolicitacao') modalValidarSolicitacao!: ModalValidarSolicitacao;
 
   listaDeEstados: Estado[] = [];
   listaDeMunicipios: Municipio[] = [];
@@ -92,6 +95,7 @@ export class CadastrarBanco implements OnInit {
 
     this.bancoLeiteService.buscarBancoLeite(idBancoLeite).subscribe({
       next: (res) => {
+        console.log(res)
         this.bancoLeite = BancoLeite.map(res);
         this.atualizaFormulario();
       },
@@ -101,7 +105,6 @@ export class CadastrarBanco implements OnInit {
 
   atualizaFormulario(): void {
     if (!this.bancoLeite) return;
-    console.log(this.bancoLeite)
 
     this.cadastroBancoForm.patchValue(this.bancoLeite);
     const estadoSalvo = this.listaDeEstados.find(e => e.sigla === this.bancoLeite?.uf);
@@ -206,7 +209,7 @@ export class CadastrarBanco implements OnInit {
     this.categoriaService.listarCategorias().subscribe({
       next: (res) => {
         this.listCategoria = res.body || []
-        console.log(res.body)
+        // console.log(res.body)
       },
       error: (err) => {
         console.log(err)
@@ -217,12 +220,12 @@ export class CadastrarBanco implements OnInit {
   salvar(): void {
     this.cadastroBancoForm.markAllAsTouched();
 
-    Object.keys(this.cadastroBancoForm.controls).forEach(key => {
-      const controlErrors = this.cadastroBancoForm.get(key)?.errors;
-      if (controlErrors != null) {
-        console.log('Campo com erro: ' + key, controlErrors);
-      }
-    });
+    // Object.keys(this.cadastroBancoForm.controls).forEach(key => {
+    //   const controlErrors = this.cadastroBancoForm.get(key)?.errors;
+    //   if (controlErrors != null) {
+    //     console.log('Campo com erro: ' + key, controlErrors);
+    //   }
+    // });
 
     if (!this.cadastroBancoForm.valid && !this.cadastroBancoForm.get('uf')?.disabled) {
       this.toastr.error("Revise os campos");
@@ -243,9 +246,17 @@ export class CadastrarBanco implements OnInit {
 
     if (this.indEdicao && this.bancoLeite) {
       dadosForm['id'] = this.bancoLeite.id;
+      const isValidado = this.bancoLeite.indValidado
 
       this.bancoLeiteService.atualizarBancoLeite(dadosForm).subscribe({
-        next: () => this.toastr.success("Banco atualizado com sucesso!"),
+        next: () => {
+          this.toastr.success("Banco atualizado com sucesso!");
+          setTimeout(() => {
+            if(!isValidado){
+              this.modalValidarSolicitacao.abrirModal(this.bancoLeite?.nome as string);
+            }
+          }, 1000)
+        },
         error: () => this.toastr.error("Erro ao atualizar banco")
       });
     } else {
@@ -256,6 +267,21 @@ export class CadastrarBanco implements OnInit {
         },
         error: () => this.toastr.error("Erro ao cadastrar Banco de Leite")
       });
+    }
+  }
+
+  validarSolicitacao(e: any){
+    if(this.bancoLeite && this.bancoLeite.id){
+      this.bancoLeiteService.validarSolicitacao(this.bancoLeite.id).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.toastr.success("Ponto validado com sucesso")
+          this.modalValidarSolicitacao.fecharModal()
+        }, error: (err) => {
+          console.log(err)
+          this.toastr.error("Não foi possível validar esse ponto")
+        }
+      })
     }
   }
 }
