@@ -1,56 +1,71 @@
-<div #meuModal class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div *ngIf="endereco" class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLongTitle">{{ endereco?.nome }}</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          style="background: transparent; border: none;" (click)="fecharModal()">
-          <span aria-hidden="true">&times;</span>
+<div #meuModal class="modal fade" id="exampleModalLong" tabindex="-1" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div *ngIf="endereco" class="modal-content border-0 shadow">
+
+      <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
+        <h3 class="modal-title fw-bold" id="exampleModalLongTitle" style="color: #4A2E1B;">
+          {{ endereco?.nome }}
+        </h3>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"></button>
+      </div>
+
+      <div class="modal-body px-4 py-4">
+
+        <div *ngIf="endereco?.descricao" class="mb-4 bg-light p-3 rounded text-secondary">
+          <span class="small text-uppercase fw-bold d-block mb-1">Descrição</span>
+          <p class="mb-0 text-dark">{{ endereco?.descricao }}</p>
+        </div>
+
+        <div class="mb-4">
+          <span class="text-muted small text-uppercase fw-bold d-block mb-1">
+            <i class="bi bi-telephone text-secondary me-1"></i> Contato
+          </span>
+          <p class="fs-5 fw-medium mb-0 text-dark">{{ endereco?.telefone | mask: '(00) 00000-0000' }}</p>
+        </div>
+
+        <h6 class="text-muted small text-uppercase fw-bold mb-3 border-bottom pb-2">
+          <i class="bi bi-geo-alt text-secondary me-1"></i> Localização
+        </h6>
+
+        <div class="row g-4">
+
+          <div class="col-12 col-md-8">
+            <span class="text-muted small d-block mb-1">Endereço</span>
+            <p class="fw-medium mb-0 text-dark">{{ endereco?.logradouro }}, nº {{ endereco?.numero }}</p>
+          </div>
+
+          <div class="col-12 col-md-4" *ngIf="endereco?.complemento">
+            <span class="text-muted small d-block mb-1">Complemento</span>
+            <p class="fw-medium mb-0 text-dark">{{ endereco?.complemento }}</p>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <span class="text-muted small d-block mb-1">Bairro</span>
+            <p class="fw-medium mb-0 text-dark">{{ endereco?.bairro }}</p>
+          </div>
+
+          <div class="col-12 col-md-5">
+            <span class="text-muted small d-block mb-1">Cidade / Estado</span>
+            <p class="fw-medium mb-0 text-dark">{{ endereco?.municipio }} - {{ endereco?.uf }}</p>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <span class="text-muted small d-block mb-1">CEP</span>
+            <p class="fw-medium mb-0 text-dark">{{ endereco?.cep | mask: '00000-000' }}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer border-top-0 pt-0 pb-4 px-4 d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary px-4 py-2" data-dismiss="modal" (click)="fecharModal()">
+          Fechar
+        </button>
+        <button type="button" class="btn text-white px-4 py-2" style="background-color: #4A2E1B; font-weight: 500;" (click)="copiarEnderecoCompleto()">
+          <i class="bi bi-clipboard me-2"></i> Copiar Endereço
         </button>
       </div>
-      <div class="modal-body">
 
-        <div *ngIf="endereco?.descricao" class="mb-3">
-          <p class="mb-1"><strong>Descrição:</strong></p>
-          <p class="text-muted">{{ endereco?.descricao }}</p>
-          <hr>
-        </div>
-
-        <div class="mb-3">
-          <p class="mb-1"><strong>Endereço:</strong></p>
-          <p class="text-muted">{{ endereco?.logradouro }}, nº {{ endereco?.numero }}</p>
-        </div>
-
-        @if (endereco?.complemento) {
-        <div class="mb-3">
-          <p class="mb-1"><strong>Complemento:</strong></p>
-          <p class="text-muted">{{ endereco?.complemento }}</p>
-        </div>
-        }
-
-        <div class="mb-3">
-          <p class="mb-1"><strong>Bairro:</strong></p>
-          <p class="text-muted">{{ endereco?.bairro }}</p>
-        </div>
-
-        <div class="mb-3">
-          <p class="mb-1"><strong>Cidade / Estado:</strong></p>
-          <p class="text-muted">{{ endereco?.municipio }} - {{ endereco?.uf }}</p>
-        </div>
-
-        <div class="mb-3">
-          <p class="mb-1"><strong>CEP:</strong></p>
-          <p class="text-muted">{{ endereco?.cep }}</p>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fecharModal()">Fechar</button>
-        <button type="button" class="btn btn-primary" (click)="copiarEnderecoCompleto()">
-          <i class="bi bi-clipboard"></i> Copiar Endereço
-        </button>
-      </div>
     </div>
   </div>
 </div>

@@ -1,12 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { NgxMaskPipe } from 'ngx-mask';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modal-mark',
-  imports: [CommonModule],
+  imports: [CommonModule, NgxMaskPipe],
   templateUrl: './modal-mark.html',
   styleUrl: './modal-mark.css',
 })
