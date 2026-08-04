@@ -1,7 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { NgxMaskPipe } from 'ngx-mask';
+import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
+import { IBancoLeite } from '../../../../class/BancoLeite';
 
 declare var bootstrap: any;
 
@@ -13,11 +15,18 @@ declare var bootstrap: any;
 })
 export class ModalMark {
   @ViewChild('meuModal') modalElement!: ElementRef;
+
+  @Input() indLogado: boolean = false;
+
   private modalInstance: any;
-
   endereco: any;
+  estacao: any;
 
-  constructor(protected toastrService: ToastrService) { }
+  constructor(protected toastrService: ToastrService, private estacaoService: BancoLeiteService) { }
+
+  ngOnInit(){
+
+  }
 
   abrirModal(endereco: any) {
     if (!this.modalInstance && this.modalElement?.nativeElement) {
@@ -29,6 +38,10 @@ export class ModalMark {
       this.modalInstance.show();
     } else {
       console.error("Não foi possível encontrar o elemento #meuModal no HTML.");
+    }
+
+    if(this.indLogado){
+      this.buscarEstacao();
     }
   }
 
@@ -55,5 +68,19 @@ export class ModalMark {
       .catch(err => {
         this.toastrService.error('Erro ao copiar endereço.');
       });
+  }
+
+  buscarEstacao(){
+    this.estacaoService.buscarBancoLeite(this.endereco.id).subscribe({
+      next: (res) => {
+        this.estacao = res
+      }, error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  reportarErro(){
+    console.log('Erro reportado')
   }
 }

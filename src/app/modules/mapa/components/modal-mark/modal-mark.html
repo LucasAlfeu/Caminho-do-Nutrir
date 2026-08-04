@@ -11,11 +11,13 @@
 
       <div class="modal-body px-4 py-4">
 
+        <!-- Descrição -->
         <div *ngIf="endereco?.descricao" class="mb-4 bg-light p-3 rounded text-secondary">
           <span class="small text-uppercase fw-bold d-block mb-1">Descrição</span>
           <p class="mb-0 text-dark">{{ endereco?.descricao }}</p>
         </div>
 
+        <!-- Telefone -->
         <div class="mb-4">
           <span class="text-muted small text-uppercase fw-bold d-block mb-1">
             <i class="bi bi-telephone text-secondary me-1"></i> Contato
@@ -23,12 +25,12 @@
           <p class="fs-5 fw-medium mb-0 text-dark">{{ endereco?.telefone | mask: '(00) 00000-0000' }}</p>
         </div>
 
+        <!-- Localização -->
         <h6 class="text-muted small text-uppercase fw-bold mb-3 border-bottom pb-2">
           <i class="bi bi-geo-alt text-secondary me-1"></i> Localização
         </h6>
 
         <div class="row g-4">
-
           <div class="col-12 col-md-8">
             <span class="text-muted small d-block mb-1">Endereço</span>
             <p class="fw-medium mb-0 text-dark">{{ endereco?.logradouro }}, nº {{ endereco?.numero }}</p>
@@ -53,15 +55,68 @@
             <span class="text-muted small d-block mb-1">CEP</span>
             <p class="fw-medium mb-0 text-dark">{{ endereco?.cep | mask: '00000-000' }}</p>
           </div>
-
         </div>
+
+        <!-- NOVA SEÇÃO: Reportar Erro -->
+        <div *ngIf="!indLogado" class="mt-5 p-3 bg-light border rounded d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle text-warning fs-3 me-3"></i>
+            <div>
+              <span class="d-block fw-bold text-dark small">Alguma informação está incorreta?</span>
+              <span class="text-muted" style="font-size: 0.85rem;">Ajude-nos a manter o mapa atualizado.</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-secondary btn-sm px-4 text-nowrap" (click)="reportarErro()">
+            <i class="bi bi-flag me-1"></i> Reportar Erro
+          </button>
+        </div>
+
+        <!-- SEÇÃO: Histórico -->
+        @if ( indLogado && estacao?.historico && estacao.historico.length > 0) {
+          <div class="mt-4">
+            <h6 class="text-muted small text-uppercase fw-bold mb-3 border-bottom pb-2">
+              <i class="bi bi-clock-history text-secondary me-1"></i> Histórico de Alterações
+            </h6>
+
+            <div class="table-responsive border rounded" style="max-height: 200px; overflow-y: auto;">
+              <table class="table table-hover table-sm align-middle mb-0">
+                <thead class="sticky-top bg-light" style="z-index: 1;">
+                  <tr>
+                    <th scope="col" class="text-secondary small fw-medium px-3 py-2" style="width: 25%;">Data</th>
+                    <th scope="col" class="text-secondary small fw-medium px-3 py-2" style="width: 40%;">Usuário</th>
+                    <th scope="col" class="text-secondary small fw-medium px-3 py-2" style="width: 35%;">Ação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (item of estacao.historico; track item.id) {
+                    <tr>
+                      <td class="text-dark small px-3 py-2">
+                        {{ item.data | date: 'dd/MM/yyyy HH:mm' }}
+                      </td>
+
+                      <td class="text-dark small px-3 py-2">
+                        <span class="fw-medium d-block">{{ item.nomeUsuario }}</span>
+                        <span class="text-muted" style="font-size: 0.75rem;">{{ item.emailUsuario }}</span>
+                      </td>
+
+                      <td class="text-dark small px-3 py-2">
+                        {{ item.descricao }}
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+
       </div>
 
       <div class="modal-footer border-top-0 pt-0 pb-4 px-4 d-flex justify-content-between">
         <button type="button" class="btn btn-outline-secondary px-4 py-2" data-dismiss="modal" (click)="fecharModal()">
           Fechar
         </button>
-        <button type="button" class="btn text-white px-4 py-2" style="background-color: #4A2E1B; font-weight: 500;" (click)="copiarEnderecoCompleto()">
+        <button *ngIf="!indLogado" type="button" class="btn text-white px-4 py-2" style="background-color: #4A2E1B; font-weight: 500;" (click)="copiarEnderecoCompleto()">
           <i class="bi bi-clipboard me-2"></i> Copiar Endereço
         </button>
       </div>
