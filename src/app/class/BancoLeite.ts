@@ -17,6 +17,7 @@ export interface IBancoLeite {
   dataUltimaAtualizacao: string;
   telefone?: string
   indValidado: boolean;
+  numReporte: number
 }
 
 export class BancoLeite implements IBancoLeite {
@@ -37,6 +38,7 @@ export class BancoLeite implements IBancoLeite {
   dataUltimaAtualizacao: string;
   categoria: Categoria | null = null;
   indValidado: boolean;
+  numReporte: number;
 
   constructor(dados: IBancoLeite) {
     this.id = dados.id;
@@ -55,6 +57,7 @@ export class BancoLeite implements IBancoLeite {
     this.latitude = dados.latitude;
     this.dataUltimaAtualizacao = dados.dataUltimaAtualizacao;
     this.indValidado = dados.indValidado
+    this.numReporte = dados.numReporte
   }
 
   static map(dados: IBancoLeite): BancoLeite {

@@ -29,6 +29,7 @@
 
         <td class="text-start">
           <div class="d-flex gap-3 justify-content-start align-items-center">
+
             <button *ngIf="exibeIconeAtencao(banco)" title="Necessário validação" aria-label="Necessário validação"
               class="p-0 bg-transparent border-0" style="color: #FFD700;">
               <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
@@ -44,8 +45,19 @@
               <i class="bi bi-search"></i>
             </button>
 
-            <button (click)="openModalDeletarSolicitacao(banco)" title="Detalhes" aria-label="Ver detalhes do banco de leite"
-              class="p-0 bg-transparent border-0" style="color: #797878;">
+            <button *ngIf="validaReporte(banco)" title="Contém Reporte" aria-label="Contém Reporte"
+              class="p-0 bg-transparent border-0" style="color: #F97316;">
+              <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+            </button>
+
+            <button
+              *ngIf="indSolicitacao"
+              (click)="openModalDeletarSolicitacao(banco)"
+              title="Deletar Solicitação"
+              aria-label="Deletar Solicitação"
+              class="p-0 bg-transparent border-0"
+              style="color: #797878;"
+            >
               <i class="bi bi-trash"></i>
             </button>
 

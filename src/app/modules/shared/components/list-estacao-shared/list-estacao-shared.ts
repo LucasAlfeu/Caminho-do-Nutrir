@@ -53,6 +53,10 @@ export class ListEstacaoShared {
     return banco.indValidado == Boolean(0) && this.indSolicitacao
   }
 
+  validaReporte(banco: IBancoLeite): boolean{
+    return this.indTabelaInicio && banco.numReporte > 0
+  }
+
   deletarSolicitacao(e: any){
     if(this.estacaoSelecionada && this.estacaoSelecionada.id) {
       this.estacaoService.deletarSolicitacao(this.estacaoSelecionada.id).subscribe({
