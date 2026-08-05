@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, Input, OnChanges, SimpleChanges, NgZone, ViewEncapsulation } from '@angular/core';
 import * as L from 'leaflet';
 import { ModalMark } from '../modal-mark/modal-mark';
 import { BancoLeite } from '../../../../class/BancoLeite';
@@ -12,7 +12,8 @@ declare var bootstrap: any;
   standalone: true,
   imports: [ModalMark, CommonModule],
   templateUrl: './mapa-leaflet.html',
-  styleUrl: './mapa-leaflet.css'
+  styleUrl: './mapa-leaflet.css',
+  encapsulation: ViewEncapsulation.None // Permite que os estilos do Leaflet funcionem perfeitamente
 })
 export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   private map: L.Map | undefined;
@@ -20,14 +21,17 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   private permissaoModal: any;
   private userMarker: L.Marker | undefined;
 
-  listCategoria: any[] = []
+  listCategoria: any[] = [];
 
   @ViewChild('modalMark') modalElement!: ModalMark;
   @ViewChild('modalPermissao') modalPermissaoRef!: ElementRef;
 
   @Input() listBancos?: BancoLeite[];
 
-  constructor(private categoriaService: CategoriaService) {}
+  constructor(
+    private categoriaService: CategoriaService,
+    private ngZone: NgZone
+  ) {}
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -98,20 +102,24 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
+          // NgZone garante que o mapa e a UI atualizem imediatamente
+          this.ngZone.run(() => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
 
-          if (this.map) {
-            this.map.setView([lat, lng], 15);
-            this.adicionarMarcadorUsuario(lat, lng);
-          }
+            if (this.map) {
+              this.map.invalidateSize();
+              this.map.setView([lat, lng], 15);
+              this.adicionarMarcadorUsuario(lat, lng);
+            }
+          });
         },
         (error) => {
           console.warn('Não foi possível obter a localização do usuário:', error.message);
         },
         {
           enableHighAccuracy: true,
-          timeout: 5000,
+          timeout: 10000,
           maximumAge: 0
         }
       );
@@ -131,6 +139,7 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
       this.map.removeLayer(this.userMarker);
     }
 
+    // Estrutura HTML com estilos inline para evitar perda de estilo do Angular
     const iconUser = L.divIcon({
       className: 'custom-user-icon',
       html: `
@@ -191,13 +200,14 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
     });
   }
 
-  buscarCategorias(){
+  buscarCategorias() {
     this.categoriaService.listarCategorias().subscribe({
       next: (res) => {
-        this.listCategoria = res.body ?? []
-      }, error: (err)=> {
-        console.error(err)
+        this.listCategoria = res.body ?? [];
+      },
+      error: (err) => {
+        console.error(err);
       }
-    })
+    });
   }
 }
