@@ -1,17 +1,30 @@
-
-
 .main_home {
-  max-width: 70vw;
-  margin: 0 auto;
   width: 100%;
 }
 
-.btn-indicar:hover{
-  color: #a67c52;
+@media (min-width: 1400px) {
+  .main_home .container {
+    max-width: 1140px;
+  }
 }
 
-@media (max-width: 992px) {
-  .main_home {
-    max-width: 95vw;
-  }
+.btn-indicar {
+  border-color: #a67c52;
+  color: #a67c52;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-indicar:hover {
+  background-color: #a67c52;
+  color: #ffffff;
+  border-color: #a67c52;
+}
+
+.map-hover-effect img {
+  transition: transform 0.4s ease;
+}
+
+.map-hover-effect:hover img {
+  transform: scale(1.05);
 }
