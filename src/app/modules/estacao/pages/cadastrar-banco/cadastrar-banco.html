@@ -39,8 +39,8 @@
 
             <div class="mb-3">
               <label for="classificacao" class="form-label">Classificação</label>
-              <select name="" formControlName="classificacao" class="form-control border-2" id="classificacao" >
-                <option >Selecione uma classificação</option>
+              <select name="" formControlName="classificacao" class="form-control border-2" id="classificacao" placeholder="Selecione uma classificação" >
+                <option value="" disabled>Selecione uma classificação</option>
                 <option [ngValue]="categoria.id" *ngFor="let categoria of listCategoria">{{ categoria.nome }}</option>
               </select>
               <div class="text-danger small mt-1"
