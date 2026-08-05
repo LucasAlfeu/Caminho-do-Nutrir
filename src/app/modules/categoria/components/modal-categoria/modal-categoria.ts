@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import Pickr from '@simonwep/pickr';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Categoria } from '../../class/Categoria';
+import { Categoria } from '../../../../class/Categoria';
 
 
 declare var bootstrap: any;

@@ -1,0 +1,84 @@
+<div #meuModal class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+
+      <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 d-flex justify-content-between align-items-start">
+        <h4 class="modal-title fw-bold text-dark d-flex align-items-center" id="exampleModalLabel">
+          <i class="bi bi-tags-fill me-2 fs-5" style="color: #4A2E1B;"></i>
+          <span *ngIf="getIndCadastro()">Cadastrar Categoria</span>
+          <span *ngIf="getIndEdicao()">Editar Categoria</span>
+          <span *ngIf="getIndDetalhe()">Detalhes da Categoria</span>
+        </h4>
+        <button type="button" class="btn-close mt-1" data-dismiss="modal" aria-label="Close" (click)="fecharModal()"></button>
+      </div>
+
+      <div class="modal-body px-4 py-4">
+        <form [formGroup]="form">
+
+          <div class="mb-3">
+            <label for="recipient-name" class="form-label fw-medium text-dark">
+              Nome da Categoria <span *ngIf="!getIndDetalhe()" class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-control bg-light"
+              formControlName="nome"
+              id="recipient-name"
+              placeholder="Ex: Doação, Informativo..."
+              style="border-radius: 8px;"
+              [readonly]="getIndDetalhe()"
+              [ngClass]="{'is-invalid': campoInvalido('nome')}">
+
+            <div class="invalid-feedback mt-1 d-flex align-items-center" *ngIf="campoInvalido('nome')">
+              <i class="bi bi-exclamation-circle me-1"></i> O nome é obrigatório.
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label for="message-text" class="form-label fw-medium text-dark">
+              Descrição <span *ngIf="!getIndDetalhe()" class="text-danger">*</span>
+            </label>
+            <textarea
+              formControlName="descricao"
+              class="form-control bg-light"
+              id="message-text"
+              rows="3"
+              placeholder="Descreva o propósito desta categoria..."
+              style="resize: none; border-radius: 8px;"
+              [readonly]="getIndDetalhe()"
+              [ngClass]="{'is-invalid': campoInvalido('descricao')}"></textarea>
+
+            <div class="invalid-feedback mt-1 d-flex align-items-center" *ngIf="campoInvalido('descricao')">
+              <i class="bi bi-exclamation-circle me-1"></i> A descrição é obrigatória.
+            </div>
+          </div>
+
+          <div class="p-3 bg-light border rounded-3 d-flex align-items-center justify-content-between">
+            <label class="form-label fw-medium text-dark mb-0 d-flex align-items-center">
+              <i class="bi bi-palette-fill me-2 text-secondary"></i> Cor do Marcador no Mapa
+            </label>
+
+            <div #colorPicker style="min-width: 40px; min-height: 40px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;"
+                 [style.pointerEvents]="getIndDetalhe() ? 'none' : 'auto'">
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="modal-footer border-top-0 pt-0 pb-4 px-4 d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-light px-4 py-2" data-dismiss="modal" (click)="fecharModal()" style="border-radius: 8px; font-weight: 500;">
+          {{ getIndDetalhe() ? 'Fechar' : 'Cancelar' }}
+        </button>
+
+        <button type="button" class="btn text-white px-4 py-2 shadow-sm" *ngIf="getIndCadastro() || getIndEdicao()" (click)="_salvar()" style="background-color: #4A2E1B; border-radius: 8px; font-weight: 500;">
+          <i class="bi bi-check-lg me-1"></i>
+          <span *ngIf="getIndCadastro()">Cadastrar</span>
+          <span *ngIf="getIndEdicao()">Atualizar</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
