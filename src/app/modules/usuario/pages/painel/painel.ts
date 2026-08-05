@@ -51,9 +51,13 @@ export class Painel {
     })
   }
 
-  listarBancosLeite() {
-    const indValidado = true
-    this.bancoLeiteService.listBancoLeite(indValidado).subscribe({
+  listarBancosLeite(filterNomeEstacao?: string) {
+
+    const params = {
+      indValidado: true,
+      filter: filterNomeEstacao ? filterNomeEstacao : ''
+    }
+    this.bancoLeiteService.listBancoLeite(params).subscribe({
       next: (res) => {
         this.listBancos = res.body?.reverse() ?? [];
 
@@ -76,9 +80,13 @@ export class Painel {
 
   filtrarPontos(){
     if(!this.form) return;
-
     const filtroString = this.form.get('filtroBanco')?.value
 
-    console.log(filtroString)
+    if(filtroString) this.listarBancosLeite(filtroString);
+  }
+
+  limparFiltro(){
+    this.form.reset();
+    this.listarBancosLeite();
   }
 }

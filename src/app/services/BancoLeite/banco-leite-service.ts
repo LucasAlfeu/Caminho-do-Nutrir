@@ -47,13 +47,7 @@ export class BancoLeiteService {
     return this.http.post(`${environment.apiUrl}/solicitar-banco-leite`, dados)
   }
 
-  listBancoLeite(apenasValidados?: boolean) {
-  let params = new HttpParams();
-
-  if (apenasValidados !== undefined) {
-    params = params.set('indValidado', apenasValidados);
-  }
-
+  listBancoLeite(params?: any) {
   return this.http.get<BancoLeite[]>(`${environment.apiUrl}/banco-leite`, {
     params,
     observe: 'response'

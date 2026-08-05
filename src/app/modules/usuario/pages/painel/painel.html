@@ -14,7 +14,7 @@
       <div class="card border-0 shadow-sm" style="border-radius: 16px; background-color: #f4efeb; min-width: 260px;">
         <div class="card-body p-3 d-flex align-items-center">
           <div class="rounded-circle d-flex justify-content-center align-items-center me-3"
-               style="width: 48px; height: 48px; background-color: rgba(74, 46, 27, 0.1);">
+            style="width: 48px; height: 48px; background-color: rgba(74, 46, 27, 0.1);">
             <i class="bi bi-hospital fs-4" style="color: #4A2E1B;"></i>
           </div>
           <div>
@@ -27,8 +27,7 @@
       </div>
 
       <button class="btn text-white px-4 py-2 shadow-sm fw-medium d-flex align-items-center justify-content-center"
-              style="background-color: #4A2E1B; border-radius: 12px; height: 48px;"
-              (click)="goTo()">
+        style="background-color: #4A2E1B; border-radius: 12px; height: 48px;" (click)="goTo()">
         <i class="bi bi-plus-lg me-2"></i> Adicionar Banco
       </button>
 
@@ -39,33 +38,33 @@
       <div [formGroup]="form" class="row mb-4 g-3 align-items-center">
 
         <div class="col-12 col-md">
-          <div class="input-group input-group-lg shadow-sm" style="border-radius: 12px; overflow: hidden;">
+          <div class="input-group shadow-sm" style="overflow: hidden; border-radius: 7px;">
             <span class="input-group-text bg-white border-end-0 text-muted px-4">
               <i class="bi bi-search"></i>
             </span>
-            <input type="text"
-                   class="form-control border-start-0 ps-0"
-                   formControlName="filtroBanco"
-                   placeholder="Buscar banco pelo nome..."
-                   aria-label="Buscar por banco"
-                   style="box-shadow: none;">
+            <input type="text" class="form-control border-start-0 ps-0" formControlName="filtroBanco"
+              placeholder="Buscar banco pelo nome..." aria-label="Buscar por banco" style="box-shadow: none;">
           </div>
         </div>
 
-        <div class="col-12 col-md-auto">
-          <button class="btn btn-dark btn-lg px-5 fw-medium shadow-sm w-100"
-                  style="border-radius: 12px;"
-                  (click)="filtrarPontos()">
+        <div class="col-12 col-md-auto d-flex gap-2">
+
+          <button type="button" class="btn btn-dark px-5 fw-medium shadow-sm flex-grow-1" style="border-radius: 7px;"
+            (click)="filtrarPontos()">
             Buscar
           </button>
+
+          <button type="button" class="btn btn-outline-secondary px-4 fw-medium shadow-sm flex-grow-1"
+            style="border-radius: 7px;" (click)="limparFiltro()">
+            Limpar
+          </button>
+
         </div>
 
       </div>
 
       <!-- Componente da Lista -->
-      <app-list-estacao-shared
-        [listBancos]="listBancos"
-        [indTabelaInicio]="true">
+      <app-list-estacao-shared [listBancos]="listBancos" [indTabelaInicio]="true">
       </app-list-estacao-shared>
 
     </div>
