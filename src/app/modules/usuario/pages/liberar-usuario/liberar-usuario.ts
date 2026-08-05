@@ -3,12 +3,13 @@ import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '../../../../services/Usuario/usuario-service';
 import { Usuario } from '../../../../class/Usuario';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-liberar-usuario',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './liberar-usuario.html',
   styleUrl: './liberar-usuario.css',
 })
@@ -22,14 +23,23 @@ export class LiberarUsuario {
 
   aberturaModal: number = 0;
   usuarioSelecionado: Usuario | null = null;
+  form!: FormGroup;
 
   constructor(
     private toastr: ToastrService,
     private usuarioService: UsuarioService,
+    protected fb: FormBuilder,
   ) { }
 
   ngOnInit(){
+    this.createForm();
     this.listarUsuarios();
+  }
+
+  createForm(){
+    this.form = this.fb.group({
+      filtroBanco: ['']
+    })
   }
 
   ngAfterViewInit() {
@@ -38,8 +48,12 @@ export class LiberarUsuario {
     }
   }
 
-  listarUsuarios(){
-    this.usuarioService.listarUsuarios().subscribe({
+  listarUsuarios(dados?: any){
+
+    const params = {
+      filter: dados?.nomeUsuario ? dados.nomeUsuario : ''
+    }
+    this.usuarioService.listarUsuarios(params).subscribe({
       next: (res) => {
         this.listUsuarios = res.body ? [...res.body] : [];
         const totalCount = res.headers.get('X-Total-Count');
@@ -115,5 +129,21 @@ export class LiberarUsuario {
         this.toastr.error(err.error.errors.default)
       }
     })
+  }
+
+  filtrarPontos(){
+    if(!this.form) return;
+
+    const dadosFiltro = {
+      nomeUsuario: this.form.get('filtroBanco')?.value
+    }
+
+
+    this.listarUsuarios(dadosFiltro);
+  }
+
+  limparFiltro(){
+    this.form.reset();
+    this.listarUsuarios();
   }
 }

@@ -12,7 +12,7 @@ export class UsuarioService {
     private http: HttpClient
   ) { }
 
-  listarUsuarios(): Observable<HttpResponse<Usuario[]>> {
+  listarUsuarios(params?: any): Observable<HttpResponse<Usuario[]>> {
     const aux = localStorage.getItem('usuario');
 
     if (aux != null) {
@@ -22,7 +22,8 @@ export class UsuarioService {
         'Authorization': `Bearer ${user.accessToken}`
       });
 
-      return this.http.get<Usuario[]>(`${environment.apiUrl}/usuario`, {
+      return this.http.get<Usuario[]>(`${environment.apiUrl}/usuario` ,{
+        params,
         observe: 'response',
         headers: headers
       });

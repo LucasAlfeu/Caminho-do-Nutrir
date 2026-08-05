@@ -26,7 +26,7 @@
             <div>
               <span class="text-muted small fw-semibold text-uppercase d-block mb-1">Total de Usuários</span>
               <span class="fs-2 fw-bold lh-1" style="color: #4A2E1B;">
-                {{ totalUser }}
+                {{ listUsuarios?.length }}
               </span>
             </div>
             <div class="rounded-circle d-flex justify-content-center align-items-center flex-shrink-0"
@@ -41,21 +41,32 @@
 
     <div class="bg-white p-4 shadow-sm d-flex flex-column flex-grow-1 overflow-hidden" style="border-radius: 16px;">
 
-      <div class="row mb-4 g-3 align-items-center justify-content-between flex-shrink-0">
-        <div class="col-12 col-md-6 col-lg-5">
-          <div class="input-group shadow-sm" style="border-radius: 12px; overflow: hidden;">
+      <div [formGroup]="form" class="row mb-4 g-3 align-items-center">
+
+        <div class="col-12 col-md">
+          <div class="input-group shadow-sm" style="overflow: hidden; border-radius: 7px;">
             <span class="input-group-text bg-white border-end-0 text-muted px-4">
               <i class="bi bi-search"></i>
             </span>
-            <input type="text"
-                   class="form-control border-start-0 ps-0"
-                   placeholder="Buscar usuário por nome ou matrícula..."
-                   style="box-shadow: none;">
-            <button class="btn text-white px-4 fw-medium border-0" type="button" style="background-color: #4A2E1B;">
-              Buscar
-            </button>
+            <input type="text" class="form-control border-start-0 ps-0" formControlName="filtroBanco"
+              placeholder="Buscar banco pelo nome..." aria-label="Buscar por banco" style="box-shadow: none;">
           </div>
         </div>
+
+        <div class="col-12 col-md-auto d-flex gap-2">
+
+          <button type="button" class="btn btn-dark px-5 fw-medium shadow-sm flex-grow-1" style="border-radius: 7px;"
+            (click)="filtrarPontos()">
+            Buscar
+          </button>
+
+          <button type="button" class="btn btn-outline-secondary px-4 fw-medium shadow-sm flex-grow-1"
+            style="border-radius: 7px;" (click)="limparFiltro()">
+            Limpar
+          </button>
+
+        </div>
+
       </div>
 
       <div class="table-responsive border rounded-3 flex-grow-1" style="overflow-y: auto;">
