@@ -1,8 +1,8 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../../class/Usuario';
+import { Usuario } from '../../../../class/Usuario';
 import { CommonModule } from '@angular/common';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 
 @Component({
   selector: 'app-menu-lateal',

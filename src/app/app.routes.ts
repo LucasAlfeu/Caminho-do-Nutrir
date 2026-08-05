@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
+import { Home } from './modules/shared/pages/home/home';
 import { Entrar } from './modules/usuario/pages/entrar/entrar';
 import { Cadastrar } from './modules/usuario/pages/cadastrar/cadastrar';
 
 // Componentes do Painel
 import { Painel } from './modules/usuario/pages/painel/painel';
-import { PainelLayoutComponent } from './components/painel-layout-component/painel-layout-component';
+import { PainelLayoutComponent } from './modules/shared/components/painel-layout-component/painel-layout-component';
 import { CadastrarBanco } from './modules/estacao/pages/cadastrar-banco/cadastrar-banco';
 import { LiberarUsuario } from './modules/usuario/pages/liberar-usuario/liberar-usuario';
 import { Mapa } from './modules/mapa/pages/mapa/mapa';

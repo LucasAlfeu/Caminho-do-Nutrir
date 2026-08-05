@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { MenuLateal } from '../../components/menu-lateal/menu-lateal';
-import { FooterSecundario } from '../../components/footer-secundario/footer-secundario';
+import { MenuLateal } from '../menu-lateal/menu-lateal';
+import { FooterSecundario } from '../footer-secundario/footer-secundario';
 import { RouterOutlet } from '@angular/router';
-import { Usuario } from '../../class/Usuario';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { Usuario } from '../../../../class/Usuario';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 
 @Component({
   selector: 'app-painel-layout-component',

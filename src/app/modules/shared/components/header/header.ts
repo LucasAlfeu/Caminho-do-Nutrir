@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AutenticacaoService } from '../../services/Autenticacao/autenticacao-service';
+import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 
 @Component({
   selector: 'app-header',
