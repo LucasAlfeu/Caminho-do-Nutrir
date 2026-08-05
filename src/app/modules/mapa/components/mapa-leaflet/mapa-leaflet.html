@@ -1,5 +1,25 @@
 <div id="mapaContainer" class="w-100 h-100"></div>
 
+<div class="legenda p-3 bg-white shadow-sm" style="border-radius: 12px; min-width: 180px;">
+
+  <h6 class="fw-bold text-dark mb-3 pb-2 border-bottom" style="font-size: 0.9rem;">
+    Legenda
+  </h6>
+
+  <div class="d-flex flex-column gap-3">
+
+    @for (categoria of listCategoria; track categoria.id) {
+    <div class="d-flex align-items-center">
+      <div class="shadow-sm"
+           [style.backgroundColor]="categoria.cor"
+           style="height: 16px; width: 16px; border-radius: 50%; border: 2px solid #fff; flex-shrink: 0;"></div>
+      <span class="ms-2 text-secondary fw-medium" style="font-size: 0.85rem;">{{ categoria.nome }}</span>
+    </div>
+    }
+
+  </div>
+</div>
+
 <app-modal-mark #modalMark></app-modal-mark>
 
 <div class="modal fade" #modalPermissao tabindex="-1" aria-hidden="true">

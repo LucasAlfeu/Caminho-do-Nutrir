@@ -2,13 +2,15 @@ import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, Input, OnCh
 import * as L from 'leaflet';
 import { ModalMark } from '../modal-mark/modal-mark';
 import { BancoLeite } from '../../../../class/BancoLeite';
+import { CategoriaService } from '../../../../services/Categoria/categoria';
+import { CommonModule } from '@angular/common';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-mapa-leaflet',
   standalone: true,
-  imports: [ModalMark],
+  imports: [ModalMark, CommonModule],
   templateUrl: './mapa-leaflet.html',
   styleUrl: './mapa-leaflet.css'
 })
@@ -18,14 +20,19 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
   private permissaoModal: any;
   private userMarker: L.Marker | undefined;
 
+  listCategoria: any[] = []
+
   @ViewChild('modalMark') modalElement!: ModalMark;
   @ViewChild('modalPermissao') modalPermissaoRef!: ElementRef;
 
   @Input() listBancos?: BancoLeite[];
 
+  constructor(private categoriaService: CategoriaService) {}
+
   ngAfterViewInit(): void {
     this.initMap();
     this.abrirModalPermissao();
+    this.buscarCategorias();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -182,5 +189,15 @@ export class MapaLeaflet implements AfterViewInit, OnDestroy, OnChanges {
         this.markersGroup?.addLayer(marker);
       }
     });
+  }
+
+  buscarCategorias(){
+    this.categoriaService.listarCategorias().subscribe({
+      next: (res) => {
+        this.listCategoria = res.body ?? []
+      }, error: (err)=> {
+        console.error(err)
+      }
+    })
   }
 }
