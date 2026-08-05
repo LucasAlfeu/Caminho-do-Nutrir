@@ -68,8 +68,6 @@ body {
 }
 
 .border-custom-container {
-  border: 1px solid #A0A0A0;
-  border-radius: 15px;
   flex-grow: 1;
   overflow-y: auto;
 }

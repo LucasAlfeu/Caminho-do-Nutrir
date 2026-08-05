@@ -10,7 +10,7 @@ import { CadastrarBanco } from './modules/estacao/pages/cadastrar-banco/cadastra
 import { LiberarUsuario } from './modules/usuario/pages/liberar-usuario/liberar-usuario';
 import { Mapa } from './modules/mapa/pages/mapa/mapa';
 import { Perfil } from './modules/usuario/pages/perfil/perfil';
-import { Categorias } from './pages/categorias/categorias';
+import { Categorias } from './modules/categoria/pages/categorias/categorias';
 import { IndicarEstacao } from './modules/estacao/pages/indicar-estacao/indicar-estacao';
 import { ValidarSolicitacao } from './modules/estacao/pages/validar-solicitacao/validar-solicitacao';
 

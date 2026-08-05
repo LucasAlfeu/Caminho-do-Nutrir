@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CategoriaService } from '../../services/Categoria/categoria';
-import { Categoria } from '../../class/Categoria';
+import { CategoriaService } from '../../../../services/Categoria/categoria';
+import { Categoria } from '../../../../class/Categoria';
 import { CommonModule } from '@angular/common';
-import { ModalCategoria } from '../../components/modal-categoria/modal-categoria';
+import { ModalCategoria } from '../../../../components/modal-categoria/modal-categoria';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
