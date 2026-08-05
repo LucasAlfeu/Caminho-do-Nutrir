@@ -1,112 +1,5 @@
-<!-- <div class="wrapper-conteudo bg-main-custom flex-grow-1 overflow-auto">
-
-  <header class="bg-header-custom px-4 d-flex flex-column justify-content-center shadow-sm">
-    <h1 class="h3 fw-bold mb-0">Bancos de Leite Humano</h1>
-    <p class="mb-0 text-muted small">Gerenciamento de bancos cadastrados no sistema</p>
-  </header>
-
-  <section class="p-4 p-md-5">
-
-    <div class="col-6 col-md-3">
-      <div class="bg-card-custom p-3 rounded-3 shadow-sm">
-        <h2 class="fs-6 fw-normal mb-1">Total de Usuários</h2>
-        <span class="h2 fw-bold d-block mb-1">{{ totalUser }}</span>
-        <small class="text-white-50 text-nowrap">cadastrados no sistema</small>
-      </div>
-    </div>
-
-    <div class="painel__form" style="margin-top: 3rem;">
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-        <div class="d-flex align-items-center gap-2 justify-content-end">
-          <input type="text" class="form-control" style="width: 320px;" placeholder="Buscar usuário...">
-          <button class="btn text-white fw-bold px-4 btn-brown-custom">Buscar</button>
-        </div>
-      </div>
-
-      <div class="table-responsive shadow-sm rounded-3 border">
-        <table class="table table-hover align-middle mb-0 bg-white">
-          <thead class="table-dark align-middle text-white" style="background-color: #4A2C1D; --bs-table-bg: #4A2C1D;">
-            <tr>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 40%;">Nome</th>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 20%;">Matrícula</th>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 15%;">Habilitado</th>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0" style="width: 15%;">Administrador</th>
-              <th scope="col" class="py-3 px-4 fw-semibold border-0 text-end" style="width: 25%;">Ações</th>
-            </tr>
-          </thead>
-          <tbody class="border-top-0">
-            @for (usuario of listUsuarios; track usuario.id) {
-            <tr [class]="usuario.indLiberado ? '__enable' : '__disable'">
-              <td class="px-4 py-3 text-dark fw-medium">{{ usuario.nome }}</td>
-              <td class="px-4 py-3 text-secondary">{{ usuario.matricula }}</td>
-              <td class="px-4 py-3 fw-semibold">
-                <span [class]="usuario.indLiberado ? 'text-success' : 'text-warning'">
-                  {{ usuario.indLiberado ? 'Sim' : 'Não' }}
-                </span>
-              </td>
-              <td class="px-4 py-3 fw-semibold">
-                <span [class]="usuario.indAdm ? 'text-success' : 'text-warning'">
-                  {{ usuario.indAdm ? 'Sim' : 'Não' }}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-end">
-                <div class="d-flex justify-content-end gap-2">
-                  <button *ngIf="!usuario.indLiberado" class="btn_acao text-success" title="Aprovar" (click)="openModalAprovarAcao(1, usuario)"><i class="bi bi-check-lg"></i></button>
-                  <button *ngIf="usuario.indLiberado && !usuario.indAdm" class="btn_acao text-secondary" title="Tornar Administrador" (click)="openModalAprovarAcao(2, usuario)"><i class="bi bi-person-lock"></i></button>
-                  <button class="btn_acao text-danger" title="Desabilitar Usuário" (click)="openModalAprovarAcao(3, usuario)"><i class="bi bi-lock-fill"></i></button>
-                  <button class="btn_acao text-danger" title="Deletar Usuario" (click)="openModalAprovarAcao(4, usuario)"><i class="bi bi-trash"></i></button>
-                </div>
-              </td>
-            </tr>
-            } @empty {
-            <tr>
-              <td colspan="4" class="text-center py-4 text-secondary">
-                Nenhum usuário pendente de liberação.
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-  </section>
-</div>
-
-<div #modalConfirmarAcao class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #4a2c1d; color: #ffffff;">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <span *ngIf="aberturaModal == 1"><strong>Habilitar Usuário</strong></span>
-          <span *ngIf="aberturaModal == 2"><strong>Tornar Administrador</strong></span>
-          <span *ngIf="aberturaModal == 3"><strong>Desabilitar Usuário</strong></span>
-          <span *ngIf="aberturaModal == 4"><strong>Deletar Usuário</strong></span>
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" style="background: transparent; border: none;" aria-label="Close" (click)="fecharModalAprorarAcao()">
-          <span aria-hidden="true" style="color: #ffffff;"><i class="bi bi-x-lg"></i></span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p *ngIf="aberturaModal == 1">Deseja habilitar o usuário <strong>{{ usuarioSelecionado?.nome }}</strong> para operar o sistema?</p>
-        <p *ngIf="aberturaModal == 2">Deseja tornar o usuário <strong>{{ usuarioSelecionado?.nome }}</strong> em administrador do sistema?</p>
-        <p *ngIf="aberturaModal == 3">Deseja desabilitar o usuário <strong>{{ usuarioSelecionado?.nome }}</strong>?</p>
-        <p *ngIf="aberturaModal == 4">Tem certeza que deseja <strong>deletar</strong> o usuário <strong>{{ usuarioSelecionado?.nome }}</strong> do sistema?</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-between">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="fecharModalAprorarAcao()">Fechar</button>
-        <button *ngIf="aberturaModal == 1" type="button" class="btn btn-primary" (click)="habilitarUsuario(usuarioSelecionado)">Habilitar</button>
-        <button *ngIf="aberturaModal == 2" type="button" class="btn btn-primary" (click)="tornarADM(usuarioSelecionado)">Tornar Administrador</button>
-        <button *ngIf="aberturaModal == 3" type="button" class="btn btn-primary" (click)="desabilitarUsuario(usuarioSelecionado)">Desabilitar</button>
-        <button *ngIf="aberturaModal == 4" type="button" class="btn btn-danger" (click)="desabilitarUsuario(usuarioSelecionado)">Deletar Usuário</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="wrapper-conteudo flex-grow-1 overflow-auto">
 
-  <!-- Cabeçalho Padrão -->
   <header class="bg-header-custom px-4 py-4 d-flex flex-column justify-content-center border-bottom shadow-sm flex-shrink-0">
     <div class="container-fluid px-0">
       <h1 class="h3 fw-bold mb-1" style="color: #4A2E1B;">Gerenciamento de Usuários</h1>
@@ -116,7 +9,6 @@
 
   <main class="p-4 d-flex flex-column flex-grow-1 overflow-hidden">
 
-    <!-- Seção de Contexto e KPI -->
     <div class="row align-items-center mb-4 g-4 flex-shrink-0">
 
       <div class="col-12 col-xl-8">
@@ -128,7 +20,6 @@
         </div>
       </div>
 
-      <!-- Card Único de KPI -->
       <div class="col-12 col-xl-4 d-flex justify-content-xl-end">
         <div class="card border-0 shadow-sm w-100" style="border-radius: 16px; background-color: #f4efeb; max-width: 300px;">
           <div class="card-body p-3 d-flex align-items-center justify-content-between">
@@ -148,10 +39,8 @@
 
     </div>
 
-    <!-- Painel Branco Principal -->
     <div class="bg-white p-4 shadow-sm d-flex flex-column flex-grow-1 overflow-hidden" style="border-radius: 16px;">
 
-      <!-- Barra de Busca -->
       <div class="row mb-4 g-3 align-items-center justify-content-between flex-shrink-0">
         <div class="col-12 col-md-6 col-lg-5">
           <div class="input-group shadow-sm" style="border-radius: 12px; overflow: hidden;">
@@ -169,11 +58,9 @@
         </div>
       </div>
 
-      <!-- Tabela com Scroll Interno -->
       <div class="table-responsive border rounded-3 flex-grow-1" style="overflow-y: auto;">
         <table class="table table-hover align-middle mb-0 w-100">
 
-          <!-- Cabeçalho Claro (Melhor legibilidade em tabelas de dados) -->
           <thead class="bg-light sticky-top" style="z-index: 1;">
             <tr>
               <th scope="col" class="py-3 px-4 text-secondary fw-semibold small text-uppercase border-bottom" style="width: 35%;">Nome</th>
@@ -194,7 +81,6 @@
                 {{ usuario.matricula }}
               </td>
               <td class="px-4 py-3">
-                <!-- Badges Visuais para Status -->
                 <span class="badge rounded-pill px-3 py-2 fw-medium"
                       [ngClass]="usuario.indLiberado ? 'bg-success bg-opacity-10 text-success' : 'bg-danger bg-opacity-10 text-danger'">
                   <i class="bi me-1" [ngClass]="usuario.indLiberado ? 'bi-check-circle' : 'bi-x-circle'"></i>
@@ -202,7 +88,6 @@
                 </span>
               </td>
               <td class="px-4 py-3">
-                <!-- Badges Visuais para Nível -->
                 <span class="badge rounded-pill px-3 py-2 fw-medium"
                       [ngClass]="usuario.indAdm ? 'bg-primary bg-opacity-10 text-primary' : 'bg-secondary bg-opacity-10 text-secondary'">
                   <i class="bi bi-person-badge me-1"></i>
@@ -210,7 +95,6 @@
                 </span>
               </td>
               <td class="px-4 py-3 text-end">
-                <!-- Botões de Ação Padronizados -->
                 <div class="d-flex justify-content-end gap-2">
                   <button *ngIf="!usuario.indLiberado" class="btn btn-sm btn-light text-success rounded-circle" style="width: 32px; height: 32px;" title="Aprovar/Habilitar" (click)="openModalAprovarAcao(1, usuario)">
                     <i class="bi bi-check-lg"></i>
@@ -243,14 +127,13 @@
   </main>
 </div>
 
-<!-- Modal Confirmar Ação (Design Limpo e Focado) -->
 <div #modalConfirmarAcao class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
 
       <div class="modal-header border-bottom-0 pt-4 pb-2 px-4 d-flex justify-content-between align-items-start">
         <h5 class="modal-title fw-bold text-dark d-flex align-items-center" id="exampleModalLabel">
-          <!-- Ícones Dinâmicos no Título -->
+
           <i *ngIf="aberturaModal == 1" class="bi bi-person-check-fill text-success me-2 fs-4"></i>
           <i *ngIf="aberturaModal == 2" class="bi bi-shield-lock-fill text-primary me-2 fs-4"></i>
           <i *ngIf="aberturaModal == 3" class="bi bi-person-x-fill text-warning me-2 fs-4"></i>
@@ -276,7 +159,6 @@
       <div class="modal-footer border-top-0 pt-2 pb-4 px-4 d-flex justify-content-end gap-2">
         <button type="button" class="btn btn-light px-4 py-2" style="border-radius: 8px; font-weight: 500;" data-dismiss="modal" (click)="fecharModalAprorarAcao()">Cancelar</button>
 
-        <!-- Botões de confirmação com cores contextuais -->
         <button *ngIf="aberturaModal == 1" type="button" class="btn btn-success px-4 py-2 text-white shadow-sm" style="border-radius: 8px; font-weight: 500;" (click)="habilitarUsuario(usuarioSelecionado)">Habilitar</button>
         <button *ngIf="aberturaModal == 2" type="button" class="btn btn-primary px-4 py-2 text-white shadow-sm" style="border-radius: 8px; font-weight: 500;" (click)="tornarADM(usuarioSelecionado)">Confirmar Admin</button>
         <button *ngIf="aberturaModal == 3" type="button" class="btn btn-warning px-4 py-2 text-dark shadow-sm" style="border-radius: 8px; font-weight: 500;" (click)="desabilitarUsuario(usuarioSelecionado)">Desabilitar</button>
