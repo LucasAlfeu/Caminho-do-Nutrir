@@ -31,8 +31,10 @@ export class Mapa {
   }
 
   listarBancosLeite() {
-    const indValidado = true
-    this.bancoLeiteService.listBancoLeite(indValidado).subscribe({
+    const params = {
+      indValidado: true
+    }
+    this.bancoLeiteService.listBancoLeite(params).subscribe({
       next: (res) => {
         this.listBancos = res.body  ?? [];
       },

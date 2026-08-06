@@ -29,6 +29,8 @@ export class Painel {
 
   usuario: Usuario | null = null;
   listBancos: BancoLeite[] = [];
+  listBancosValidados!: BancoLeite[];
+  listBancosNaoValidados!: BancoLeite[];
   totalBancos: number = 0;
   form!: FormGroup;
 
@@ -52,23 +54,27 @@ export class Painel {
   }
 
   listarBancosLeite(filterNomeEstacao?: string) {
+  const params = {
+    filter: filterNomeEstacao ? filterNomeEstacao : ''
+  };
 
-    const params = {
-      indValidado: true,
-      filter: filterNomeEstacao ? filterNomeEstacao : ''
+  this.bancoLeiteService.listBancoLeite(params).subscribe({
+    next: (res) => {
+      const bancos = res.body ?? [];
+      this.listBancosValidados = bancos.filter((b) => b.indValidado);
+
+      this.listBancosNaoValidados = bancos.filter((b) => !b.indValidado);
+
+
+      const totalCount = res.headers.get('x-total-count');
+      this.totalBancos = totalCount ? parseInt(totalCount, 10) : 0;
+
+    },
+    error: (err) => {
+      this.toastr.error("Não foi possível carregar os Bancos de Leite");
     }
-    this.bancoLeiteService.listBancoLeite(params).subscribe({
-      next: (res) => {
-        this.listBancos = res.body?.reverse() ?? [];
-
-        const totalCount = res.headers.get('X-Total-Count');
-        this.totalBancos = totalCount ? parseInt(totalCount, 10) : 0;
-      },
-      error: (err) => {
-        this.toastr.error("Não foi possível carregar os Bancos de Leite")
-      }
-    })
-  }
+  });
+}
 
   goTo() {
     this.router.navigate(['painel/cadastrar-banco']);
