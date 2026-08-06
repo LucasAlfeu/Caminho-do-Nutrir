@@ -248,7 +248,12 @@ export class CadastrarBanco implements OnInit {
       dadosForm['id'] = this.bancoLeite.id;
       const isValidado = this.bancoLeite.indValidado
 
-      this.bancoLeiteService.atualizarBancoLeite(dadosForm).subscribe({
+      const dadosParaEnvio = {
+        ...dadosForm,
+        indValidado: isValidado
+      }
+
+      this.bancoLeiteService.atualizarBancoLeite(dadosParaEnvio).subscribe({
         next: () => {
           this.toastr.success("Banco atualizado com sucesso!");
           setTimeout(() => {
