@@ -114,8 +114,12 @@ export class BancoLeiteService {
     return this.http.post(`${environment.apiUrl}/reporte`, dados)
   }
 
-  finalizarReporte(id: number){
+  finalizarReporte(id: number, dados: any){
     const headers = this.autenticacaoService.autenticacaoAPI();
-    return this.http.delete(`${environment.apiUrl}/reporte/${id}`, { headers });
+    return this.http.delete(`${environment.apiUrl}/reporte/${id}`,
+      {
+        headers: headers ,
+        params: dados
+      });
   }
 }

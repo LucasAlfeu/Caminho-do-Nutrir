@@ -128,8 +128,17 @@ export class ModalMark {
   }
 
   finalizarReporte(e: any){
+    let user;
+    const userString = localStorage.getItem("usuario");
+    if(userString) user = JSON.parse(userString)
+    const dadosParaEnvio = {
+      idEstacao: this.estacao.id,
+      nomeUsuario: user.nome,
+      emailUsuario: user.email
+    }
+
     if(this.reporteSelecionado && this.reporteSelecionado.id){
-      this.estacaoService.finalizarReporte(this.reporteSelecionado.id).subscribe({
+      this.estacaoService.finalizarReporte(this.reporteSelecionado.id, dadosParaEnvio).subscribe({
         next: (res) => {
           console.log(res);
           this.toastrService.success("Reporte finalizado com sucesso");
