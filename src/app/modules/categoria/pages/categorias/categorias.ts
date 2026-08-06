@@ -4,10 +4,11 @@ import { Categoria } from '../../../../class/Categoria';
 import { CommonModule } from '@angular/common';
 import { ModalCategoria } from '../../components/modal-categoria/modal-categoria';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-categorias',
-  imports: [CommonModule, ModalCategoria],
+  imports: [CommonModule, ModalCategoria, ReactiveFormsModule],
   templateUrl: './categorias.html',
   styleUrl: './categorias.css',
 })
@@ -16,17 +17,32 @@ export class Categorias implements OnInit {
 
   listCategorias: Categoria[] = [];
   totalCategoria: string = '';
+  form!: FormGroup;
 
-  constructor(private categoriaService: CategoriaService, private toastr: ToastrService,) {
+  constructor(
+    private categoriaService: CategoriaService,
+    private toastr: ToastrService,
+    protected fb: FormBuilder,
+  ) {
 
   }
 
   ngOnInit() {
+    this.createForm();
     this.buscarCategorias();
   }
 
-  buscarCategorias() {
-    this.categoriaService.listarCategorias().subscribe({
+  createForm(){
+    this.form = this.fb.group({
+      filtroBanco: ['']
+    })
+  }
+
+  buscarCategorias(filterNomeCategoria?: string) {
+    const params = {
+      filter: filterNomeCategoria ? filterNomeCategoria : ''
+    }
+    this.categoriaService.listarCategorias(params).subscribe({
       next: (res) => {
         this.totalCategoria = res.headers.get("x-total-count") || "0"
         this.listCategorias = res.body || []
@@ -70,5 +86,17 @@ export class Categorias implements OnInit {
         }
       }
     });
+  }
+
+  filtrarPontos(){
+    if(!this.form) return;
+    const filtroString = this.form.get('filtroBanco')?.value
+
+    if(filtroString) this.buscarCategorias(filtroString);
+  }
+
+  limparFiltro(){
+    this.form.reset();
+    this.buscarCategorias();
   }
 }

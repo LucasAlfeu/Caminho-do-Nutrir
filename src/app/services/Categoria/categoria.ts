@@ -15,9 +15,10 @@ export class CategoriaService {
     private autenticacaoService: AutenticacaoService
   ) { }
 
-  listarCategorias(){
+  listarCategorias(params?: any){
     return this.http.get<Categoria[]>(`${environment.apiUrl}/classificacao`, {
-      observe: 'response'
+      observe: 'response',
+      params: params
     })
   }
 
