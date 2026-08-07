@@ -259,6 +259,8 @@ export class CadastrarBanco implements OnInit {
           setTimeout(() => {
             if(!isValidado){
               this.modalValidarSolicitacao.abrirModal(this.bancoLeite?.nome as string);
+            } else {
+              this.router.navigate(['/painel'])
             }
           }, 1000)
         },
@@ -277,11 +279,25 @@ export class CadastrarBanco implements OnInit {
 
   validarSolicitacao(e: any){
     if(this.bancoLeite && this.bancoLeite.id){
-      this.bancoLeiteService.validarSolicitacao(this.bancoLeite.id).subscribe({
+
+      let usuario;
+
+      const userAux = localStorage.getItem('usuario');
+      if(userAux){
+        usuario = JSON.parse(userAux);
+      }
+
+      const params = {
+        nomeUsuario: usuario.nome,
+        emailUsuario: usuario.email
+      }
+
+      this.bancoLeiteService.validarSolicitacao(this.bancoLeite.id, params).subscribe({
         next: (res) => {
           console.log(res)
           this.toastr.success("Ponto validado com sucesso")
           this.modalValidarSolicitacao.fecharModal()
+          this.router.navigate(['/painel'])
         }, error: (err) => {
           console.log(err)
           this.toastr.error("Não foi possível validar esse ponto")

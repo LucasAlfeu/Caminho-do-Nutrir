@@ -105,9 +105,12 @@ export class BancoLeiteService {
     return this.http.delete(`${environment.apiUrl}/banco-leite/${idSolicitacao}`, { headers })
   }
 
-  validarSolicitacao(idSolicitacao: number){
+  validarSolicitacao(idSolicitacao: number, params: any){
     const headers = this.autenticacaoService.autenticacaoAPI();
-    return this.http.put(`${environment.apiUrl}/solicitar-banco-leite/${idSolicitacao}`, null , { headers })
+    return this.http.put(`${environment.apiUrl}/solicitar-banco-leite/${idSolicitacao}`, null , {
+      headers: headers,
+      params: params
+    })
   }
 
   cadastrarReporte(dados: any){

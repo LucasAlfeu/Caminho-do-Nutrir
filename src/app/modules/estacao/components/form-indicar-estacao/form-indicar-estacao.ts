@@ -152,6 +152,8 @@ export class FormIndicarEstacao {
   }
 
   _cadastrar() {
+    this.form.markAllAsTouched();
+
     let dadosFormulario = this.form.getRawValue();
     Object.keys(dadosFormulario).forEach(element => {
       const valor = dadosFormulario[element];

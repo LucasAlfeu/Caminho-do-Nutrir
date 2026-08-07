@@ -62,6 +62,7 @@ export class Painel {
     next: (res) => {
       const bancos = res.body ?? [];
       this.listBancosValidados = bancos.filter((b) => b.indValidado);
+      this.listBancosValidados = this.listBancosValidados.reverse();
 
       this.listBancosNaoValidados = bancos.filter((b) => !b.indValidado);
 
