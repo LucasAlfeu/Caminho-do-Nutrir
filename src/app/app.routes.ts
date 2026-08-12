@@ -13,6 +13,7 @@ import { Perfil } from './modules/usuario/pages/perfil/perfil';
 import { Categorias } from './modules/categoria/pages/categorias/categorias';
 import { IndicarEstacao } from './modules/estacao/pages/indicar-estacao/indicar-estacao';
 import { ValidarSolicitacao } from './modules/estacao/pages/validar-solicitacao/validar-solicitacao';
+import { ComoDoar } from './modules/shared/pages/como-doar/como-doar';
 
 
 export const routes: Routes = [
@@ -35,6 +36,10 @@ export const routes: Routes = [
   {
     path: 'indicacao',
     component: IndicarEstacao
+  },
+  {
+    path: 'saiba-mais',
+    component: ComoDoar
   },
 
   {
