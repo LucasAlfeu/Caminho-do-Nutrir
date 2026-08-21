@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "caminho-nutrir": {
+    "ariadne": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -90,16 +90,18 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "caminho-nutrir:build:production"
+              "buildTarget": "ariadne:build:production"
             },
             "development": {
-              "buildTarget": "caminho-nutrir:build:development"
+              "buildTarget": "ariadne:build:development"
             },
             "caminho-nutrir": {
-              "buildTarget": "caminho-nutrir:build:development,caminho-nutrir"
+              "buildTarget": "ariadne:build:development,caminho-nutrir",
+              "port": 4200
             },
             "demo": {
-              "buildTarget": "caminho-nutrir:build:development,demo"
+              "buildTarget": "ariadne:build:development,demo",
+              "port": 4201
             }
           },
           "defaultConfiguration": "development"
