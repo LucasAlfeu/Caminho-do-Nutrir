@@ -1,4 +1,5 @@
 export const environment = {
+  production: false,
   apiUrl: 'http://localhost:3333',
-  tenant: 'default'
+  tenant: 'caminho-nutrir'
 };

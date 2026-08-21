@@ -6,7 +6,13 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+
+    "start:caminho": "ng serve -c caminho-nutrir",
+    "start:demo": "ng serve -c demo",
+
+    "build:caminho": "ng build -c caminho-nutrir",
+    "build:demo": "ng build -c demo"
   },
   "prettier": {
     "printWidth": 100,

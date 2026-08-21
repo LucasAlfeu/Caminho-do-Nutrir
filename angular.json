@@ -52,6 +52,36 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "caminho-nutrir": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environment.ts",
+                  "with": "src/themes/caminho-nutrir/environments/environment.ts"
+                }
+              ],
+              "styles": [
+                "src/themes/caminho-nutrir/style/style.css",
+                "src/styles.css",
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/leaflet/dist/leaflet.css",
+                "node_modules/ngx-toastr/toastr.css"
+              ]
+            },
+            "demo": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environment.ts",
+                  "with": "src/themes/demo/environments/environment.ts"
+                }
+              ],
+              "styles": [
+                "src/themes/demo/style/style.css",
+                "src/styles.css",
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/leaflet/dist/leaflet.css",
+                "node_modules/ngx-toastr/toastr.css"
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -64,6 +94,12 @@
             },
             "development": {
               "buildTarget": "caminho-nutrir:build:development"
+            },
+            "caminho-nutrir": {
+              "buildTarget": "caminho-nutrir:build:development,caminho-nutrir"
+            },
+            "demo": {
+              "buildTarget": "caminho-nutrir:build:development,demo"
             }
           },
           "defaultConfiguration": "development"

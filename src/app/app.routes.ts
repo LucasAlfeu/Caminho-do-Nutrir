@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { Home } from './modules/shared/pages/home/home';
+import { Home } from '../themes/caminho-nutrir/home/home';
 import { Entrar } from './modules/usuario/pages/entrar/entrar';
 import { Cadastrar } from './modules/usuario/pages/cadastrar/cadastrar';
+import { environment } from './environments/environment';
 
 // Componentes do Painel
 import { Painel } from './modules/usuario/pages/painel/painel';
@@ -19,7 +20,15 @@ import { ComoDoar } from './modules/shared/pages/como-doar/como-doar';
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    loadComponent: () => {
+      if (environment.tenant === 'caminho-nutrir') {
+        return import('../themes/caminho-nutrir/home/home')
+          .then(c => c.Home);
+      }
+
+      return import('../themes/demo/home-demo/home-demo')
+        .then(c => c.HomeDemo);
+    }
   },
   {
     path: 'entrar',
