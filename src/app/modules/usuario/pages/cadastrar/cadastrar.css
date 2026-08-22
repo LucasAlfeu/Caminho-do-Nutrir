@@ -1,9 +1,9 @@
 .bg-brown-custom {
-  background-color: #8c5730;
+  background-color: var(--background-infor-lateral);
 }
 
 .btn-brown-custom {
-  background-color: #8c5730;
+  background-color: var(--background-infor-lateral);
   color: #ffffff;
   border: none;
 }

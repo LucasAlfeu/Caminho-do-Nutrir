@@ -62,7 +62,7 @@
               </div>
               <div class="col-md-4">
                 <button type="button" class="btn btn-custom w-100 fw-semibold" (blur)="carregaEnderecoViaCep()"
-                  (click)="carregaEnderecoViaCep()" style="background-color: #4A2E1B; color: #fff;"
+                  (click)="carregaEnderecoViaCep()" style="background-color: var(--background-button); color: #fff;"
                   [style.margin-bottom]="cadastroBancoForm.get('cep')?.invalid && cadastroBancoForm.get('cep')?.touched ? '23px' : '0px'">
                   Buscar
                   </button>
@@ -169,7 +169,7 @@
         </div>
 
         <div class="d-flex justify-content-end mt-4">
-          <button type="submit" class="btn px-5 fw-semibold" style="background-color: #4A2E1B; color: #fff;"
+          <button type="submit" class="btn px-5 fw-semibold" style="background-color: var(--background-button); color: #fff;"
             (click)="salvar()">
             <span *ngIf="!indEdicao">Cadastrar</span>
             <span *ngIf="indEdicao">Atualizar</span>

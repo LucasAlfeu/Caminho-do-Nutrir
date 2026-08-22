@@ -7,64 +7,20 @@ body {
   overflow: hidden;
 }
 
-/* Cores e dimensões fixas do Menu Lateral */
-.sidebar {
-  background-color: #925F37;
-  /* Tom marrom do menu original */
-  color: #FFFFFF;
-  width: 260px;
-  /* Largura travada do menu */
-  flex-shrink: 0;
-}
-
-/* Área de conteúdo que DEVE ocupar o resto inteiro da tela */
-.content-area {
-  flex-grow: 1;
-  /* Ocupa 100% do espaço restante */
-  height: 100vh;
-  background-color: #f8f9fa;
-}
-
-/* Componentes internos */
 .bg-header-custom {
-  background-color: #D3A280;
-  color: #211915;
+  background-color: var(--header-background-painel);
+  color: var(--header-text-color);
   height: 85px;
 }
 
-.bg-card-custom {
-  background-color: #4A2E1B;
-  color: #FFFFFF;
-}
-
-.btn-custom-dark {
-  background-color: #4A2E1B;
-  color: #FFFFFF;
-  border: none;
-}
-
-.btn-custom-blue {
-  background-color: #246095;
-  color: #FFFFFF;
-  border: none;
-}
-
 .table-custom-header {
-  background-color: #4A2E1B;
+  background-color: var(--primary-color-text);
   color: #FFFFFF;
 }
 
-/* Força o painel a usar toda a altura que sobra no display flex */
 .main-workspace {
   flex-grow: 1;
   overflow: hidden;
-}
-
-.bg-white-panel {
-  background-color: #ffffff;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .border-custom-container {

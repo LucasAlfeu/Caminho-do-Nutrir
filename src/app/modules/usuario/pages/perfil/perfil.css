@@ -3,7 +3,7 @@
 }
 
 .custom-header {
-  background-color: #D3A280;
+  background-color: var(--header-background-painel);
 }
 
 .wrapper-conteudo {

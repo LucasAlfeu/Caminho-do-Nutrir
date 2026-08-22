@@ -29,8 +29,8 @@ body {
 }
 
 .bg-header-custom {
-  background-color: #D3A280;
-  color: #211915;
+  background-color: var(--header-background-painel);
+  color: var(--header-text-color);
   height: 85px;
   flex-shrink: 0;
 }

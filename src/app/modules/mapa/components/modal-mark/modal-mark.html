@@ -4,7 +4,7 @@
     <div *ngIf="endereco" class="modal-content border-0 shadow">
 
       <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
-        <h3 class="modal-title fw-bold" id="exampleModalLongTitle" style="color: #4A2E1B;">
+        <h3 class="modal-title fw-bold" id="exampleModalLongTitle" style="color: var(--background-button);">
           {{ endereco?.nome }}
         </h3>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"
@@ -175,7 +175,7 @@
           Fechar
         </button>
         <button *ngIf="!indLogado" type="button" class="btn text-white px-4 py-2"
-          style="background-color: #4A2E1B; font-weight: 500;" (click)="copiarEnderecoCompleto()">
+          style="background-color: var(--background-button); font-weight: 500;" (click)="copiarEnderecoCompleto()">
           <i class="bi bi-clipboard me-2"></i> Copiar Endereço
         </button>
       </div>

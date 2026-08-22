@@ -1,15 +1,11 @@
-.bg-brown-custom {
-  background-color: #8c5730;
-}
-
 .btn-brown-custom {
-  background-color: #8c5730;
+  background-color: var(--background-infor-lateral);
   color: #ffffff;
   border: none;
 }
 
 .btn-brown-custom:hover {
-  background-color: #704526;
+  background-color: var(--btn-hover);
   color: #ffffff;
 }
 

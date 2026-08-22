@@ -36,12 +36,12 @@
             </button>
 
             <a [routerLink]="['/painel/cadastrar-banco/editar', banco.id]" title="Editar"
-              aria-label="Editar banco de leite" style="color: #4A2E1B;">
+              aria-label="Editar banco de leite" style="color: var(--primary-color-text);">
               <i class="bi bi-pencil-square"></i>
             </a>
 
             <button (click)="openModalDetalhe(banco)" title="Detalhes" aria-label="Ver detalhes do banco de leite"
-              class="p-0 bg-transparent border-0" style="color: #4A2E1B;">
+              class="p-0 bg-transparent border-0" style="color: var(--primary-color-text);">
               <i class="bi bi-search"></i>
             </button>
 

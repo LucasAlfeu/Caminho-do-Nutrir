@@ -4,7 +4,7 @@
     <div class="modal-content border-0 shadow-lg">
 
       <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 d-flex align-items-center">
-        <h4 class="modal-title fw-bold d-flex align-items-center" id="exampleModalLabel" style="color: #4A2E1B;">
+        <h4 class="modal-title fw-bold d-flex align-items-center" id="exampleModalLabel" style="color: var(--background-button);">
           <i class="bi bi-flag-fill me-2 fs-5"></i> Reportar Erro
         </h4>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"
@@ -16,7 +16,7 @@
         <div class="mb-4 text-secondary" style="font-size: 0.95rem;">
 
           <div *ngIf="!indAdministrador; else usuarioComum">
-            <i class="bi bi-info-circle-fill me-2" style="color: #4A2E1B;"></i>
+            <i class="bi bi-info-circle-fill me-2" style="color: var(--background-button);"></i>
             Encontrou alguma informação incorreta neste local? Por favor, descreva o erro abaixo com o máximo de
             detalhes possível para que nossa equipe possa analisar e corrigir.
           </div>
@@ -58,7 +58,7 @@
         </button>
 
         <button *ngIf="!indAdministrador" type="button" class="btn text-white px-4 py-2 shadow-sm"
-          style="background-color: #4A2E1B; font-weight: 500;" (click)="_enviarRelatorio()">
+          style="background-color: var(--background-button); font-weight: 500;" (click)="_enviarRelatorio()">
           <i class="bi bi-send me-2"></i> Enviar Relatório
         </button>
       </div>

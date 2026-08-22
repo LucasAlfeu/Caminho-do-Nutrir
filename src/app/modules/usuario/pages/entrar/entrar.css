@@ -11,16 +11,16 @@
   .input-underlined {
     background-color: transparent !important;
     border: none;
-    border-bottom: 2px solid #1a1a1a;
+    border-bottom: 2px solid var(--color-primary-entrar);
     border-radius: 0;
     padding: 0.5rem 0;
-    color: #1a1a1a;
+    color: var(--color-primary-entrar);
     font-weight: 600;
     box-shadow: none !important; /* Remove o contorno azul padrão do Bootstrap */
   }
 
   .input-underlined::placeholder {
-    color: #1a1a1a;
+    color: var(--color-primary-entrar);
     font-weight: 600;
   }
 
@@ -30,7 +30,7 @@
 
   /* Botão Escuro */
   .btn-dark-custom {
-    background-color: #221f1f;
+    background-color: var(--show-password);
     color: #fff;
     border-radius: 4px;
     letter-spacing: 1px;

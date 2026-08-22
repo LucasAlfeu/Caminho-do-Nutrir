@@ -3,5 +3,21 @@
   --secondary-color: #343a40;
   --background-color: #f8f9fa;
 
+  --background-button: #4A2E1B;
+  --primary-color-text: #4A2E1B;
+
+  --background-infor-lateral: #8c5730;
+
+  --btn-hover: #704526;
+
   --footer-background: #a67c52;
+
+  --color-primary-entrar: #1a1a1a;
+  --show-password: #221f1f;
+
+  --menu-lateral: #9A6233;
+
+  --header-background-painel: #D3A280;
+  --header-text-color: #4A2E1B;
+  --total-solicitacao: #F57C00;
 }

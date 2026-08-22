@@ -19,53 +19,10 @@ html, body {
 }
 
 .bg-header-custom {
-  background-color: #D3A280;
-  color: #211915;
+  background-color: var(--header-background-painel);
+  color: var(--header-text-color);
   height: 85px;
   flex-shrink: 0;
-}
-
-.bg-card-custom {
-  background-color: #4A2E1B;
-  color: #FFFFFF;
-}
-
-.btn-custom-dark {
-  background-color: #4A2E1B;
-  color: #FFFFFF;
-  border: none;
-}
-
-.btn-custom-dark:hover {
-  background-color: #362113;
-  color: #FFFFFF;
-}
-
-.btn-custom-blue {
-  background-color: #246095;
-  color: #FFFFFF;
-}
-
-.btn-custom-blue:hover {
-  background-color: #1A476F;
-  color: #FFFFFF;
-}
-
-.table-custom-header {
-  background-color: #4A2E1B;
-  color: #FFFFFF;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-.border-custom-container {
-  border: 1px solid #A0A0A0;
-  border-radius: 15px;
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  min-height: 0;
 }
 
 .main-container {
@@ -76,14 +33,4 @@ html, body {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
-}
-
-.bg-white-panel {
-  background-color: #ffffff;
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }

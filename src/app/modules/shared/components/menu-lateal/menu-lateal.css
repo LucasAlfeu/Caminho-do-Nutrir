@@ -1,6 +1,6 @@
 .sidebar-custom {
   width: 320px;
-  background-color: #9A6233;
+  background-color: var(--menu-lateral);
 }
 
 .sidebar-header-custom {
@@ -19,7 +19,7 @@
 }
 
 .sidebar-link:hover {
-  color: #9A6233;
+  color: var(--menu-lateral);
   background: #EBE1D8;
 }
 

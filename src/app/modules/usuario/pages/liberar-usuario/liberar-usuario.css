@@ -1,17 +1,16 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Evita scrolls globais */
+  overflow: hidden;
 }
 
 .bg-header-custom {
-  background-color: #D3A280;
-  color: #211915;
+  background-color: var(--header-background-painel);
+  color: var(--header-text-color);
   height: 85px;
   flex-shrink: 0;
 }
 
-/* O pulo do gato para preencher a tela até o final (descontando o menu) */
 .wrapper-conteudo {
   display: flex;
   flex-direction: column;
@@ -21,26 +20,10 @@ body {
 }
 
 .bg-card-custom {
-  background-color: #4A2E1B;
+  background-color: var(--background-button);
   color: #FFFFFF;
 }
 
-.bg-main-custom {
-  background-color: #f5ece4; /* Cor de fundo bege */
-}
-
-/* Botão de busca marrom personalizado */
-.btn-brown-custom {
-  background-color: #4A3933;
-  transition: 0.3s;
-}
-
-.btn-brown-custom:hover {
-  background-color: #352721;
-  color: white;
-}
-
-/* Ícones de Ação SVG */
 .btn_acao {
   width: 24px;
   height: 24px;

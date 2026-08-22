@@ -10,7 +10,7 @@
 
   <div class="glass-card p-5" style="width: 100%; max-width: 450px;">
 
-    <h1 class="text-center fw-bold mb-5" style="color: #1a1a1a; letter-spacing: 1px;">ENTRAR</h1>
+    <h1 class="text-center fw-bold mb-5" style="color: var(--color-primary-entrar); letter-spacing: 1px;">ENTRAR</h1>
 
     <form [formGroup]="form">
       <div class="mb-4">
@@ -21,7 +21,7 @@
         <input [type]="showPassword ? 'text' : 'password'" class="form-control py-2 pe-5 input-underlined"
           formControlName="senha" placeholder="Digite sua senha">
 
-        <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: #221f1f;"
+        <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer; color: var(--show-password);"
           (click)="showPassword = !showPassword">
 
           <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -48,9 +48,9 @@
 
     <div class="d-flex justify-content-between mt-2">
       <a href="/cadastrar" class="text-decoration-none fw-bold"
-        style="color: #1a1a1a; font-size: 0.95rem;">Cadastrar</a>
+        style="color: var(--color-primary-entrar); font-size: 0.95rem;">Cadastrar</a>
       <button (click)="openMoalRecuperarSenha()" class="text-decoration-none fw-bold"
-        style="color: #1a1a1a; font-size: 0.95rem; background: transparent; border: none;">Perdeu a senha?</button>
+        style="color: var(--color-primary-entrar); font-size: 0.95rem; background: transparent; border: none;">Perdeu a senha?</button>
     </div>
 
   </div>
