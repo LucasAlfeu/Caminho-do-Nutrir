@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 
 @Component({
@@ -9,6 +10,8 @@ import { AutenticacaoService } from '../../../../services/Autenticacao/autentica
   styleUrl: './header.css',
 })
 export class Header {
+
+  environment = environment;
 
   constructor(
     private autenticacaoService: AutenticacaoService,

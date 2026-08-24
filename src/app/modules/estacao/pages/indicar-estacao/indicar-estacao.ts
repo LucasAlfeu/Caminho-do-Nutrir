@@ -3,6 +3,7 @@ import { FormIndicarEstacao } from '../../components/form-indicar-estacao/form-i
 import { Router } from '@angular/router';
 import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-indicar-estacao',
@@ -11,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './indicar-estacao.css',
 })
 export class IndicarEstacao {
+
+  environment = environment;
 
   @ViewChild('formSolicitar') formSolicitar!: FormIndicarEstacao;
 

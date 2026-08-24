@@ -1,5 +1,11 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:3333',
-  tenant: 'caminho-nutrir'
+  tenant: 'caminho-nutrir',
+
+  nome: 'Caminho do Nutrir',
+
+  nomenclatura: {
+
+  }
 };

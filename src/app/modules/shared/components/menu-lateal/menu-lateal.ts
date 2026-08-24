@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../../../class/Usuario';
 import { CommonModule } from '@angular/common';
 import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-menu-lateal',
@@ -11,6 +12,8 @@ import { AutenticacaoService } from '../../../../services/Autenticacao/autentica
   styleUrl: './menu-lateal.css',
 })
 export class MenuLateal {
+
+  environment = environment
 
   @Input() usuario: Usuario | null = null;
 
