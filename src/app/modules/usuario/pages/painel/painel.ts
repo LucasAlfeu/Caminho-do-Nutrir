@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 import { ModalMark } from '../../../mapa/components/modal-mark/modal-mark';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ListEstacaoShared } from '../../../shared/components/list-estacao-shared/list-estacao-shared';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-painel',
@@ -27,6 +28,7 @@ export class Painel {
 
   @ViewChild('modalMark') modalDetalhe!: ModalMark;
 
+  environment = environment;
   usuario: Usuario | null = null;
   listBancos: BancoLeite[] = [];
   listBancosValidados!: BancoLeite[];

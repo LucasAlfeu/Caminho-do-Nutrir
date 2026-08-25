@@ -4,19 +4,19 @@
 
       <div class="col-12 col-lg-4 bg-brown-custom text-white d-flex flex-column justify-content-between text-center p-5 sidebar-fixed">
         <div class="mt-4">
-          <h1 class="fw-bold display-4 lh-sm">Caminho<br>do Nutrir</h1>
+          <h1 class="fw-bold display-4 lh-sm">{{ environment.nome }}</h1>
         </div>
 
         <div class="px-3">
           <h2 class="fw-bold mb-3">Seja bem-vindo(a)</h2>
           <p class="fs-4 lh-sm">
-            Juntos, vamos<br>mapear pontos de<br>doação e transformar<br>vidas através da<br>solidariedade.
+            {{ environment.nomenclatura.cadastroUsuario.text1 }}
           </p>
         </div>
 
         <div class="mb-4">
           <p class="fs-5 mb-0 lh-sm">
-            Preencha os campos ao lado para fazer<br>parte dessa rede de apoio e nutrição.
+            {{ environment.nomenclatura.cadastroUsuario.text2 }}
           </p>
         </div>
       </div>

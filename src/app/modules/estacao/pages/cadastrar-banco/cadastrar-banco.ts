@@ -14,6 +14,7 @@ import { BancoLeite } from '../../../../class/BancoLeite';
 import { CategoriaService } from '../../../../services/Categoria/categoria';
 import { Categoria } from '../../../../class/Categoria';
 import { ModalValidarSolicitacao } from '../../components/modal-validar-solicitacao/modal-validar-solicitacao';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-cadastrar-banco',
@@ -28,6 +29,8 @@ import { ModalValidarSolicitacao } from '../../components/modal-validar-solicita
 })
 export class CadastrarBanco implements OnInit {
   @ViewChild('modalValidarSolicitacao') modalValidarSolicitacao!: ModalValidarSolicitacao;
+
+  environment = environment;
 
   listaDeEstados: Estado[] = [];
   listaDeMunicipios: Municipio[] = [];

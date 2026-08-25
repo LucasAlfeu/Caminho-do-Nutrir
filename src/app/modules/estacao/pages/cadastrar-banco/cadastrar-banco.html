@@ -1,8 +1,8 @@
 <div class="wrapper-conteudo">
 
   <header class="bg-header-custom px-4 d-flex flex-column justify-content-center shadow-sm">
-    <h1 class="h3 fw-bold mb-0">Bancos de Leite Humano</h1>
-    <p class="mb-0 text-muted small">Gerenciamento de bancos cadastrados no sistema</p>
+    <h1 class="h3 fw-bold mb-0">Painel de Cadastro</h1>
+    <p class="mb-0 text-muted small">Gerenciamento de cadastrados no sistema</p>
   </header>
 
   <div class="container-fluid p-4 form-scroll-area">
@@ -10,8 +10,8 @@
     <div class="form-container shadow-sm p-4 bg-white rounded-3">
 
       <h2 class="section-title mb-4 fs-5 fw-bold">
-        <span *ngIf="!indEdicao">Cadastrar Banco de Leite Humano</span>
-        <span *ngIf="indEdicao">Atualizar Banco de Leite Humano</span>
+        <span *ngIf="!indEdicao">{{ environment.nomenclatura.cadastro.titulo }}</span>
+        <span *ngIf="indEdicao">{{ environment.nomenclatura.cadastro.tituloEdicao }}</span>
       </h2>
 
       <form [formGroup]="cadastroBancoForm">
@@ -20,7 +20,7 @@
             <div class="mb-3">
               <label for="nome" class="form-label">Nome</label>
               <input type="text" formControlName="nome" class="form-control border-2" id="nome"
-                placeholder="Digite o nome do banco"
+                placeholder="{{ environment.nomenclatura.label.nomeEstacao }}"
                 [ngClass]="{'is-invalid': cadastroBancoForm.get('nome')?.invalid && cadastroBancoForm.get('nome')?.touched}">
               <div class="text-danger small mt-1"
                 *ngIf="cadastroBancoForm.get('nome')?.invalid && cadastroBancoForm.get('nome')?.touched">
@@ -31,7 +31,7 @@
             <div class="mb-3">
               <label for="telefone" class="form-label">Telefone</label>
               <input type="tel" formControlName="telefone" class="form-control border-2" id="telefone"
-                placeholder="Digite o telefone Para contato"
+                placeholder="Digite o telefone para contato"
                 autocomplete="tel"
                 maxlength="15"
                 mask="(00) 0000-0000||(00) 00000-0000">

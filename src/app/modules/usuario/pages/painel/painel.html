@@ -2,8 +2,8 @@
 
   <header class="bg-header-custom px-4 py-4 d-flex flex-column justify-content-center border-bottom shadow-sm">
     <div class="container-fluid px-0">
-      <h1 class="h3 fw-bold mb-1" style="color: var(--primary-color-text);">Bancos de Leite Humano</h1>
-      <p class="mb-0 text-muted small">Gerenciamento e controle de bancos cadastrados no sistema</p>
+      <h1 class="h3 fw-bold mb-1" style="color: var(--primary-color-text);">{{ environment.nomenclatura.painel.titulo }}</h1>
+      <p class="mb-0 text-muted small">{{ environment.nomenclatura.painel.subtitulo }}</p>
     </div>
   </header>
 
@@ -24,7 +24,7 @@
               <i class="bi bi-hospital fs-4" style="color: var(--primary-color-text);"></i>
             </div>
             <div>
-              <h2 class="fs-6 fw-semibold text-muted mb-0">Total de Bancos</h2>
+              <h2 class="fs-6 fw-semibold text-muted mb-0">{{ environment.nomenclatura.painel.totalEstacao }}</h2>
               <span class="fs-3 fw-bold d-block lh-1 mt-1" style="color: var(--primary-color-text);">
                 {{ listBancosValidados.length }}
               </span>
@@ -53,7 +53,7 @@
 
       <button class="btn text-white px-4 py-2 shadow-sm fw-medium d-flex align-items-center justify-content-center"
         style="background-color: var(--background-button); border-radius: 12px; height: 48px;" (click)="goTo()">
-        <i class="bi bi-plus-lg me-2"></i> Adicionar Banco
+        <i class="bi bi-plus-lg me-2"></i> {{ environment.nomenclatura.painel.btnAdicionarEstacao }}
       </button>
 
     </div>
@@ -68,7 +68,7 @@
               <i class="bi bi-search"></i>
             </span>
             <input type="text" class="form-control border-start-0 ps-0" formControlName="filtroBanco"
-              placeholder="Buscar banco pelo nome..." aria-label="Buscar por banco" style="box-shadow: none;">
+              placeholder="{{ environment.nomenclatura.filtro.nomeEstacao }}" aria-label="Buscar por banco" style="box-shadow: none;">
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BancoLeiteService } from '../../../../services/BancoLeite/banco-leite-service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-validar-solicitacao',
@@ -17,6 +18,7 @@ export class ValidarSolicitacao {
 
   listBancos!: IBancoLeite[]
   form!: FormGroup;
+  environment = environment;
 
   constructor(
     private router: Router,

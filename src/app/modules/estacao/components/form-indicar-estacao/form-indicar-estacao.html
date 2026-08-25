@@ -10,7 +10,7 @@
       <div class="mb-3">
         <label for="nome" class="form-label">Nome do local</label>
         <input type="text" formControlName="nome" class="form-control border-2" id="nome"
-          placeholder="Ex: Banco de Leite Humano XYZ"
+          placeholder="{{ environment.nomenclatura.label.nomeEstacao }}"
           [ngClass]="{'is-invalid': form.get('nome')?.invalid && form.get('nome')?.touched}">
         <div class="text-danger small mt-1" *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">
           O nome é obrigatório.

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormularioCadastrarUsuario } from '../../components/formulario-cadastrar-usuario/formulario-cadastrar-usuario';
 import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 declare var bootstrap: any;
 
@@ -18,6 +19,7 @@ export class Cadastrar {
 
   @ViewChild('meuModal') modalElement!: ElementRef;
   private modalInstance: any;
+  environment = environment
 
   constructor(
     private autenticacaoService: AutenticacaoService,

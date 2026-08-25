@@ -8,6 +8,7 @@ import { Cep } from '../../../../class/Cep';
 import { Municipio } from '../../../../class/Municipio';
 import { Estado } from '../../../../class/Estado';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-form-indicar-estacao',
@@ -23,6 +24,7 @@ export class FormIndicarEstacao {
 
   @Output() public cadastrar = new EventEmitter();
 
+  environment = environment;
   form!: FormGroup;
   dadosCep: Cep;
   listaDeMunicipios: Municipio[] = [];
