@@ -8,11 +8,11 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
 
-    "start:caminho": "ng serve -c caminho-nutrir",
-    "start:demo": "ng serve -c demo",
+    "start:caminho-nutrir": "ng serve -c caminho-nutrir",
+    "build:caminho-nutrir": "ng build -c caminho-nutrir,production",
 
-    "build:caminho": "ng build -c caminho-nutrir",
-    "build:demo": "ng build -c demo"
+    "start:demo": "ng serve -c demo",
+    "build:demo": "ng build -c demo,production"
   },
   "prettier": {
     "printWidth": 100,
