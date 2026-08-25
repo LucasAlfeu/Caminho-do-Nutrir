@@ -30,5 +30,11 @@ export const environment = {
       text1: 'Juntos, vamos mapear pontos de doação e transformar vidas através da solidariedade.',
       text2: 'Preencha os campos ao lado para fazer parte dessa rede de apoio e nutrição.',
     }
+  },
+
+  image: {
+    entrar: {
+      backgroundEntrar: '../assets/background-entrar.jpg'
+    }
   }
 };

@@ -20,4 +20,6 @@
   --header-background-painel: #D3A280;
   --header-text-color: #4A2E1B;
   --total-solicitacao: #F57C00;
+
+  --imagem-entrar: url('/assets/background-entrar.jpg');
 }

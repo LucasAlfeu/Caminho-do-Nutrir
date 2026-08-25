@@ -29,5 +29,11 @@ export const environment = {
       text1: '',
       text2: ''
     }
+  },
+
+  image: {
+    entrar: {
+      backgroundEntrar: ''
+    }
   }
 };

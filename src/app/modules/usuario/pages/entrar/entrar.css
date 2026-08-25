@@ -1,42 +1,49 @@
+.entrar {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), var(--imagem-entrar);
+  /* url('/images/background-entrar.jpg'); */
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .glass-card {
-    background: rgba(255, 255, 255, 0.45); /* Fundo branco translúcido */
-    backdrop-filter: blur(12px); /* Desfoque do fundo */
-    -webkit-backdrop-filter: blur(12px); /* Suporte para Safari */
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Borda levemente branca */
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  }
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
 
-  /* Inputs com borda apenas embaixo */
-  .input-underlined {
-    background-color: transparent !important;
-    border: none;
-    border-bottom: 2px solid var(--color-primary-entrar);
-    border-radius: 0;
-    padding: 0.5rem 0;
-    color: var(--color-primary-entrar);
-    font-weight: 600;
-    box-shadow: none !important; /* Remove o contorno azul padrão do Bootstrap */
-  }
+.input-underlined {
+  background-color: transparent !important;
+  border: none;
+  border-bottom: 2px solid var(--color-primary-entrar);
+  border-radius: 0;
+  padding: 0.5rem 0;
+  color: var(--color-primary-entrar);
+  font-weight: 600;
+  box-shadow: none !important;
+}
 
-  .input-underlined::placeholder {
-    color: var(--color-primary-entrar);
-    font-weight: 600;
-  }
+.input-underlined::placeholder {
+  color: var(--color-primary-entrar);
+  font-weight: 600;
+}
 
-  .input-underlined:focus {
-    border-bottom-color: #000;
-  }
+.input-underlined:focus {
+  border-bottom-color: #000;
+}
 
-  /* Botão Escuro */
-  .btn-dark-custom {
-    background-color: var(--show-password);
-    color: #fff;
-    border-radius: 4px;
-    letter-spacing: 1px;
-  }
+.btn-dark-custom {
+  background-color: var(--show-password);
+  color: #fff;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
 
-  .btn-dark-custom:hover {
-    background-color: #000;
-    color: #fff;
-  }
+.btn-dark-custom:hover {
+  background-color: #000;
+  color: #fff;
+}

@@ -54,6 +54,18 @@
               "sourceMap": true
             },
             "caminho-nutrir": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/themes/caminho-nutrir/assets",
+                  "output": "/assets"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/app/environments/environment.ts",
@@ -69,6 +81,18 @@
               ]
             },
             "demo": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public",
+                  "output": "/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/themes/demo/assets",
+                  "output": "/assets"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/app/environments/environment.ts",
