@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { AutenticacaoService } from '../../../../services/Autenticacao/autenticacao-service';
+import { Header } from '../../../shared/components/header/header';
 
 @Component({
   selector: 'app-mapa',
-  imports: [MapaLeaflet, CommonModule],
+  imports: [MapaLeaflet, CommonModule, Header],
   templateUrl: './mapa.html',
   styleUrl: './mapa.css',
 })

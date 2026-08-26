@@ -20,4 +20,8 @@ export class Header {
   validaUsuarioLogado(){
     return this.autenticacaoService.validaUsuarioLogado()
   }
+
+  verificaEnvironments(): boolean {
+    return environment.tenant === 'caminho-nutrir'
+  }
 }

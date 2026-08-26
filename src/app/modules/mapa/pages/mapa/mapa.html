@@ -1,5 +1,5 @@
 <section class="d-flex flex-column m-0 p-0" style="height: 100vh; overflow: hidden;">
-  <header
+  <!-- <header
     class="header-map d-flex justify-content-between align-items-center px-4 py-3 w-100"
   >
     <h1 class="text-white fw-bold m-0 fs-4">Caminho do Nutrir</h1>
@@ -23,7 +23,11 @@
         </li>
       </ul>
     </nav>
-  </header>
+  </header> -->
+
+  <div class="position-absolute w-100" style="z-index: 1000;">
+    <app-header></app-header>
+  </div>
 
   <div class="flex-grow-1 w-100 position-relative" style="min-height: 0;">
     <app-mapa-leaflet [listBancos]="listBancos"></app-mapa-leaflet>
