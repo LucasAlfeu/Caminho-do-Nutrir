@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://api-caminho-nutrir.vercel.app/',
+  apiUrl: 'https://api-caminho-nutrir.vercel.app',
   tenant: 'caminho-nutrir',
 
   nome: 'Caminho do Nutrir',
