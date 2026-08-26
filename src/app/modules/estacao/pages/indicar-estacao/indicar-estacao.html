@@ -1,34 +1,37 @@
-<div class="d-flex vh-100 overflow-hidden">
+<div class="container-fluid min-vh-100 p-0">
+  <div class="row g-0 min-vh-100">
 
-  <!-- Lado Esquerdo (Fixo) -->
-  <div
-    class="col-12 col-lg-4 text-white d-flex flex-column justify-content-between text-center p-5 sidebar-fixed h-100"
-    style="background: var(--background-infor-lateral); overflow-y: auto;">
-    <div class="mt-4">
-      <h1 class="fw-bold display-4 lh-sm">{{ environment.nome }}</h1>
+    <!-- Lado Esquerdo (Sidebar Informativa) -->
+    <div class="col-12 col-lg-4 text-white d-flex flex-column justify-content-between text-center p-4 p-lg-5"
+      style="background: var(--background-infor-lateral);">
+
+      <!-- Apenas este título aparece no mobile e no desktop -->
+      <div class="mt-2 mt-lg-4">
+        <h1 class="fw-bold fs-2 fs-lg-1 lh-sm m-0">{{ environment.nome }}</h1>
+      </div>
+
+      <!-- Estes textos somem no mobile (d-none) e aparecem apenas no desktop (d-lg-block) -->
+      <div class="px-3 my-3 d-none d-lg-block">
+        <h2 class="fw-bold mb-3">Indique um Local</h2>
+        <p class="fs-4 lh-sm">
+          Sua indicação<br>faz a diferença!<br>Compartilhe um<br>ponto que conhece<br>e expanda a rede.
+        </p>
+      </div>
+
+      <div class="mb-2 d-none d-lg-block">
+        <p class="fs-5 mb-0 lh-sm">
+          Preencha os dados ao lado para que<br>possamos validar o local e incluí-lo no mapa.
+        </p>
+      </div>
     </div>
 
-    <div class="px-3">
-      <h2 class="fw-bold mb-3">Indique um Local</h2>
-      <p class="fs-4 lh-sm">
-        Sua indicação<br>faz a diferença!<br>Compartilhe um<br>ponto que conhece<br>e expanda a rede.
-      </p>
-    </div>
+    <!-- Lado Direito (Formulário) -->
+    <div class="col-12 col-lg-8 bg-white p-4 p-md-5 d-flex flex-column">
+      <h2 class="fw-bold mb-3">Indicar local</h2>
 
-    <div class="mb-4">
-      <p class="fs-5 mb-0 lh-sm">
-        Preencha os dados ao lado para que<br>possamos validar o local e incluí-lo no mapa.
-      </p>
-    </div>
-  </div>
-
-  <!-- Lado Direito (Formulário com Scroll) -->
-  <div class="col-12 col-lg-8 bg-white p-5 form-scrollable d-flex flex-column h-100" style="overflow-y: auto;">
-
-    <h2 class="fw-bold mb-3">Indicar local</h2>
-
-    <div class="ml-3 mb-lg-1">
-      <app-form-indicar-estacao #formSolicitar (cadastrar)="cadastrar($event)"></app-form-indicar-estacao>
+      <div class="mb-lg-1">
+        <app-form-indicar-estacao #formSolicitar (cadastrar)="cadastrar($event)"></app-form-indicar-estacao>
+      </div>
     </div>
 
   </div>
