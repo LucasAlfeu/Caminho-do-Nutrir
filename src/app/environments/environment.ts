@@ -1,5 +1,5 @@
 export const environment = {
-  apiUrl: 'http://localhost:3333',
+  apiUrl: 'https://api-caminho-nutrir.vercel.app/',
   tenant: 'default',
 
   nome: 'Ariadne',
