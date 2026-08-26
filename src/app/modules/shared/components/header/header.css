@@ -21,7 +21,7 @@ header {
   }
 
   @media (max-width: 767.98px) {
-    /* Garante o fundo marrom fixo no mobile e espaçamento adequado */
+    /* Garante o fundo marrom fixo no mobile */
     .navbar,
     .header-map {
       background-color: var(--menu-lateral) !important;
@@ -33,13 +33,24 @@ header {
       font-size: 1.25rem !important;
     }
 
+    /* Torna o container relativo para a caixa flutuar perfeitamente abaixo dele */
+    .container-fluid {
+      position: relative;
+    }
+
+    /* Caixa do menu flutuante alinhada e com largura ideal */
     .navbar-collapse {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
       flex-direction: column;
       background-color: rgba(74, 46, 27, 0.98);
       padding: 1.5rem;
-      border-radius: 12px;
-      margin-top: 1rem;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-radius: 0 0 12px 12px;
+      margin-top: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      z-index: 2000;
     }
 
     .navbar-nav {
